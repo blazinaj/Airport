@@ -1,19 +1,32 @@
 ## PART 2
 
-a.	Create the initial airport system using information contained in an input file: Information about airports, airlines, flights and their associated information will now be read from a file. When the program first starts it will read the input file and create the initial airport system using the information in the file. The format of the file is given in the section AMS File Format. 
-b.	Store information about the current airport system in a file:  The program should be able to store information about the airport system in a file when requested. This feature is similar to the display airport system feature: instead of outputting the information on the screen the information is sent to a file to be stored. The format of this file will be the same as the format of the input airport system file.
-c.	Create flight sections with a layout: In the previous assignment a flight section was created using only the number of seats and columns. In this assignment you will be required to create sections given a layout that identifies window and aisles seats. See the AMS file format section for an example of how the layouts are to be specified.
-d.	Associate one-way prices for seats on an airline for flights between an origin and destination: Given an airline, the pricing for all seats in a particular flight class for all airline flights between an origin and destination is the same. For example, the price of an economy seat on any American Airways flight from Denver to Seattle is $300, while an economy seat on any USAircorp flight from Denver to Seattle is $200.
-e.	Book a flight using a seating preference
-f.	Provide a simple intuitive text-based user interface for the system: The interface will allow a human user to do the following
-a.	Create an airport system by using information provided in an input file.
-b.	Change the price associated with seats in a flight section (all seats in a flight section have the same price).
-c.	Query the system for flights with available seats in a given class (e.g., economy, business) that leave from a specified airport and arrive at specified airport on a particular date. The query operation should list all the available flights found and its prices.
-d.	Change the seat class (e.g., economy) pricing for an origin and destination for a given airline.
-e.	Book a seat given a specific seat on a flight.
-f.	Book a seat on a flight given only a seating preference: The program should allow a user to book a seat on a particular flight using only a seating preference and a flight class. There will only be two seating preferences: Window and Aisle. This booking service will look for an available seat in the flight section with the seating preference. If one is found then the seat is booked. If one is not found, then the system will book any available seat in the specified section, if any.
-g.	Display details of the airport system.
-h.	Store information about the airport system in a specified file.
+a)	Create the initial airport system using information contained in an input file: Information about airports, airlines, flights and their associated information will now be read from a file. When the program first starts it will read the input file and create the initial airport system using the information in the file. The format of the file is given in the section AMS File Format. 
+
+b)	Store information about the current airport system in a file:  The program should be able to store information about the airport system in a file when requested. This feature is similar to the display airport system feature: instead of outputting the information on the screen the information is sent to a file to be stored. The format of this file will be the same as the format of the input airport system file.
+
+c)	Create flight sections with a layout: In the previous assignment a flight section was created using only the number of seats and columns. In this assignment you will be required to create sections given a layout that identifies window and aisles seats. See the AMS file format section for an example of how the layouts are to be specified.
+
+d)	Associate one-way prices for seats on an airline for flights between an origin and destination: Given an airline, the pricing for all seats in a particular flight class for all airline flights between an origin and destination is the same. For example, the price of an economy seat on any American Airways flight from Denver to Seattle is $300, while an economy seat on any USAircorp flight from Denver to Seattle is $200.
+
+e)	Book a flight using a seating preference
+
+f)	Provide a simple intuitive text-based user interface for the system: The interface will allow a human user to do the following
+
+a)	Create an airport system by using information provided in an input file.
+
+  i)	Change the price associated with seats in a flight section (all seats in a flight section have the same price).
+  
+  ii)	Query the system for flights with available seats in a given class (e.g., economy, business) that leave from a specified airport 
+      and arrive at specified airport on a particular date. The query operation should list all the available flights found and its           prices.
+  iii) Change the seat class (e.g., economy) pricing for an origin and destination for a given airline.
+  
+  iv)	Book a seat given a specific seat on a flight.
+
+  v)	Book a seat on a flight given only a seating preference: The program should allow a user to book a seat on a particular flight           using only a seating preference and a flight class. There will only be two seating preferences: Window and Aisle. This booking           service    will look for an available seat in the flight section with the seating preference. If one is found then the seat is           booked. If one is not found, then the system will book any available seat in the specified section, if any.
+  
+  vi)	Display details of the airport system.
+
+  vii)	Store information about the airport system in a specified file.
 
  
 ```
