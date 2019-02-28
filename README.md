@@ -1,6 +1,4 @@
-##Part 2 Branch
-
-PART 2
+## PART 2
 
 a.	Create the initial airport system using information contained in an input file: Information about airports, airlines, flights and their associated information will now be read from a file. When the program first starts it will read the input file and create the initial airport system using the information in the file. The format of the file is given in the section AMS File Format. 
 b.	Store information about the current airport system in a file:  The program should be able to store information about the airport system in a file when requested. This feature is similar to the display airport system feature: instead of outputting the information on the screen the information is sent to a file to be stored. The format of this file will be the same as the format of the input airport system file.
@@ -18,7 +16,7 @@ g.	Display details of the airport system.
 h.	Store information about the airport system in a specified file.
 
  
-
+```
 AMS File Format AMS information will be stored in a file using the following format: 
 
 AMS ::= [list-of-airport-codes] {list-of-airlines} 
@@ -41,7 +39,7 @@ layout ::= S, M, W  (where S is a seat layout with 3 columns with an aisle betwe
 Example: An airport system with 4 airports, 4 airlines - AMER (in red), UNTD (in green), FRONT, USAIR - and associated flights. 
 
 [DEN, NYC, SEA, LAX]{AMER[AA1|2011, 10, 8, 16, 30|DEN|LAX[E:200:S:4,F:500:S:2], AA2|2011, 8, 9, 7, 30|LAX|DEN[E:200:S:5,F:500:S:3], …], UNTD[UA21|2011, 11, 8, 12, 30|NYC|SEA[E:300:S:6, F:800:S:3], UA12|2011, 8, 9, 7, 30|SEA|DEN[B:700:S:5, F:1200:S:2], …], FRONT[…], USAIR[…]}
-
+```
 
 Extend the program so that it can be used to book cabins on cruise trips as well as seats on flights. The extended program thus supports the building and management of bookings of 2 subsystems: Airline and Cruise subsystems. Write your program to exploit polymorphism and avoid coding the solution as two completely separated solutions. 
 
