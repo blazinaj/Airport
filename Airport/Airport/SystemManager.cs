@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 
 namespace Airport
 {
@@ -40,13 +37,23 @@ namespace Airport
 
         public void CreateAirline(string n)
         {
-            Airline airline = new Airline(n);
+            Airline airline = null;
 
-            List<Airline> results = airlines.FindAll(x => x.AirlineName == airline.AirlineName);
+            if (n.Length < 6)
+            {
+                airline = new Airline(n);
+            }
+            else
+            {
+                Console.WriteLine("Airport name: " + n + " is longer than 5 letters!");
+            }
+
+
+            List<Airline> results = airlines.FindAll(x => airline != null && x.AirlineName == airline.AirlineName);
 
             if (results.Count > 0)
             {
-                Console.WriteLine("Airline name: " + airline.AirlineName + " is already exists!");
+                if (airline != null) Console.WriteLine("Airline name: " + airline.AirlineName + " is already exists!");
             }
             else
             {
@@ -67,11 +74,25 @@ namespace Airport
                 flights.Add(flight);
             }
         }
-        /*
-                public static FlightSection CreateSection(string air, string flID, int rows, int cols, SeatClass s)
-                {
-                    return "";
-                }
-          */
+
+        public void CreateSection(string air, string flID, int rows, int cols, SeatClass s)
+        {
+           FlightSection flightSection = new FlightSection(air, flID, rows, cols, s);
+        }
+
+        public void BookSeat(string air, string fl, SeatClass s, int row, char col)
+        {
+
+        }
+
+        public void DisplaySystemDetails()
+        {
+
+        }
+
+        public void FindAvailableFlights(string den, string lon)
+        {
+
+        }
     }
 }
