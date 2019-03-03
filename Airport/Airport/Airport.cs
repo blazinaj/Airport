@@ -4,30 +4,23 @@ using System.Text;
 
 namespace Airport
 {
-    class Airport
+    public class Airport
     {
         private string _airportName;
 
-        public string AirportName
-        {
-            get => _airportName;
-            set
-            {
-                if (value.Length <= 3 && value.Length > 0)
-                {
-                    _airportName = value;
-                }
-                else
-                {
-                    Console.WriteLine("Airport name is longer than 3 letters!");
-                }
-
-            }
-        }
+        public string AirportName => _airportName;
 
         public Airport(string airportName)
         {
-            AirportName = airportName;
+            if (airportName.Length <= 3 && airportName.Length > 0)
+            {
+                _airportName = airportName;
+            }
+            else
+            {
+                Console.WriteLine("Airport name: " + airportName + " is longer than 3 letters!");
+            }
+           
         }
     }
 }

@@ -6,25 +6,19 @@ namespace Airport
     {
         private string _airlineName;
 
-        public string AirlineName
-        {
-            get => _airlineName;
-            set
-            {
-                if (value.Length < 6 && value.Length > 0)
-                {
-                    _airlineName = value;
-                }
-                else
-                {
-                    Console.WriteLine("Airline name is longer than 5 letters!");
-                }
-            }
-        }
+        public string AirlineName => _airlineName;
 
         public Airline(string airlineName)
         {
-            AirlineName = airlineName;
+            if (airlineName.Length < 6)
+            {
+                _airlineName = airlineName;
+            }
+            else
+            {
+                Console.WriteLine("Airport name: " + airlineName + " is longer than 5 letters!");
+            }
+
         }
     }
 }
