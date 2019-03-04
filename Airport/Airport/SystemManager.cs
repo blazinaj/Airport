@@ -65,13 +65,24 @@ namespace Airport
         {
             if (orig.Equals(dest))
             {
-                Console.WriteLine("For Flight: "+id+" Same Destination Airport");
+                Console.WriteLine("For Flight: "+ id +" Same Destination Airport");
             }
             else
             {
-                Flight flight = new Flight(aname, orig, dest, year, month, day, id);
+                List<Airline> airlineResults = airlines.FindAll(x => x.AirlineName == aname);
+                List<Airport> airportOrigResults = airports.FindAll(x => x.AirportName == orig);
+                List<Airport> airportDestResults = airports.FindAll(x => x.AirportName == dest);
 
-                flights.Add(flight);
+                if (airlineResults.Count > 0 && airportOrigResults.Count > 0 && airportDestResults.Count > 0)
+                { 
+                    Flight flight = new Flight(aname, orig, dest, year, month, day, id);
+                    flights.Add(flight);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Airport or Airline");
+                }
+ 
             }
         }
 
