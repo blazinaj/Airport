@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Airport
 {
@@ -7,6 +8,7 @@ namespace Airport
         private readonly string _airlineName;
 
         public string AirlineName => _airlineName;
+        public List<Flight> FlightList { get; set; }
 
         public Airline(string airlineName)
         {

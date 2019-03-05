@@ -5,60 +5,66 @@ namespace Airport
 {
     public class SystemManager
     {
-        List<Airport> airports = new List<Airport>();
+        List<Airport> airportList = new List<Airport>();
         List<Airline> airlines = new List<Airline>();
         List<Flight> flights = new List<Flight>();
 
         public void CreateAirport(string n)
         {
-            Airport airport = null;
+            Airport newAirport = null;
 
-            if (n.Length <= 3 && n.Length > 0)
+            if (n.Length == 3)
             {
-                airport = new Airport(n);
+                newAirport = new Airport(n);
             }
             else
             {
-                Console.WriteLine("Airport name: " + n + " is longer than 3 letters!");
+                Console.WriteLine("Could not create Airport, name: " + n + " must be exactly 3 letters!");
+                return;
             }
 
-            List<Airport> results = airports.FindAll(x => airport != null && x.AirportName == airport.AirportName);
+            List<Airport> results = airportList.FindAll(x => newAirport != null && x.AirportName == newAirport.AirportName);
 
             if (results.Count > 0)
             {
-                if (airport != null) Console.WriteLine("Airport name: " + airport.AirportName + " is already exists!");
+                if (newAirport != null) Console.WriteLine("Airport name: " + newAirport.AirportName + " already exists!");
+                return;
             }
             else
             {
-                airports.Add(airport);
+                airportList.Add(newAirport);
+                Console.WriteLine("Airport " + newAirport.AirportName + " Successfully Created!");
             }
-
         }
 
         public void CreateAirline(string n)
         {
-            Airline airline = null;
+            Airline newAirline = null;
 
             if (n.Length < 6)
             {
-                airline = new Airline(n);
+                newAirline = new Airline(n);
             }
             else
             {
-                Console.WriteLine("Airport name: " + n + " is longer than 5 letters!");
+                Console.WriteLine("Airline name: " + n + " is longer than 5 letters!");
+                return;
             }
 
 
-            List<Airline> results = airlines.FindAll(x => airline != null && x.AirlineName == airline.AirlineName);
+            List<Airline> results = airlines.FindAll(x => newAirline != null && x.AirlineName == newAirline.AirlineName);
 
             if (results.Count > 0)
             {
-                if (airline != null) Console.WriteLine("Airline name: " + airline.AirlineName + " is already exists!");
+                Console.WriteLine("Airline name: " + newAirline.AirlineName + " is already exists!");
+                return;
             }
             else
             {
-                airlines.Add(airline);
+                airlines.Add(newAirline);
+                Console.WriteLine("Airline " + newAirline.AirlineName + " Successfully Created!");
             }
+            
         }
 
         public void CreateFlight(string aname, string orig, string dest, int year, int month, int day, string id)
@@ -70,8 +76,8 @@ namespace Airport
             else
             {
                 List<Airline> airlineResults = airlines.FindAll(x => x.AirlineName == aname);
-                List<Airport> airportOrigResults = airports.FindAll(x => x.AirportName == orig);
-                List<Airport> airportDestResults = airports.FindAll(x => x.AirportName == dest);
+                List<Airport> airportOrigResults = airportList.FindAll(x => x.AirportName == orig);
+                List<Airport> airportDestResults = airportList.FindAll(x => x.AirportName == dest);
 
                 if (airlineResults.Count > 0 && airportOrigResults.Count > 0 && airportDestResults.Count > 0)
                 { 
