@@ -30,5 +30,10 @@ namespace Airport
             FlightSectionList.Add(new FlightSection(air, flId, rows, cols, seatClass));
             Console.WriteLine("Success: Flight Section (" + rows + " rows, " + cols + " cols) with Seat Class " + seatClass + " on Flight " + flId + " with " + air + " airline " + " Created!");
         }
+
+        public override string ToString()
+        {
+            return "Flight Number: " + ID + " Airline Name: " + AirlineName + " Origin Airport: " + OriginAirport + " Destination Airport: " + DestinationAirport + " Date: " + Month+"/"+Day+"/"+Year;
+        }
     }
 }

@@ -12,7 +12,12 @@ namespace Airport
 
         public Airport(string airportName)
         {
-            _airportName = airportName;  
+            _airportName = airportName;
+        }
+
+        public override string ToString()
+        {
+            return "Airport: " + _airportName;
         }
     }
 }

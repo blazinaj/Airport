@@ -39,17 +39,22 @@ namespace Airport
             res.CreateSection("DELTA","123", 2, 3, SeatClass.first);//Invalid
             res.CreateSection("SWSERTT","123", 5, 5, SeatClass.economy);//Invalid airline
 
-            //Uncomment after debugging
-            Console.ReadLine();
+            ////Uncomment after debugging
+            //Console.ReadLine();
 
-            res.BookSeat("DELTA", "123", SeatClass.first, 1, 'A');
-            res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'A');
-            res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'B');
-            res.BookSeat("DELTA888", "123", SeatClass.business, 1, 'A'); //Invalid airline
-            res.BookSeat("DELTA", "123haha7", SeatClass.business, 1, 'A'); //Invalid flightId
-            res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'A'); //already booked
+            //res.BookSeat("DELTA", "123", SeatClass.first, 1, 'A');
+            //res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'A');
+            //res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'B');
+            //res.BookSeat("DELTA888", "123", SeatClass.business, 1, 'A'); //Invalid airline
+            //res.BookSeat("DELTA", "123haha7", SeatClass.business, 1, 'A'); //Invalid flightId
+            //res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'A'); //already booked
+
+
 
             res.DisplaySystemDetails();
+
+            //Uncomment after debugging
+            Console.ReadLine();
 
             res.FindAvailableFlights("DEN", "LON");
         }

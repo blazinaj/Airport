@@ -57,5 +57,10 @@ namespace Airport
 
             Console.WriteLine("Success: Flight " + id + " Created!");
         }
+
+        public override string ToString()
+        {
+            return "Airline: " + _airlineName;
+        }
     }
 }

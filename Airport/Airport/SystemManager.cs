@@ -141,7 +141,15 @@ namespace Airport
 
         public void DisplaySystemDetails()
         {
+            foreach (var airport in airportList)
+            {
+                Console.WriteLine(airport.ToString());
+            }
 
+            foreach (var airline in airlineList)
+            {
+                Console.WriteLine(airline.ToString());
+            }
         }
 
         public void FindAvailableFlights(string den, string lon)
