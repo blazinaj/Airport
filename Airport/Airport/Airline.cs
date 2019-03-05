@@ -47,9 +47,15 @@ namespace Airport
                 return;
             }
 
+            if (FlightList.FindAll(x => x.ID == id).Count > 0)
+            {
+                Console.WriteLine("Error: A Flight with " + id + "already exists!");
+                return;
+            }
+
             FlightList.Add(new Flight(airlineName, originAirport, destinationAirport, year, month, day, id));
 
-            Console.WriteLine("Flight " + id + " Successfully Created!");
+            Console.WriteLine("Success: Flight " + id + " Created!");
         }
     }
 }

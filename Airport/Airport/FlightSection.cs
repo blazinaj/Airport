@@ -6,7 +6,7 @@
         private string flId;
         private int rows;
         private int cols;
-        private SeatClass seatClass;
+        internal SeatClass seatClass = SeatClass.economy;
 
         public FlightSection(string air, string flId, int rows, int cols, SeatClass seatClass)
         {
@@ -15,7 +15,6 @@
             this.rows = rows;
             this.cols = cols;
             this.seatClass = seatClass;
-
         }
 
         public bool HasAvailableSeats()
