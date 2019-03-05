@@ -69,27 +69,35 @@ namespace Airport
 
         public void CreateFlight(string aname, string orig, string dest, int year, int month, int day, string id)
         {
-            if (orig.Equals(dest))
+            List<Airline> airlineResults = airlines.FindAll(x => x.AirlineName == aname);
+            List<Airport> airportOrigResults = airportList.FindAll(x => x.AirportName == orig);
+            List<Airport> airportDestResults = airportList.FindAll(x => x.AirportName == dest);
+
+            if (airlineResults.Count < 1)
             {
-                Console.WriteLine("For Flight: "+ id +" Same Destination Airport");
+                Console.WriteLine("Error: Could not Create Flight, " + aname + " is not a valid airline!");
+                return;
+            }
+            else if (airportOrigResults.Count < 1)
+            {
+                Console.WriteLine("Error: Could not Create Flight, " + orig + " is not a valid airport!");
+                return;
+            }
+            else if (airportDestResults.Count < 1)
+            {
+                Console.WriteLine("Error: Could not Create Flight, " + dest + " is not a valid airport!");
+                return;
+            }
+            else if (airlineResults.Count > 0 && airportOrigResults.Count > 0 && airportDestResults.Count > 0)
+            {
+                airlineResults.Find(x => x.AirlineName == aname).CreateFlight(aname, orig, dest, year, month, day, id);
             }
             else
             {
-                List<Airline> airlineResults = airlines.FindAll(x => x.AirlineName == aname);
-                List<Airport> airportOrigResults = airportList.FindAll(x => x.AirportName == orig);
-                List<Airport> airportDestResults = airportList.FindAll(x => x.AirportName == dest);
-
-                if (airlineResults.Count > 0 && airportOrigResults.Count > 0 && airportDestResults.Count > 0)
-                { 
-                    Flight flight = new Flight(aname, orig, dest, year, month, day, id);
-                    flights.Add(flight);
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Airport or Airline");
-                }
- 
+                Console.WriteLine("Some weird error happened");
             }
+ 
+            Console.ReadLine();
         }
 
         public void CreateSection(string air, string flID, int rows, int cols, SeatClass s)
