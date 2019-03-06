@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Airport
 {
-    public class Airline
+    public class Airline : IDisplaySystemDetails
     {
         private readonly string _airlineName;
 
@@ -56,6 +56,20 @@ namespace Airport
             FlightList.Add(new Flight(airlineName, originAirport, destinationAirport, year, month, day, id));
 
             Console.WriteLine("Success: Flight " + id + " Created!");
+        }
+
+        public void DisplaySystemDetails()
+        {
+            foreach (var flight in FlightList)
+            {
+                Console.WriteLine(flight.ToString());
+            }
+
+            foreach (var flight in FlightList)
+            {
+                flight.DisplaySystemDetails();
+            }
+
         }
 
         public override string ToString()

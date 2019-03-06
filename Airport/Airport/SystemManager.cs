@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Airport
 {
-    public class SystemManager
+    public class SystemManager : IDisplaySystemDetails
     {
         List<Airport> airportList = new List<Airport>();
         List<Airline> airlineList = new List<Airline>();
+
+        private Airline airline;
+        private Flight flight;
 
         public void CreateAirport(string n)
         {
@@ -96,7 +101,6 @@ namespace Airport
                 Console.WriteLine("Some weird error happened");
             }
  
-            
         }
 
         public void CreateSection(string air, string flID, int rows, int cols, SeatClass s)
@@ -136,6 +140,28 @@ namespace Airport
 
         public void BookSeat(string air, string fl, SeatClass s, int row, char col)
         {
+            if (airlineList.FindAll(x => x.AirlineName == air).Count < 1)
+            {
+                Console.WriteLine("Error: The Airline " + air + " Does Not Exist!");
+                return;
+            }
+
+            if ((airlineList.Find(x => x.AirlineName == air).FlightList.FindAll(x => x.ID == fl).Count) < 1)
+            {
+                Console.WriteLine("Error: The Flight " + fl + " associated with the Airline " + air + " Does Not Exist!");
+                return;
+            }
+
+            if ((airlineList.Find(x => x.AirlineName == air)
+                    .FlightList.Find(x => x.ID == fl)
+                    .FlightSectionList.Find(x => x.seatClass == s)
+                    .BookedSeatsList.FindAll(x => (x.ColumnCharacter == col) && (x.ColumnCharacter == col) && (x.RowNumber == row)).Count) > 0)
+            {
+                Console.WriteLine("Error: The Flight " + fl + " associated with the Airline " + air + " and with seat " + col + row+" in "+s+" class"+" Already Booked!");
+                return;
+            }
+
+            airlineList.Find(x => x.AirlineName == air).FlightList.Find(x => x.ID == fl).FlightSectionList.Find(x => x.seatClass == s).BookSeat(air, fl, s, row, col);
 
         }
 
@@ -150,11 +176,28 @@ namespace Airport
             {
                 Console.WriteLine(airline.ToString());
             }
+
+            foreach (var flights in airlineList)
+            {
+                flights.DisplaySystemDetails();
+            }
+
+
         }
 
-        public void FindAvailableFlights(string den, string lon)
+        public void FindAvailableFlights(string org, string dis)
         {
-
+            foreach (var flight in airlineList)
+            {
+                foreach (var availableFlight in flight.FlightList.Where(x => (x.OriginAirport == org) && (x.DestinationAirport == dis)))
+                {
+                    foreach (var section in availableFlight.FlightSectionList)
+                    {
+                        Console.WriteLine(section.ToString());
+                    }
+                }
+            }
         }
+
     }
 }

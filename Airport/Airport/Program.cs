@@ -14,7 +14,7 @@ namespace Airport
             res.CreateAirport("DENW"); //INVALID
 
             //Uncomment after debugging
-            Console.ReadLine();
+            //Console.ReadLine();
 
             res.CreateAirline("DELTA");
             res.CreateAirline("AMER");
@@ -23,7 +23,7 @@ namespace Airport
             res.CreateAirline("FRONT"); //INVALID
 
             //Uncomment after debugging
-            Console.ReadLine();
+            //Console.ReadLine();
 
             res.CreateFlight("DELTA", "DEN", "LON", 2018, 10, 10, "123");
             res.CreateFlight("DELTA", "DEN", "DEN", 2018, 8, 8, "567abc");
@@ -32,31 +32,35 @@ namespace Airport
             res.CreateFlight("AMER", "DEN", "LON", 2010, 40, 100, "123abc");//invalid date
 
             //Uncomment after debugging
-            Console.ReadLine();
+            //Console.ReadLine();
 
             res.CreateSection("DELTA","123", 2, 2, SeatClass.economy);
             res.CreateSection("DELTA","123", 2, 3, SeatClass.first);
             res.CreateSection("DELTA","123", 2, 3, SeatClass.first);//Invalid
             res.CreateSection("SWSERTT","123", 5, 5, SeatClass.economy);//Invalid airline
 
-            ////Uncomment after debugging
+            //Uncomment after debugging
             //Console.ReadLine();
 
-            //res.BookSeat("DELTA", "123", SeatClass.first, 1, 'A');
-            //res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'A');
-            //res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'B');
-            //res.BookSeat("DELTA888", "123", SeatClass.business, 1, 'A'); //Invalid airline
-            //res.BookSeat("DELTA", "123haha7", SeatClass.business, 1, 'A'); //Invalid flightId
-            //res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'A'); //already booked
+            res.BookSeat("DELTA", "123", SeatClass.first, 1, 'A');
+            res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'A');
+            res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'B');
+            res.BookSeat("DELTA888", "123", SeatClass.business, 1, 'A'); //Invalid airline
+            res.BookSeat("DELTA", "123haha7", SeatClass.business, 1, 'A'); //Invalid flightId
+            res.BookSeat("DELTA", "123", SeatClass.economy, 1, 'A'); //already booked
 
-
+            //Uncomment after debugging
+            //Console.ReadLine();
 
             res.DisplaySystemDetails();
 
             //Uncomment after debugging
-            Console.ReadLine();
+            //Console.ReadLine();
 
             res.FindAvailableFlights("DEN", "LON");
+
+            //Uncomment after debugging
+            Console.ReadLine();
         }
     }
 }

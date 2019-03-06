@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Airport
 {
-    public class Flight
+    public class Flight : IDisplaySystemDetails
     {
         private string AirlineName { get; set; }
-        private string OriginAirport { get; set; }
-        private string DestinationAirport { get; set; }
+        public string OriginAirport { get; set; }
+        public string DestinationAirport { get; set; }
         private int Year { get; set; }
         private int Month { get; set; }
         private int Day { get; set; }
@@ -25,10 +25,28 @@ namespace Airport
             ID = id;
         }
 
+        public Flight()
+        {
+        }
+
         public void CreateFlightSection(string air, string flId, int rows, int cols, SeatClass seatClass)
         {
             FlightSectionList.Add(new FlightSection(air, flId, rows, cols, seatClass));
             Console.WriteLine("Success: Flight Section (" + rows + " rows, " + cols + " cols) with Seat Class " + seatClass + " on Flight " + flId + " with " + air + " airline " + " Created!");
+        }
+
+        public void DisplaySystemDetails()
+        {
+            foreach (var section in FlightSectionList)
+            {
+                Console.WriteLine(section.ToString());
+            }
+
+            foreach (var section in FlightSectionList)
+            {
+                section.DisplaySystemDetails();
+            }
+
         }
 
         public override string ToString()
