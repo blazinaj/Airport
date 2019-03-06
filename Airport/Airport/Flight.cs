@@ -14,6 +14,7 @@ namespace Airport
         internal string ID { get; set; }
         internal List<FlightSection> FlightSectionList { get; set; } = new List<FlightSection>();
 
+
         public Flight(string aname, string orig, string dest, int year, int month, int day, string id)
         {
             AirlineName = aname;
@@ -23,10 +24,6 @@ namespace Airport
             Month = month;
             Day = day;
             ID = id;
-        }
-
-        public Flight()
-        {
         }
 
         public void CreateFlightSection(string air, string flId, int rows, int cols, SeatClass seatClass)

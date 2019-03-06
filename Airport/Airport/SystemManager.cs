@@ -10,9 +10,6 @@ namespace Airport
         List<Airport> airportList = new List<Airport>();
         List<Airline> airlineList = new List<Airline>();
 
-        private Airline airline;
-        private Flight flight;
-
         public void CreateAirport(string n)
         {
             Airport newAirport = null;
@@ -152,12 +149,18 @@ namespace Airport
                 return;
             }
 
+            if ((col - 'A') < 0 && (col - 'A') > 9)
+            {
+                Console.WriteLine("Error: The Flight " + fl + " associated with the Airline " + air + ", the column greater than 'J' ");
+                return;
+            }
+
             if ((airlineList.Find(x => x.AirlineName == air)
                     .FlightList.Find(x => x.ID == fl)
                     .FlightSectionList.Find(x => x.seatClass == s)
-                    .BookedSeatsList.FindAll(x => (x.ColumnCharacter == col) && (x.ColumnCharacter == col) && (x.RowNumber == row)).Count) > 0)
+                    .BookedSeatsList.FindAll(x => (x.ColumnCharacter == col) && (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == true)).Count) > 0)
             {
-                Console.WriteLine("Error: The Flight " + fl + " associated with the Airline " + air + " and with seat " + col + row+" in "+s+" class"+" Already Booked!");
+                Console.WriteLine("Error: The Flight " + fl + " associated with the Airline " + air + " and with seat " + col + row + " in " + s + " class" + " Already Booked!");
                 return;
             }
 
@@ -181,19 +184,24 @@ namespace Airport
             {
                 flights.DisplaySystemDetails();
             }
-
-
         }
 
         public void FindAvailableFlights(string org, string dis)
         {
+            Console.WriteLine("Available Seats for Flight " + org +" to "+ dis);
             foreach (var flight in airlineList)
             {
                 foreach (var availableFlight in flight.FlightList.Where(x => (x.OriginAirport == org) && (x.DestinationAirport == dis)))
                 {
                     foreach (var section in availableFlight.FlightSectionList)
                     {
-                        Console.WriteLine(section.ToString());
+                        Console.WriteLine(section.seatClass.ToString() + " class seats available");
+                        var notBooked = section.BookedSeatsList.Where(x => x.IsBooked == false);
+
+                        foreach (var seat in notBooked)
+                        {
+                            Console.WriteLine(seat.ToString());
+                        }
                     }
                 }
             }

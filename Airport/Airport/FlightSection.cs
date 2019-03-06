@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Airport
 {
@@ -7,9 +8,9 @@ namespace Airport
     {
         private string air;
         private string flId;
-        private int rows;
-        private int cols;
-        internal SeatClass seatClass = SeatClass.economy;
+        public int rows;
+        public int cols;
+        public SeatClass seatClass = SeatClass.economy;
 
         internal List<Seat> BookedSeatsList { get; set; } = new List<Seat>();
 
@@ -20,21 +21,34 @@ namespace Airport
             this.rows = rows;
             this.cols = cols;
             this.seatClass = seatClass;
+
+            for (int i = 1; i <= cols; i++)
+            {
+                for (int j = 1; j <= rows; j++)
+                {
+                    BookedSeatsList.Add(new Seat(j, (char)((i-1)+65), false));
+                }
+               
+            }   
         }
 
         public bool HasAvailableSeats()
         {
+            var booked = false;
+
             foreach (var seat in BookedSeatsList)
             {
-                
+               booked = seat.IsBooked;
             }
 
-            return false;
+            return booked;
         }
 
         public void BookSeat(string air, string fId, SeatClass s, int row, char col)
         {
-            BookedSeatsList.Add(new Seat(row, col, true));
+            BookedSeatsList.Where(x=> (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == false)).ToList().ForEach(x=>x.IsBooked = true);
+
+//            BookedSeatsList.Add(new Seat(row, col, true));
             Console.WriteLine("Success: Seat (" + col + row+ ") with Seat Class " + seatClass + " on Flight " + flId + " with " + air + " airline " + " Booked!");
         }
 
