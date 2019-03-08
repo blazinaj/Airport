@@ -123,39 +123,46 @@ namespace Airport
  
         }
 
-        public void CreateSection(string air, string flID, int rows, int cols, SeatClass s)
+        public string CreateSection(string air, string flID, int rows, int cols, SeatClass s)
         {
+            string result;
             if (airlineList.FindAll(x => x.AirlineName == air).Count < 1)
             {
-                Console.WriteLine("Error: The Airline " + air + " Does Not Exist!");
-                return;
+                result = "Error: The Airline " + air + " Does Not Exist!";
+                Console.WriteLine(result);
+                return result;
             }
 
             if (rows > 100 || rows < 1)
             {
-                Console.WriteLine("Error: You must have between 1 and 100 rows!");
-                return;
+                result = "Error: You must have between 1 and 100 rows!";
+                Console.WriteLine(result);
+                return result;
             }
 
             if (cols > 10 || cols < 1)
             {
-                Console.WriteLine("Error: You must have between 1 and 10 columns!");
-                return;
+                result = "Error: You must have between 1 and 10 columns!";
+                Console.WriteLine(result);
+                return result;
             }
 
             if ((airlineList.Find(x => x.AirlineName == air).FlightList.FindAll(x => x.ID == flID).Count) < 1)
             {
-                Console.WriteLine("Error: The Flight " + flID + " associated with the Airline " + air + " Does Not Exist!");
-                return;
+                result = "Error: The Flight " + flID + " associated with the Airline " + air + " Does Not Exist!";
+                Console.WriteLine(result);
+                return result;
             }
 
             if ((airlineList.Find(x => x.AirlineName == air).FlightList.Find(x => x.ID == flID).FlightSectionList.FindAll(x => x.seatClass == s)).Count > 0)
             {
-                Console.WriteLine("Error: A flight section with Seat Class " + s + " already exists on Flight " + flID + " with " + air + " airline!");
-                return;
+                result = "Error: A flight section with Seat Class " + s + " already exists on Flight " + flID + " with " + air + " airline!";
+                Console.WriteLine(result);
+                return result;
             }
 
-            airlineList.Find(x => x.AirlineName == air).FlightList.Find(x => x.ID == flID).CreateFlightSection(air, flID, rows, cols, s);
+            result = airlineList.Find(x => x.AirlineName == air).FlightList.Find(x => x.ID == flID).CreateFlightSection(air, flID, rows, cols, s);
+            return result;
         }
 
         public void BookSeat(string air, string fl, SeatClass s, int row, char col)

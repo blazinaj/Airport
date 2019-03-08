@@ -26,10 +26,13 @@ namespace Airport
             ID = id;
         }
 
-        internal void CreateFlightSection(string air, string flId, int rows, int cols, SeatClass seatClass)
+        internal string CreateFlightSection(string air, string flId, int rows, int cols, SeatClass seatClass)
         {
+            string result;
             FlightSectionList.Add(new FlightSection(air, flId, rows, cols, seatClass));
-            Console.WriteLine("Success: Flight Section (" + rows + " rows, " + cols + " cols) with Seat Class " + seatClass + " on Flight " + flId + " with " + air + " airline " + " Created!");
+            result = "Success: Flight Section (" + rows + " rows, " + cols + " cols) with Seat Class " + seatClass + " on Flight " + flId + " with " + air + " airline " + " Created!";
+            Console.WriteLine(result);
+            return result;
         }
 
         public string DisplaySystemDetails()
