@@ -1,8 +1,8 @@
 ﻿using Airport.Exceptions;
+using Airport.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Airport
 {
@@ -11,16 +11,17 @@ namespace Airport
         private List<Airport> airportList = new List<Airport>();
         private List<Airline> airlineList = new List<Airline>();
 
-        const int MAXIMUM_AIRLINE_NAME_LENGTH = 5;
-
         private AirportFactory airportFactory = new AirportFactory();
+        private AirlineFactory airlineFactory = new AirlineFactory();
 
         public string CreateAirport(string n)
         {
             try
             {
                 (Airport airport, string success) = airportFactory.CreateAirport(n, airportList);
+
                 airportList.Add(airport);
+
                 Console.WriteLine(success);
                 return success;
             }
@@ -33,36 +34,20 @@ namespace Airport
 
         public string CreateAirline(string n)
         {
-            Airline newAirline = null;
-            string result;
-            if (n.Length <= MAXIMUM_AIRLINE_NAME_LENGTH)
+            try
             {
-                newAirline = new Airline(n);
-            }
-            else
-            {
-                result = "Error: Airline name: " + n + " is longer than " + MAXIMUM_AIRLINE_NAME_LENGTH + " letters!";
-                Console.WriteLine(result);
-                return result;
-            }
+                (Airline airline, string success) = airlineFactory.CreateAirline(n, airlineList);
 
+                airlineList.Add(airline);
 
-            List<Airline> results = airlineList.FindAll(x => newAirline != null && x.AirlineName == newAirline.AirlineName);
-
-            if (results.Count > 0)
-            {
-                result = "Error: Airline name: " + newAirline.AirlineName + " is already exists!";
-                Console.WriteLine(result);
-                return result;
+                Console.WriteLine(success);
+                return success;
             }
-            else
+            catch (Exception e)
             {
-                airlineList.Add(newAirline);
-                result = "Success: Airline " + newAirline.AirlineName + " Created!";
-                Console.WriteLine(result);
-                return result;
+                Console.WriteLine(e.Message);
+                return e.Message;
             }
-            
         }
 
         public string CreateFlight(string aname, string orig, string dest, int year, int month, int day, string id)
