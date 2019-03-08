@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Airport.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -10,40 +11,24 @@ namespace Airport
         private List<Airport> airportList = new List<Airport>();
         private List<Airline> airlineList = new List<Airline>();
 
-        const int REQUIRED_AIRPORT_NAME_LENGTH = 3;
         const int MAXIMUM_AIRLINE_NAME_LENGTH = 5;
+
+        private AirportFactory airportFactory = new AirportFactory();
 
         public string CreateAirport(string n)
         {
-            Airport newAirport = null;
-            string result;
-
-            if (n.Length == REQUIRED_AIRPORT_NAME_LENGTH)
+            try
             {
-                newAirport = new Airport(n);
+                (Airport airport, string success) = airportFactory.CreateAirport(n, airportList);
+                airportList.Add(airport);
+                Console.WriteLine(success);
+                return success;
             }
-            else
+            catch (Exception e)
             {
-                result = "Error: Could not create Airport, name: " + n + " must be exactly 3 letters!";
-                Console.WriteLine(result);
-                return result;
-            }
-
-            List<Airport> results = airportList.FindAll(x => newAirport != null && x.AirportName == newAirport.AirportName);
-
-            if (results.Count > 0)
-            {
-                result = "Error: Airport name: " + newAirport.AirportName + " already exists!";
-                if (newAirport != null) Console.WriteLine(result);
-                return result;
-            }
-            else
-            {
-                result = "Success: Airport " + newAirport.AirportName + " Created!";
-                airportList.Add(newAirport);
-                Console.WriteLine(result);
-                return result;
-            }
+                Console.WriteLine(e.Message);
+                return e.Message;
+            };
         }
 
         public string CreateAirline(string n)
