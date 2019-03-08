@@ -7,15 +7,15 @@ namespace Airport
     {
         private readonly string _airlineName;
 
-        public string AirlineName => _airlineName;
-        public List<Flight> FlightList { get; set; } = new List<Flight>();
+        internal string AirlineName => _airlineName;
+        internal List<Flight> FlightList { get; set; } = new List<Flight>();
 
-        public Airline(string airlineName)
+        internal Airline(string airlineName)
         {
            _airlineName = airlineName;
         }
 
-        public void CreateFlight(string airlineName, string originAirport, string destinationAirport, int year, int month, int day, string id)
+        internal void CreateFlight(string airlineName, string originAirport, string destinationAirport, int year, int month, int day, string id)
         {
             if (airlineName != AirlineName)
             {
@@ -58,10 +58,12 @@ namespace Airport
             Console.WriteLine("Success: Flight " + id + " Created!");
         }
 
-        public void DisplaySystemDetails()
+        public string DisplaySystemDetails()
         {
+            string returnForUnitTests = "";
             foreach (var flight in FlightList)
             {
+                returnForUnitTests += flight.ToString();
                 Console.WriteLine(flight.ToString());
             }
 
@@ -70,6 +72,7 @@ namespace Airport
                 flight.DisplaySystemDetails();
             }
 
+            return returnForUnitTests;
         }
 
         public override string ToString()

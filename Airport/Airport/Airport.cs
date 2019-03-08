@@ -8,7 +8,7 @@ namespace Airport
     {
         private readonly string _airportName;
 
-        public string AirportName => _airportName;
+        internal string AirportName => _airportName;
 
         public Airport(string airportName)
         {

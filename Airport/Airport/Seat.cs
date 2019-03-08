@@ -6,9 +6,9 @@ namespace Airport
 {
     class Seat
     {
-        public int RowNumber { get; set; }
-        public char ColumnCharacter { get; set; }
-        public bool IsBooked { get; set; }
+        internal int RowNumber { get; set; }
+        internal char ColumnCharacter { get; set; }
+        internal bool IsBooked { get; set; }
 
         public Seat(int row, char col, bool isBooked)
         {
