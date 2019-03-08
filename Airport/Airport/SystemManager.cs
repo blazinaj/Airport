@@ -10,31 +10,38 @@ namespace Airport
         private List<Airport> airportList = new List<Airport>();
         private List<Airline> airlineList = new List<Airline>();
 
-        public void CreateAirport(string n)
+        const int REQUIRED_AIRPORT_NAME_LENGTH = 3;
+
+        public string CreateAirport(string n)
         {
             Airport newAirport = null;
+            string result;
 
-            if (n.Length == 3)
+            if (n.Length == REQUIRED_AIRPORT_NAME_LENGTH)
             {
                 newAirport = new Airport(n);
             }
             else
             {
-                Console.WriteLine("Error: Could not create Airport, name: " + n + " must be exactly 3 letters!");
-                return;
+                result = "Error: Could not create Airport, name: " + n + " must be exactly 3 letters!";
+                Console.WriteLine(result);
+                return result;
             }
 
             List<Airport> results = airportList.FindAll(x => newAirport != null && x.AirportName == newAirport.AirportName);
 
             if (results.Count > 0)
             {
-                if (newAirport != null) Console.WriteLine("Error: Airport name: " + newAirport.AirportName + " already exists!");
-                return;
+                result = "Error: Airport name: " + newAirport.AirportName + " already exists!";
+                if (newAirport != null) Console.WriteLine(result);
+                return result;
             }
             else
             {
+                result = "Success: Airport " + newAirport.AirportName + " Created!";
                 airportList.Add(newAirport);
-                Console.WriteLine("Success: Airport " + newAirport.AirportName + " Created!");
+                Console.WriteLine(result);
+                return result;
             }
         }
 
@@ -171,18 +178,18 @@ namespace Airport
         public string DisplaySystemDetails()
         {
             string returnForUnitTests = "";
+            Console.WriteLine("Displaying List of Airports..");
             foreach (var airport in airportList)
             {
                 returnForUnitTests += airport.ToString();
                 Console.WriteLine(airport.ToString());
             }
-
+            Console.WriteLine("Displaying List of Airlines...");
             foreach (var airline in airlineList)
             {
                 returnForUnitTests += airline.ToString();
                 Console.WriteLine(airline.ToString());
             }
-
             foreach (var flights in airlineList)
             {
                 returnForUnitTests += flights.ToString();
