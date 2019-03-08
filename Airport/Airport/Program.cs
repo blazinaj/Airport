@@ -14,7 +14,7 @@ namespace Airport
             res.CreateAirport("DENW"); //INVALID
 
             //Uncomment after debugging
-            Console.ReadLine();
+            //Console.ReadLine();
 
             res.CreateAirline("DELTA");
             res.CreateAirline("AMER");
