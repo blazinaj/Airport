@@ -31,6 +31,12 @@ namespace Airport.Tests
         }
 
         [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
+        public void Create_FlightSection_Invalid_SeatClass_Fails()
+        {
+            Assert.AreEqual("temp", "fails");
+        }
+
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void Create_FlightSection_Invalid_Flight_Fails()
         {
             Assert.AreEqual("temp", "fails");
