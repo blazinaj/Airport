@@ -15,7 +15,7 @@ namespace Airport.Tests
 
             testManager.CreateAirport("BON");
 
-            Assert.AreEqual("Airport: DENAiport: BON", testManager.DisplaySystemDetails());
+            Assert.AreEqual("Airport: DENAirport: BON", testManager.DisplaySystemDetails());
         }
     }
 }
