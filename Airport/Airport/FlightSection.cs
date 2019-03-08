@@ -55,19 +55,20 @@ namespace Airport
 
         public override string ToString()
         {
-            return "Available Sections for: Flight " + flId + " " + air+" airline" + " Seat Class " + seatClass + " with "+rows+" rows and " + cols+ " columns" ;
+            return "Flight Section " + seatClass + " class for Flight " + flId + " on " + air + " with " + rows + " rows and " + cols + " columns.";
         }
 
         public string DisplaySystemDetails()
         {
-            string returnForUnitTests = "";
+            string result = "";
+            result = ToString();
+            Console.WriteLine(result);
             foreach (var seat in BookedSeatsList)
             {
-                returnForUnitTests += seat.ToString();
-                Console.WriteLine(seat.ToString());
+                seat.DisplaySystemDetails();
             }
-
-            return returnForUnitTests;
+            Console.WriteLine();
+            return result;
         }
     }
 }

@@ -206,24 +206,23 @@ namespace Airport
         public string DisplaySystemDetails()
         {
             string returnForUnitTests = "";
-            Console.WriteLine("Displaying List of Airports..");
+
+            Console.WriteLine("\nDisplaying Airport Information");
+            Console.WriteLine("----------------------------------");
             foreach (var airport in airportList)
             {
                 returnForUnitTests += airport.ToString();
                 Console.WriteLine(airport.ToString());
             }
-            Console.WriteLine("Displaying List of Airlines...");
+            Console.WriteLine("----------------------------------");
+
+            Console.WriteLine("\nDisplaying Airline Information");
+            Console.WriteLine("----------------------------------");
             foreach (var airline in airlineList)
             {
-                returnForUnitTests += airline.ToString();
-                Console.WriteLine(airline.ToString());
+                airline.DisplaySystemDetails();
             }
-            foreach (var flights in airlineList)
-            {
-                returnForUnitTests += flights.ToString();
-                flights.DisplaySystemDetails();
-            }
-
+            Console.WriteLine("----------------------------------");
             return returnForUnitTests;
         }
 

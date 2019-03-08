@@ -37,20 +37,15 @@ namespace Airport
 
         public string DisplaySystemDetails()
         {
-            string returnForUnitTests = "";
+            string result = "";
+            result = ToString();
+            Console.WriteLine(result);
             foreach (var section in FlightSectionList)
             {
-                returnForUnitTests += section.ToString();
-                Console.WriteLine(section.ToString());
-            }
-
-            foreach (var section in FlightSectionList)
-            {
-                returnForUnitTests += section.ToString();
                 section.DisplaySystemDetails();
             }
 
-            return returnForUnitTests;
+            return result;
         }
 
         public override string ToString()

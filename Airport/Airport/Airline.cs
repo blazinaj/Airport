@@ -70,24 +70,20 @@ namespace Airport
 
         public string DisplaySystemDetails()
         {
-            string returnForUnitTests = "";
-            foreach (var flight in FlightList)
-            {
-                returnForUnitTests += flight.ToString();
-                Console.WriteLine(flight.ToString());
-            }
-
+            string result = "";
+            result = ToString();
+            Console.WriteLine("Displaying Information for " + result + " Airline\n");
             foreach (var flight in FlightList)
             {
                 flight.DisplaySystemDetails();
             }
-
-            return returnForUnitTests;
+            Console.WriteLine();
+            return result;
         }
 
         public override string ToString()
         {
-            return "Airline: " + _airlineName;
+            return _airlineName;
         }
     }
 }
