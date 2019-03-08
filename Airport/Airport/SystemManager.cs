@@ -11,6 +11,7 @@ namespace Airport
         private List<Airline> airlineList = new List<Airline>();
 
         const int REQUIRED_AIRPORT_NAME_LENGTH = 3;
+        const int MAXIMUM_AIRLINE_NAME_LENGTH = 5;
 
         public string CreateAirport(string n)
         {
@@ -48,15 +49,16 @@ namespace Airport
         public void CreateAirline(string n)
         {
             Airline newAirline = null;
-
-            if (n.Length < 6)
+            string result;
+            if (n.Length <= MAXIMUM_AIRLINE_NAME_LENGTH)
             {
                 newAirline = new Airline(n);
             }
             else
             {
-                Console.WriteLine("Error: Airline name: " + n + " is longer than 5 letters!");
-                return;
+                result = "Error: Airline name: " + n + " is longer than " + MAXIMUM_AIRLINE_NAME_LENGTH + " letters!";
+                Console.WriteLine(result);
+                return result;
             }
 
 
@@ -64,13 +66,16 @@ namespace Airport
 
             if (results.Count > 0)
             {
-                Console.WriteLine("Error: Airline name: " + newAirline.AirlineName + " is already exists!");
-                return;
+                result = "Error: Airline name: " + newAirline.AirlineName + " is already exists!";
+                Console.WriteLine(result);
+                return result;
             }
             else
             {
                 airlineList.Add(newAirline);
-                Console.WriteLine("Success: Airline " + newAirline.AirlineName + " Created!");
+                result = "Success: Airline " + newAirline.AirlineName + " Created!";
+                Console.WriteLine(result);
+                return result;
             }
             
         }
