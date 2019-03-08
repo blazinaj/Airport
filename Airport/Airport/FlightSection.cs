@@ -47,8 +47,6 @@ namespace Airport
         public void BookSeat(string air, string fId, SeatClass s, int row, char col)
         {
             BookedSeatsList.Where(x=> (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == false)).ToList().ForEach(x=>x.IsBooked = true);
-
-//            BookedSeatsList.Add(new Seat(row, col, true));
             Console.WriteLine("Success: Seat (" + col + row+ ") with Seat Class " + seatClass + " on Flight " + flId + " with " + air + " airline " + " Booked!");
         }
 
