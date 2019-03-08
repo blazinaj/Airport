@@ -165,24 +165,28 @@ namespace Airport
             return result;
         }
 
-        public void BookSeat(string air, string fl, SeatClass s, int row, char col)
+        public string BookSeat(string air, string fl, SeatClass s, int row, char col)
         {
+            string result;
             if (airlineList.FindAll(x => x.AirlineName == air).Count < 1)
             {
-                Console.WriteLine("Error: The Airline " + air + " Does Not Exist!");
-                return;
+                result = "Error: The Airline " + air + " Does Not Exist!";
+                Console.WriteLine(result);
+                return result;
             }
 
             if ((airlineList.Find(x => x.AirlineName == air).FlightList.FindAll(x => x.ID == fl).Count) < 1)
             {
-                Console.WriteLine("Error: The Flight " + fl + " associated with the Airline " + air + " Does Not Exist!");
-                return;
+                result = "Error: The Flight " + fl + " associated with the Airline " + air + " Does Not Exist!";
+                Console.WriteLine(result);
+                return result;
             }
 
             if ((col - 'A') < 0 && (col - 'A') > 9)
             {
-                Console.WriteLine("Error: The Flight " + fl + " associated with the Airline " + air + ", the column greater than 'J' ");
-                return;
+                result = "Error: The Flight " + fl + " associated with the Airline " + air + ", the column greater than 'J' ";
+                Console.WriteLine(result);
+                return result;
             }
 
             if ((airlineList.Find(x => x.AirlineName == air)
@@ -190,12 +194,13 @@ namespace Airport
                     .FlightSectionList.Find(x => x.seatClass == s)
                     .BookedSeatsList.FindAll(x => (x.ColumnCharacter == col) && (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == true)).Count) > 0)
             {
-                Console.WriteLine("Error: The Flight " + fl + " associated with the Airline " + air + " and with seat " + col + row + " in " + s + " class" + " Already Booked!");
-                return;
+                result = "Error: The Flight " + fl + " associated with the Airline " + air + " and with seat " + col + row + " in " + s + " class" + " Already Booked!";
+                Console.WriteLine(result);
+                return result;
             }
 
-            airlineList.Find(x => x.AirlineName == air).FlightList.Find(x => x.ID == fl).FlightSectionList.Find(x => x.seatClass == s).BookSeat(air, fl, s, row, col);
-
+            result = airlineList.Find(x => x.AirlineName == air).FlightList.Find(x => x.ID == fl).FlightSectionList.Find(x => x.seatClass == s).BookSeat(air, fl, s, row, col);
+            return result;
         }
 
         public string DisplaySystemDetails()
