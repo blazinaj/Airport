@@ -15,69 +15,75 @@ namespace Airport
            _airlineName = airlineName;
         }
 
-        internal void CreateFlight(string airlineName, string originAirport, string destinationAirport, int year, int month, int day, string id)
+        // Gets Called only if SystemManger List checks pass, these error checks are the specific Flight Details checks
+        internal string CreateFlight(string airlineName, string originAirport, string destinationAirport, int year, int month, int day, string id)
         {
+            string result;
+            
             if (airlineName != AirlineName)
             {
-                Console.WriteLine("An Error occured while creating a flight");
-                return;
+                result = "An Error occured while creating a flight";
+                Console.WriteLine(result);
+                return result;
             }
 
-            if (originAirport == destinationAirport)
+            if (originAirport.Equals(destinationAirport))
             {
-                Console.WriteLine("Error: You cannot have the same Origin (" + originAirport + ") and Destination (" + destinationAirport + ") Airports!");
-                return;
+                result = "Error: You cannot have the same Origin (" + originAirport + ") and Destination (" + destinationAirport + ") Airports!";
+                Console.WriteLine(result);
+                return result;
             }
 
             if (year < 1928)
             {
-                Console.WriteLine("Error: Airports Didn't Even exist in the year " + year + "!");
-                return;
+                result = "Error: Airports Didn't Even exist in the year " + year + "!";
+                Console.WriteLine(result);
+                return result;
             }
 
             if (month < 1 || month > 12)
             {
-                Console.WriteLine("Error: " + month + " is not a valid month!");
-                return;
+                result = "Error: " + month + " is not a valid month!";
+                Console.WriteLine(result);
+                return result;
             }
 
             if (day < 1 || day > 31)
             {
-                Console.WriteLine("Error: " + day + " is not a valid day!");
-                return;
+                result = "Error: " + day + " is not a valid day!";
+                Console.WriteLine(result);
+                return result;
             }
 
             if (FlightList.FindAll(x => x.ID == id).Count > 0)
             {
-                Console.WriteLine("Error: A Flight with " + id + "already exists!");
-                return;
+                result = "Error: A Flight with " + id + "already exists!";
+                Console.WriteLine(result);
+                return result;
             }
 
+            result = "Success: Flight " + id + " Created!";
             FlightList.Add(new Flight(airlineName, originAirport, destinationAirport, year, month, day, id));
-
-            Console.WriteLine("Success: Flight " + id + " Created!");
+            Console.WriteLine(result);
+            return result;
         }
 
         public string DisplaySystemDetails()
         {
-            string returnForUnitTests = "";
-            foreach (var flight in FlightList)
-            {
-                returnForUnitTests += flight.ToString();
-                Console.WriteLine(flight.ToString());
-            }
-
+            string result = "";
+            result = ToString();
+            Console.WriteLine("Displaying Information for " + result + " Airline\n");
             foreach (var flight in FlightList)
             {
                 flight.DisplaySystemDetails();
             }
-
-            return returnForUnitTests;
+            Console.WriteLine();
+            return result;
         }
 
         public override string ToString()
         {
-            return "Airline: " + _airlineName;
+            return _airlineName;
         }
     }
 }

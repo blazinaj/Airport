@@ -17,6 +17,13 @@ namespace Airport
             IsBooked = isBooked;
         }
 
+        public string DisplaySystemDetails()
+        {
+            string result = "Seat " + ColumnCharacter + RowNumber + ", Is Booked: " + IsBooked;
+            Console.WriteLine(result);
+            return result;
+        }
+
         public override string ToString()
         {
             return "Seat " + ColumnCharacter+RowNumber;

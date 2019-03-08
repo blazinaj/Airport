@@ -44,27 +44,31 @@ namespace Airport
             return booked;
         }
 
-        internal void BookSeat(string air, string fId, SeatClass s, int row, char col)
+        internal string BookSeat(string air, string fId, SeatClass s, int row, char col)
         {
-            BookedSeatsList.Where(x=> (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == false)).ToList().ForEach(x=>x.IsBooked = true);
-            Console.WriteLine("Success: Seat (" + col + row+ ") with Seat Class " + seatClass + " on Flight " + flId + " with " + air + " airline " + " Booked!");
+            string result;
+            BookedSeatsList.Where(x => (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == false)).ToList().ForEach(x => x.IsBooked = true);
+            result = "Success: Seat (" + col + row + ") with Seat Class " + seatClass + " on Flight " + flId + " with " + air + " airline " + " Booked!";
+            Console.WriteLine(result);
+            return result;
         }
 
         public override string ToString()
         {
-            return "Available Sections for: Flight " + flId + " " + air+" airline" + " Seat Class " + seatClass + " with "+rows+" rows and " + cols+ " columns" ;
+            return "Flight Section " + seatClass + " class for Flight " + flId + " on " + air + " with " + rows + " rows and " + cols + " columns.";
         }
 
         public string DisplaySystemDetails()
         {
-            string returnForUnitTests = "";
+            string result = "";
+            result = ToString();
+            Console.WriteLine(result);
             foreach (var seat in BookedSeatsList)
             {
-                returnForUnitTests += seat.ToString();
-                Console.WriteLine(seat.ToString());
+                seat.DisplaySystemDetails();
             }
-
-            return returnForUnitTests;
+            Console.WriteLine();
+            return result;
         }
     }
 }
