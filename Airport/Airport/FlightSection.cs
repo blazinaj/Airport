@@ -8,9 +8,9 @@ namespace Airport
     {
         private string air;
         private string flId;
-        public int rows;
-        public int cols;
-        public SeatClass seatClass = SeatClass.economy;
+        private int rows;
+        private int cols;
+        internal SeatClass seatClass = SeatClass.economy;
 
         internal List<Seat> BookedSeatsList { get; set; } = new List<Seat>();
 
@@ -32,7 +32,7 @@ namespace Airport
             }   
         }
 
-        public bool HasAvailableSeats()
+        private bool HasAvailableSeats()
         {
             var booked = false;
 
@@ -44,7 +44,7 @@ namespace Airport
             return booked;
         }
 
-        public void BookSeat(string air, string fId, SeatClass s, int row, char col)
+        internal void BookSeat(string air, string fId, SeatClass s, int row, char col)
         {
             BookedSeatsList.Where(x=> (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == false)).ToList().ForEach(x=>x.IsBooked = true);
 
@@ -57,12 +57,16 @@ namespace Airport
             return "Available Sections for: Flight " + flId + " " + air+" airline" + " Seat Class " + seatClass + " with "+rows+" rows and " + cols+ " columns" ;
         }
 
-        public void DisplaySystemDetails()
+        public string DisplaySystemDetails()
         {
+            string returnForUnitTests = "";
             foreach (var seat in BookedSeatsList)
             {
+                returnForUnitTests += seat.ToString();
                 Console.WriteLine(seat.ToString());
             }
+
+            return returnForUnitTests;
         }
     }
 }
