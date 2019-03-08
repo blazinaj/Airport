@@ -7,8 +7,8 @@ namespace Airport
 {
     public class SystemManager : IDisplaySystemDetails
     {
-        List<Airport> airportList = new List<Airport>();
-        List<Airline> airlineList = new List<Airline>();
+        private List<Airport> airportList = new List<Airport>();
+        private List<Airline> airlineList = new List<Airline>();
 
         public void CreateAirport(string n)
         {
@@ -168,22 +168,28 @@ namespace Airport
 
         }
 
-        public void DisplaySystemDetails()
+        public string DisplaySystemDetails()
         {
+            string returnForUnitTests = "";
             foreach (var airport in airportList)
             {
+                returnForUnitTests += airport.ToString();
                 Console.WriteLine(airport.ToString());
             }
 
             foreach (var airline in airlineList)
             {
+                returnForUnitTests += airline.ToString();
                 Console.WriteLine(airline.ToString());
             }
 
             foreach (var flights in airlineList)
             {
+                returnForUnitTests += flights.ToString();
                 flights.DisplaySystemDetails();
             }
+
+            return returnForUnitTests;
         }
 
         public void FindAvailableFlights(string org, string dis)

@@ -6,6 +6,6 @@ namespace Airport
 {
     interface IDisplaySystemDetails
     {
-        void DisplaySystemDetails();
+        string DisplaySystemDetails();
     }
 }

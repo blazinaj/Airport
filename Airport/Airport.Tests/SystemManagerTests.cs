@@ -10,6 +10,12 @@ namespace Airport.Tests
         {
             SystemManager testManager = new SystemManager();
             testManager.CreateAirport("DEN");
+
+            Assert.AreEqual("Airport: DEN", testManager.DisplaySystemDetails());
+
+            testManager.CreateAirport("BON");
+
+            Assert.AreEqual("Airport: DENAiport: BON", testManager.DisplaySystemDetails());
         }
     }
 }
