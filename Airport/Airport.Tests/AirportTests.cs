@@ -2,7 +2,8 @@
 
 namespace Airport.Tests
 {
-    class AirportTests
+    [TestClass]
+    public class AirportTests
     {
         SystemManager testManager = new SystemManager();
         [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
@@ -25,7 +26,9 @@ namespace Airport.Tests
         public void Create_Airport_Name_Already_Exists_Failure()
         {
             string result = testManager.CreateAirport("BOB");
+            Assert.AreEqual("Success: Airport BOB Created!", result);
 
+            result = testManager.CreateAirport("BOB");
             Assert.AreEqual("Error: Airport name: BOB already exists!", result);
         }
     }

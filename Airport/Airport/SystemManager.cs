@@ -46,7 +46,7 @@ namespace Airport
             }
         }
 
-        public void CreateAirline(string n)
+        public string CreateAirline(string n)
         {
             Airline newAirline = null;
             string result;
@@ -80,34 +80,45 @@ namespace Airport
             
         }
 
-        public void CreateFlight(string aname, string orig, string dest, int year, int month, int day, string id)
+        public string CreateFlight(string aname, string orig, string dest, int year, int month, int day, string id)
         {
             List<Airline> airlineResults = airlineList.FindAll(x => x.AirlineName == aname);
             List<Airport> airportOrigResults = airportList.FindAll(x => x.AirportName == orig);
             List<Airport> airportDestResults = airportList.FindAll(x => x.AirportName == dest);
 
+            string result;
+
+            // Checks SystemManager Lists
             if (airlineResults.Count < 1)
             {
-                Console.WriteLine("Error: Could not Create Flight, " + aname + " is not a valid airline!");
-                return;
+                result = "Error: Could not Create Flight, " + aname + " is not a valid airline!";
+                Console.WriteLine(result);
+                return result;
             }
             else if (airportOrigResults.Count < 1)
             {
-                Console.WriteLine("Error: Could not Create Flight, " + orig + " is not a valid airport!");
-                return;
+                result = "Error: Could not Create Flight, " + orig + " is not a valid airport!";
+                Console.WriteLine(result);
+                return result;
             }
             else if (airportDestResults.Count < 1)
             {
-                Console.WriteLine("Error: Could not Create Flight, " + dest + " is not a valid airport!");
-                return;
+                result = "Error: Could not Create Flight, " + dest + " is not a valid airport!";
+                Console.WriteLine(result);
+                return result;
             }
             else if (airlineResults.Count > 0 && airportOrigResults.Count > 0 && airportDestResults.Count > 0)
-            {
-                airlineResults.Find(x => x.AirlineName == aname).CreateFlight(aname, orig, dest, year, month, day, id);
+            { 
+                // If All List Checks Pass, call CreateFlight in Airline for other checks
+                result = airlineResults.Find(x => x.AirlineName == aname).CreateFlight(aname, orig, dest, year, month, day, id);
+                Console.WriteLine(result);
+                return result;
             }
             else
             {
+                result = "Some weird error happened";
                 Console.WriteLine("Some weird error happened");
+                return result;
             }
  
         }

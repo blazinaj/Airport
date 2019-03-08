@@ -2,36 +2,38 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace Airport.Tests
 {
-    class AirlineTests
+    [TestClass]
+    public class AirlineTests
     {
         SystemManager testManager = new SystemManager();
 
-        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
+        [TestMethod]
         public void Create_Airline_Name_More_Than_Five_Letters_Fails()
         {
-            string result = testManager.createAirline("FRONTIER");
+            string result = testManager.CreateAirline("FRONTIER");
 
             Assert.AreEqual("Error: Airline name: FRONTIER is longer than 5 letters!", result);
         }
 
-        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
+        [TestMethod]
         public void Create_Airline_Success()
         {
-            string result = testManager.createAirline("FRONT");
+            string result = testManager.CreateAirline("FRONT");
 
             Assert.AreEqual("Success: Airline FRONT Created!", result);
         }
 
-        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
+        [TestMethod]
         public void Create_Airline_Name_Already_Exists_Fails()
         {
-            string result = testManager.createAirline("FRONT");
+            string result = testManager.CreateAirline("FRONT");
+            Assert.AreEqual("Success: Airline FRONT Created!", result);
 
+            result = testManager.CreateAirline("FRONT");
             Assert.AreEqual("Error: Airline name: FRONT is already exists!", result);
         }
     }

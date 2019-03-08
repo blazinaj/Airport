@@ -15,9 +15,11 @@ namespace Airport
            _airlineName = airlineName;
         }
 
+        // Gets Called only if SystemManger List checks pass, these error checks are the specific Flight Details checks
         internal string CreateFlight(string airlineName, string originAirport, string destinationAirport, int year, int month, int day, string id)
         {
-            strint result;
+            string result;
+            
             if (airlineName != AirlineName)
             {
                 result = "An Error occured while creating a flight";
@@ -25,7 +27,7 @@ namespace Airport
                 return result;
             }
 
-            if (originAirport == destinationAirport)
+            if (originAirport.Equals(destinationAirport))
             {
                 result = "Error: You cannot have the same Origin (" + originAirport + ") and Destination (" + destinationAirport + ") Airports!";
                 Console.WriteLine(result);
