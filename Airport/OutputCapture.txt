@@ -1,0 +1,70 @@
+Success: Airport DEN Created!
+Success: Airport DFW Created!
+Success: Airport LON Created!
+Error: Airport name: DEN already exists!
+Error: Could not create Airport, name: DENW must be exactly 3 letters!
+Success: Airline DELTA Created!
+Success: Airline AMER Created!
+Success: Airline FRONT Created!
+Error: Airline name: FRONTIER is longer than 5 letters!
+Error: Airline name: FRONT is already exists!
+Success: Flight 123 Created!
+Error: You cannot have the same Origin (DEN) and Destination (DEN) Airports!
+Error: Could not Create Flight, DEL is not a valid airline!
+Error: Could not Create Flight, LON33 is not a valid airport!
+Error: Could not Create Flight for past year!
+Success: Flight Section (2 rows, 2 cols) with Seat Class economy on Flight 123 with DELTA airline  Created!
+Success: Flight Section (2 rows, 3 cols) with Seat Class first on Flight 123 with DELTA airline  Created!
+Error: A flight section with Seat Class first already exists on Flight 123 with DELTA airline!
+Error: The Airline SWSERTT Does Not Exist!
+Success: Seat (A1) with Seat Class first on Flight 123 with DELTA airline  Booked!
+Success: Seat (A1) with Seat Class economy on Flight 123 with DELTA airline  Booked!
+Success: Seat (B1) with Seat Class economy on Flight 123 with DELTA airline  Booked!
+Error: The Airline DELTA888 Does Not Exist!
+Error: The Flight 123haha7 associated with the Airline DELTA Does Not Exist!
+Error: The Flight 123 associated with the Airline DELTA and with seat A1 in economy class Already Booked!
+
+Displaying Airport Information
+----------------------------------
+Airport: DEN
+Airport: DFW
+Airport: LON
+----------------------------------
+
+Displaying Airline Information
+----------------------------------
+Displaying Information for DELTA Airline
+
+Flight Number: 123 Airline Name: DELTA Origin Airport: DEN Destination Airport: LON Date: 10/10/2019
+Flight Section economy class for Flight 123 on DELTA with 2 rows and 2 columns.
+Seat A1, Is Booked: True
+Seat A2, Is Booked: False
+Seat B1, Is Booked: True
+Seat B2, Is Booked: False
+
+Flight Section first class for Flight 123 on DELTA with 2 rows and 3 columns.
+Seat A1, Is Booked: True
+Seat A2, Is Booked: False
+Seat B1, Is Booked: False
+Seat B2, Is Booked: False
+Seat C1, Is Booked: False
+Seat C2, Is Booked: False
+
+
+Displaying Information for AMER Airline
+
+
+Displaying Information for FRONT Airline
+
+
+----------------------------------
+Available Seats for Flight DEN to LON
+economy class seats available
+Seat A2
+Seat B2
+first class seats available
+Seat A2
+Seat B1
+Seat B2
+Seat C1
+Seat C2
