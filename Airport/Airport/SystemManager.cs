@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Airport.Exceptions;
+using Airport.Factories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Airport
 {
@@ -10,180 +11,73 @@ namespace Airport
         private List<Airport> airportList = new List<Airport>();
         private List<Airline> airlineList = new List<Airline>();
 
-        const int REQUIRED_AIRPORT_NAME_LENGTH = 3;
-        const int MAXIMUM_AIRLINE_NAME_LENGTH = 5;
+        private AirportFactory airportFactory = new AirportFactory();
+        private AirlineFactory airlineFactory = new AirlineFactory();
+        private FlightFactory flightFactory = new FlightFactory();
+        private FlightSectionFactory flightSectionFactory = new FlightSectionFactory();
 
         public string CreateAirport(string n)
         {
-            Airport newAirport = null;
-            string result;
+            try
+            {
+                (Airport airport, string success) = airportFactory.CreateAirport(n, airportList);
 
-            if (n.Length == REQUIRED_AIRPORT_NAME_LENGTH)
-            {
-                newAirport = new Airport(n);
-            }
-            else
-            {
-                result = "Error: Could not create Airport, name: " + n + " must be exactly 3 letters!";
-                Console.WriteLine(result);
-                return result;
-            }
+                airportList.Add(airport);
 
-            List<Airport> results = airportList.FindAll(x => newAirport != null && x.AirportName == newAirport.AirportName);
-
-            if (results.Count > 0)
-            {
-                result = "Error: Airport name: " + newAirport.AirportName + " already exists!";
-                if (newAirport != null) Console.WriteLine(result);
-                return result;
+                Console.WriteLine(success);
+                return success;
             }
-            else
+            catch (Exception e)
             {
-                result = "Success: Airport " + newAirport.AirportName + " Created!";
-                airportList.Add(newAirport);
-                Console.WriteLine(result);
-                return result;
-            }
+                Console.WriteLine(e.Message);
+                return e.Message;
+            };
         }
 
         public string CreateAirline(string n)
         {
-            Airline newAirline = null;
-            string result;
-            if (n.Length <= MAXIMUM_AIRLINE_NAME_LENGTH)
+            try
             {
-                newAirline = new Airline(n);
-            }
-            else
-            {
-                result = "Error: Airline name: " + n + " is longer than " + MAXIMUM_AIRLINE_NAME_LENGTH + " letters!";
-                Console.WriteLine(result);
-                return result;
-            }
+                (Airline airline, string success) = airlineFactory.CreateAirline(n, airlineList);
 
+                airlineList.Add(airline);
 
-            List<Airline> results = airlineList.FindAll(x => newAirline != null && x.AirlineName == newAirline.AirlineName);
-
-            if (results.Count > 0)
-            {
-                result = "Error: Airline name: " + newAirline.AirlineName + " is already exists!";
-                Console.WriteLine(result);
-                return result;
+                Console.WriteLine(success);
+                return success;
             }
-            else
+            catch (Exception e)
             {
-                airlineList.Add(newAirline);
-                result = "Success: Airline " + newAirline.AirlineName + " Created!";
-                Console.WriteLine(result);
-                return result;
+                Console.WriteLine(e.Message);
+                return e.Message;
             }
-            
         }
 
         public string CreateFlight(string aname, string orig, string dest, int year, int month, int day, string id)
         {
-
-            string result;
-
-            // Checks SystemManager Lists
-            if (airlineList.FindAll(x => x.AirlineName == aname).Count < 1)
+            try
             {
-                result = "Error: Could not Create Flight, " + aname + " is not a valid airline!";
-                Console.WriteLine(result);
-                return result;
+                string success = flightFactory.CreateFlight(aname, orig, dest, year, month, day, id, airportList, airlineList);
+                return success;
             }
-
-            if (airportList.FindAll(x => x.AirportName == orig).Count < 1)
+            catch (Exception e)
             {
-                result = "Error: Could not Create Flight, " + orig + " is not a valid airport!";
-                Console.WriteLine(result);
-                return result;
-            }
-
-            if (airportList.FindAll(x => x.AirportName == dest).Count < 1)
-            {
-                result = "Error: Could not Create Flight, " + dest + " is not a valid airport!";
-                Console.WriteLine(result);
-                return result;
-            }
-
-            if (year < DateTime.Now.Year)
-            {
-                if ( month < DateTime.Now.Month)
-                {
-                    if (day < DateTime.Now.Day)
-                    {
-                        result = "Error: Could not Create past date Flight!";
-                        Console.WriteLine(result);
-                        return result;
-                    }
-
-                    result = "Error: Could not Create past date Flight!";
-                    Console.WriteLine(result);
-                    return result;
-                }
-
-                result = "Error: Could not Create past date Flight!";
-                Console.WriteLine(result);
-                return result;
-            }
-
-            if (airlineList.FindAll(x => x.AirlineName == aname).Count > 0 && airportList.FindAll(x => x.AirportName == orig).Count > 0 && airportList.FindAll(x => x.AirportName == dest).Count > 0)
-            { 
-                // If All List Checks Pass, call CreateFlight in Airline for other checks
-                result = airlineList.FindAll(x => x.AirlineName == aname).Find(x => x.AirlineName == aname).CreateFlight(aname, orig, dest, year, month, day, id);
-                Console.WriteLine(result);
-                return result;
-            }
-            else
-            {
-                result = "Some weird error happened";
-                Console.WriteLine("Some weird error happened");
-                return result;
+                Console.WriteLine(e.Message);
+                return e.Message;
             }
  
         }
 
         public string CreateSection(string air, string flID, int rows, int cols, SeatClass s)
         {
-            string result;
-            if (airlineList.FindAll(x => x.AirlineName == air).Count < 1)
+           try
             {
-                result = "Error: The Airline " + air + " Does Not Exist!";
-                Console.WriteLine(result);
-                return result;
-            }
-
-            if (rows > 100 || rows < 1)
+                string success = flightSectionFactory.CreateSection(air, flID, rows, cols, s, airlineList);
+                return success;
+            } catch (Exception e)
             {
-                result = "Error: You must have between 1 and 100 rows!";
-                Console.WriteLine(result);
-                return result;
+                Console.WriteLine(e.Message);
+                return e.Message;
             }
-
-            if (cols > 10 || cols < 1)
-            {
-                result = "Error: You must have between 1 and 10 columns!";
-                Console.WriteLine(result);
-                return result;
-            }
-
-            if ((airlineList.Find(x => x.AirlineName == air).FlightList.FindAll(x => x.ID == flID).Count) < 1)
-            {
-                result = "Error: The Flight " + flID + " associated with the Airline " + air + " Does Not Exist!";
-                Console.WriteLine(result);
-                return result;
-            }
-
-            if ((airlineList.Find(x => x.AirlineName == air).FlightList.Find(x => x.ID == flID).FlightSectionList.FindAll(x => x.seatClass == s)).Count > 0)
-            {
-                result = "Error: A flight section with Seat Class " + s + " already exists on Flight " + flID + " with " + air + " airline!";
-                Console.WriteLine(result);
-                return result;
-            }
-
-            result = airlineList.Find(x => x.AirlineName == air).FlightList.Find(x => x.ID == flID).CreateFlightSection(air, flID, rows, cols, s);
-            return result;
         }
 
         public string BookSeat(string air, string fl, SeatClass s, int row, char col)
