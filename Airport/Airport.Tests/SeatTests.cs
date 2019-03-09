@@ -37,11 +37,5 @@ namespace Airport.Tests
             result = testManager.BookSeat("DELTA", "123", SeatClass.economy, 1, 'B');
             Assert.AreEqual("Success: Seat (B1) with Seat Class economy on Flight 123 with DELTA airline  Booked!", result);
         }
-
-        [TestMethod]
-        public void MyTestMethod()
-        {
-
-        }
     }
 }
