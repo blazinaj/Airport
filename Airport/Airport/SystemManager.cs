@@ -64,7 +64,6 @@ namespace Airport
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
- 
         }
 
         public string CreateSection(string air, string flID, int rows, int cols, SeatClass s)
