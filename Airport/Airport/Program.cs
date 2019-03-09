@@ -40,9 +40,6 @@ namespace Airport
             res.DisplaySystemDetails();
 
             res.FindAvailableFlights("DEN", "LON");
-
-            //Uncomment after debugging
-            Console.ReadLine();
         }
     }
 }
