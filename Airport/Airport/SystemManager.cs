@@ -83,6 +83,8 @@ namespace Airport
         public string BookSeat(string air, string fl, SeatClass s, int row, char col)
         {
             string result;
+            char column = Char.ToUpper(col);
+
             if (airlineList.FindAll(x => x.AirlineName == air).Count < 1)
             {
                 result = "Error: The Airline " + air + " Does Not Exist!";
@@ -97,9 +99,17 @@ namespace Airport
                 return result;
             }
 
-            if ((col - 'A') < 0 && (col - 'A') > 9)
+            //check column for range between 'A' to 'J' 
+            if ((column - 0) < 64 && (column - 0) > 75)
             {
                 result = "Error: The Flight " + fl + " associated with the Airline " + air + ", the column greater than 'J' ";
+                Console.WriteLine(result);
+                return result;
+            }
+
+            if (row < 1)
+            {
+                result = "Error: The Flight " + fl + " associated with the Airline " + air + ", the row less than 1 ";
                 Console.WriteLine(result);
                 return result;
             }
@@ -114,7 +124,7 @@ namespace Airport
                 return result;
             }
 
-            result = airlineList.Find(x => x.AirlineName == air).FlightList.Find(x => x.ID == fl).FlightSectionList.Find(x => x.seatClass == s).BookSeat(air, fl, s, row, col);
+            result = airlineList.Find(x => x.AirlineName == air).FlightList.Find(x => x.ID == fl).FlightSectionList.Find(x => x.seatClass == s).BookSeat(air, fl, s, row, column);
             return result;
         }
 
