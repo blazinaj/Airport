@@ -21,7 +21,7 @@ namespace Airport
 
             res.CreateFlight("DELTA", "DEN", "LON", 2019, 10, 10, "123");
             res.CreateFlight("DELTA", "DEN", "DEN", 2019, 8, 8, "567abc");
-            res.CreateFlight("DEL", "DEN", "LON", 2018, 9, 8, "567"); //invalid airline
+            res.CreateFlight("DEL", "DEN", "LON", 2019, 9, 8, "567"); //invalid airline
             res.CreateFlight("DELTA", "LON33", "DEN33", 2019, 5, 7, "123");//invalid airports
             res.CreateFlight("AMER", "DEN", "LON", 2010, 40, 100, "123abc");//invalid date
 
