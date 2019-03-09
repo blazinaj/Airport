@@ -14,7 +14,7 @@ namespace Airport.Tests
             testManager.CreateAirport("LON");
             testManager.CreateAirline("DELTA");
 
-            string result = testManager.CreateFlight("DELTA", "DEN", "LON", 2018, 10, 10, "123");
+            string result = testManager.CreateFlight("DELTA", "DEN", "LON", 2019, 10, 10, "123");
 
             Assert.AreEqual("Success: Flight 123 Created!", result);
         }
@@ -25,7 +25,7 @@ namespace Airport.Tests
             testManager.CreateAirport("DEN");
             testManager.CreateAirport("LON");
             testManager.CreateAirline("DELTA");
-            string result = testManager.CreateFlight("DELTA", "DEN", "DEN", 2018, 8, 8, "567abc");
+            string result = testManager.CreateFlight("DELTA", "DEN", "DEN", 2019, 8, 8, "567abc");
 
             Assert.AreEqual("Error: You cannot have the same Origin (DEN) and Destination (DEN) Airports!", result);
         }
@@ -38,20 +38,16 @@ namespace Airport.Tests
             testManager.CreateAirline("AMER");
 
             // Invalid Month
-            string result = testManager.CreateFlight("AMER", "DEN", "LON", 2010, 40, 10, "123abc");
+            string result = testManager.CreateFlight("AMER", "DEN", "LON", 2019, 40, 10, "123abc");
             Assert.AreEqual("Error: 40 is not a valid month!", result);
 
             // Invalid Day
-            result = testManager.CreateFlight("AMER", "DEN", "LON", 2010, 10, 400, "123abc");
+            result = testManager.CreateFlight("AMER", "DEN", "LON", 2019, 10, 400, "123abc");
             Assert.AreEqual("Error: 400 is not a valid day!", result);
 
             // Invalid Year
-            //result = testManager.CreateFlight("AMER", "DEN", "LON", 199d, 10, 20, "123abc");
-            //Assert.AreEqual("Invalid Year", result);
-
-            //// Invalid Date: inputted a past date
-            //result = testManager.CreateFlight("AMER", "DEN", "LON", 2018, 10, 20, "123abc");
-            //Assert.AreEqual("Date is in past", result);
+            result = testManager.CreateFlight("AMER", "DEN", "LON", 1993, 10, 20, "123abc");
+            Assert.AreEqual("Error: Could not Create Flight for past year!", result);
         }
 
         [TestMethod]

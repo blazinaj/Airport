@@ -1,7 +1,7 @@
 CSCD 349 Airport Part 1
 
 Contributors: 
-Anatoli Rilean
+Anatoli Railean
 Jacob Blazina
 
 Project Management Board :

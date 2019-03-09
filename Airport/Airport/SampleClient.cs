@@ -2,7 +2,7 @@
 
 namespace Airport
 {
-    class Program
+    class SampleClient
     {
         static void Main(string[] args)
         {
@@ -23,7 +23,7 @@ namespace Airport
             res.CreateFlight("DELTA", "DEN", "DEN", 2019, 8, 8, "567abc");
             res.CreateFlight("DEL", "DEN", "LON", 2019, 9, 8, "567"); //invalid airline
             res.CreateFlight("DELTA", "LON33", "DEN33", 2019, 5, 7, "123");//invalid airports
-            res.CreateFlight("AMER", "DEN", "LON", 2010, 40, 100, "123abc");//invalid date
+            res.CreateFlight("AMER", "DEN", "LON", 2019, 40, 100, "123abc");//invalid date
 
             res.CreateSection("DELTA","123", 2, 2, SeatClass.economy);
             res.CreateSection("DELTA","123", 2, 3, SeatClass.first);
@@ -40,9 +40,6 @@ namespace Airport
             res.DisplaySystemDetails();
 
             res.FindAvailableFlights("DEN", "LON");
-
-            //Uncomment after debugging
-            Console.ReadLine();
         }
     }
 }
