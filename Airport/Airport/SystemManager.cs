@@ -82,35 +82,56 @@ namespace Airport
 
         public string CreateFlight(string aname, string orig, string dest, int year, int month, int day, string id)
         {
-            List<Airline> airlineResults = airlineList.FindAll(x => x.AirlineName == aname);
-            List<Airport> airportOrigResults = airportList.FindAll(x => x.AirportName == orig);
-            List<Airport> airportDestResults = airportList.FindAll(x => x.AirportName == dest);
 
             string result;
 
             // Checks SystemManager Lists
-            if (airlineResults.Count < 1)
+            if (airlineList.FindAll(x => x.AirlineName == aname).Count < 1)
             {
                 result = "Error: Could not Create Flight, " + aname + " is not a valid airline!";
                 Console.WriteLine(result);
                 return result;
             }
-            else if (airportOrigResults.Count < 1)
+
+            if (airportList.FindAll(x => x.AirportName == orig).Count < 1)
             {
                 result = "Error: Could not Create Flight, " + orig + " is not a valid airport!";
                 Console.WriteLine(result);
                 return result;
             }
-            else if (airportDestResults.Count < 1)
+
+            if (airportList.FindAll(x => x.AirportName == dest).Count < 1)
             {
                 result = "Error: Could not Create Flight, " + dest + " is not a valid airport!";
                 Console.WriteLine(result);
                 return result;
             }
-            else if (airlineResults.Count > 0 && airportOrigResults.Count > 0 && airportDestResults.Count > 0)
+
+            if (year < DateTime.Now.Year)
+            {
+                if ( month < DateTime.Now.Month)
+                {
+                    if (day < DateTime.Now.Day)
+                    {
+                        result = "Error: Could not Create past date Flight!";
+                        Console.WriteLine(result);
+                        return result;
+                    }
+
+                    result = "Error: Could not Create past date Flight!";
+                    Console.WriteLine(result);
+                    return result;
+                }
+
+                result = "Error: Could not Create past date Flight!";
+                Console.WriteLine(result);
+                return result;
+            }
+
+            if (airlineList.FindAll(x => x.AirlineName == aname).Count > 0 && airportList.FindAll(x => x.AirportName == orig).Count > 0 && airportList.FindAll(x => x.AirportName == dest).Count > 0)
             { 
                 // If All List Checks Pass, call CreateFlight in Airline for other checks
-                result = airlineResults.Find(x => x.AirlineName == aname).CreateFlight(aname, orig, dest, year, month, day, id);
+                result = airlineList.FindAll(x => x.AirlineName == aname).Find(x => x.AirlineName == aname).CreateFlight(aname, orig, dest, year, month, day, id);
                 Console.WriteLine(result);
                 return result;
             }
