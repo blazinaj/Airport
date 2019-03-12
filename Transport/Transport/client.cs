@@ -2,7 +2,7 @@
 
 namespace Transport
 {
-    class Program
+    class client
     {
         static void Main(string[] args)
         {
