@@ -2,11 +2,11 @@
 
 namespace Transport
 {
-    class client
+    class Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ImportFile.ReadFromFile(args);
         }
     }
 }
