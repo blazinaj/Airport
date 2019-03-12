@@ -22,7 +22,7 @@ namespace Airport
                 {
                     throw new PortException("Error: " + type + " name " + name + " already exists!");
                 }
-                else if (name.Length != 3)
+                else if (name.Length != REQUIRED_AIRPORT_NAME_LENGTH)
                 {
                     throw new PortException("Error: Could not create " + type + ", name: " + name + " must be exactly 3 letters!");
                 }
