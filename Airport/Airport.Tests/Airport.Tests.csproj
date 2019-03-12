@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Airport\Airport.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TrainTests\" />
+  </ItemGroup>
+
 </Project>
