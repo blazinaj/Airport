@@ -3,11 +3,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Transport.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class ReadInputFile
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ReadFromArgs_Success()
         {
+            
         }
     }
 }
