@@ -21,13 +21,14 @@ namespace Transport.Menu
             {
                 if (res == 1)
                 {
-                    Console.Clear();
+                    Console.WriteLine("Creating an Airport...");
                     Console.WriteLine("Please enter the Airport name: ");
                     string airportName = Console.ReadLine();
 
                     (Port port, string result) = systemManager.airFactory.CreatePort(airportName);
 
                     Console.WriteLine(result);
+                    Console.WriteLine("\nPress Enter to Return to MENU");
                     Console.ReadLine();
                 }
 
@@ -37,7 +38,7 @@ namespace Transport.Menu
                 }
             }
 
-            return "";
+            return DisplayMenu();
         }
     }
 }
