@@ -16,7 +16,7 @@ namespace Transport.Factories
         {
             try
             {
-                Port newTrainPort = new AirPort(name);
+                Port newTrainPort = new TrainPort(name);
                 string success = "Success: TrainPort " + newTrainPort.Name + " Successfully Created!";
                 return (newTrainPort, success);
             }

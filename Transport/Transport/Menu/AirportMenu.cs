@@ -25,7 +25,10 @@ namespace Transport.Menu
                     Console.WriteLine("Please enter the Airport name: ");
                     string airportName = Console.ReadLine();
 
-                    Port airPort = new AirPort(airportName);
+                    (Port port, string result) = systemManager.airFactory.CreatePort(airportName);
+
+                    Console.WriteLine(result);
+                    Console.ReadLine();
                 }
 
                 if (res == 2)
