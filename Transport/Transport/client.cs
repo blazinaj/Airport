@@ -27,19 +27,19 @@ namespace Transport
                     if (res == 1)
                     {
                         SystemMenu airportMenu = new AirportMenu();
-                        Console.WriteLine(airportMenu.DisplayMenu());
+                        airportMenu.DisplayMenu();
                     }
 
                     if (res == 2)
                     {
                         SystemMenu trainMenu = new TrainMenu();
-                        Console.WriteLine(trainMenu.DisplayMenu());
+                        trainMenu.DisplayMenu();
                     }
 
                     if (res == 3)
                     {
                         SystemMenu cruiseMenu = new CruiseMenu();
-                        Console.WriteLine(cruiseMenu.DisplayMenu());
+                        cruiseMenu.DisplayMenu();
                     }
 
                  }
