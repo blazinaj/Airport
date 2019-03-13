@@ -14,9 +14,9 @@ namespace Transport.Tests.AirportTests
         {
             SystemFactory factory = new AirportFactory();
 
-            var airport = factory.CreatePort("DEN");
+            (Port port, string result) = factory.CreatePort("DEN");
 
-            Assert.AreEqual("AirPort: DEN", airport.DisplaySystemDetails());
+            Assert.AreEqual("Success: AirPort DEN Successfully Created!", result);
         }
     }
 }

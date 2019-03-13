@@ -12,7 +12,7 @@ namespace Transport
         public string Name { get; set; }
         public string DisplaySystemDetails()
         {
-            return this.GetType().Name + ": " + Name;
+            return GetType().Name + ": " + Name;
         }
     }
 }

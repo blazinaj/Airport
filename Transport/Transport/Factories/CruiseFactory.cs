@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Transport.Exceptions;
 using Transport.Lines;
 using Transport.Trips;
 
@@ -11,18 +12,36 @@ namespace Transport.Factories
     /// </summary>
     public class CruiseFactory : SystemFactory
     {
-        public override Port CreatePort(string name)
+        public override (Port, string) CreatePort(string name)
         {
-            return new CruisePort(name);
+            try
+            {
+                Port newCruisePort = new CruisePort(name);
+                string success = "Success: CruisePort " + newCruisePort.Name + " Successfully Created!";
+                return (newCruisePort, success);
+            }
+            catch (InvalidCruisePortException e)
+            {
+                return (null, e.Message);
+            }
         }
-        public override Line CreateLine()
+        public override (Line, string) CreateLine(string name)
         {
-            return new CruiseLine();
+            try
+            {
+                Line newCruiseLine = new CruiseLine(name);
+                string success = "Success: CruiseLine " + newCruiseLine.Name + " Successfully Created!";
+                return (newCruiseLine, success);
+            }
+            catch (InvalidCruiseLineException e)
+            {
+                return (null, e.Message);
+            }
         }
 
-        public override Trip CreateTrip()
+        public override Trip CreateTrip(string name)
         {
-            return new CruiseTrip();
+            return new CruiseTrip(name);
         }
     }
 }

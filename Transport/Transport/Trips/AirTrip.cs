@@ -6,5 +6,9 @@ namespace Transport.Trips
 {
     class AirTrip : Trip
     {
+        public AirTrip(string tripID)
+        {
+            TripID = tripID;
+        }
     }
 }
