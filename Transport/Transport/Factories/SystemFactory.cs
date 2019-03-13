@@ -9,8 +9,8 @@ namespace Transport
     /// </summary>
     public abstract class SystemFactory
     {
-        public abstract Port CreatePort(string name);
-        public abstract Line CreateLine();
-        public abstract Trip CreateTrip();
+        public abstract (Port, string) CreatePort(string name);
+        public abstract (Line, string) CreateLine(string name);
+        public abstract Trip CreateTrip(string name);
     }
 }

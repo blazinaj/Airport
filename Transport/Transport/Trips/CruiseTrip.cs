@@ -6,5 +6,9 @@ namespace Transport.Trips
 {
     class CruiseTrip : Trip
     {
+        public CruiseTrip(string tripID)
+        {
+            TripID = tripID;
+        }
     }
 }

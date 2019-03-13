@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Transport.Lines;
 
 namespace Transport.Menu
 {
@@ -8,7 +9,36 @@ namespace Transport.Menu
     {
         public override string DisplayMenu()
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            Console.WriteLine("Welcome to the Airport Transportation System");
+            Console.WriteLine("Please choose one of the following from menu:");
+            Console.WriteLine("1. Create an Airport");
+            Console.WriteLine("2. Create an Airline");
+            Console.WriteLine("3. Create a Flight");
+            var isNumeric = int.TryParse(Console.ReadLine(), out int res);
+
+            if (res > 0 && res < 4)
+            {
+                if (res == 1)
+                {
+                    Console.WriteLine("Creating an Airport...");
+                    Console.WriteLine("Please enter the Airport name: ");
+                    string airportName = Console.ReadLine();
+
+                    (Port port, string result) = systemManager.airFactory.CreatePort(airportName);
+
+                    Console.WriteLine(result);
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
+                }
+
+                if (res == 2)
+                {
+                    //Line airport = new AirLine();
+                }
+            }
+
+            return DisplayMenu();
         }
     }
 }
