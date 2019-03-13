@@ -30,7 +30,7 @@ namespace Transport.Menu
 
                 if (res == 2)
                 {
-                    Line airport = new AirLine();
+                    //Line airport = new AirLine();
                 }
             }
 

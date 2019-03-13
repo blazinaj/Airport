@@ -11,7 +11,7 @@ namespace Transport
     {
         public AirPort(string name)
         {
-            base.Name = name;
+            Name = name;
         }
     }
 }
