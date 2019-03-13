@@ -5,28 +5,14 @@ using System.Text;
 
 namespace Transport
 {
-    public class ImportFile
+    public class CruiseImportFile
     {
-        public static string ReadFromFile(string[] args)
+        public static string ReadFromFile()
         {
-            FileStream fileStream;
-
-            if (args.Length != 0)
-            {
-                string inputFileName = args[0];
-
-                // change to your path to make it work
-                fileStream =
-                    new FileStream($@"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\{inputFileName}",
-                        FileMode.Open, FileAccess.Read);
-            }
-            else
-            {
-                // change to your path to make it work
-                fileStream =
-                    new FileStream(@"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\inputFile.in",
-                        FileMode.Open, FileAccess.Read);
-            }
+            // change to your path to make it work
+                var fileStream = new FileStream(@"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\FileIO\cruiseFile.in",
+                    FileMode.Open, FileAccess.Read);
+            
 
             using (StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8))
             {
