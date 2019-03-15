@@ -56,7 +56,7 @@ namespace Transport.Factories
             }
         }
 
-        public override string CreateSection(string airLine, string fID, int rows, int cols, SeatClass seatClass, int price)
+        public override string CreateSection(string airLine, string fID, int rows, char cols, SeatClass seatClass, int price)
         {
             try
             {

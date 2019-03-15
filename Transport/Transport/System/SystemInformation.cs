@@ -99,12 +99,16 @@ namespace Transport
                                      trip.Hour + ", " + trip.Minutes + "|" + trip.OriginPort + "|" +
                                      trip.DestinationPorts+"[");
 
-                        foreach (var VARIABLE in )
+                        foreach (var section in TripSectionList.Where(x => x.tripId == trip.TripID))
                         {
-                            
+                            state.Append(section.seatClass + ":" + section.price + ":"+section.cols+":"+section.rows+", ");
                         }
+
+                        state.Append("]");
                     }
-                    
+
+                    state.Append("]");
+
                 }
 
                 state.Append("}");

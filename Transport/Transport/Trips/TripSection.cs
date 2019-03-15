@@ -7,14 +7,14 @@ namespace Transport.Trips
 {
     public class TripSection
     {
-        private string line;
-        private string tripId;
-        private int rows;
-        private int cols;
-        private int price;
+        public string line;
+        public string tripId;
+        public int rows;
+        public char cols;
+        public int price;
         internal SeatClass seatClass = SeatClass.E;
 
-        public TripSection(string line, string tripId, int rows, int cols, SeatClass seatClass, int price)
+        public TripSection(string line, string tripId, int rows, char cols, SeatClass seatClass, int price)
         {
             this.line = line;
             this.tripId = tripId;
@@ -23,15 +23,37 @@ namespace Transport.Trips
             this.seatClass = seatClass;
             this.price = price;
 
-            for (int i = 1; i <= cols; i++)
+            int columnCheck = ColumnCheck(cols);
+
+            for (int i = 1; i <= columnCheck; i++)
             {
                 for (int j = 1; j <= rows; j++)
                 {
                     SystemInformation systemInformation = new SystemInformation();
-                    systemInformation.BookedSeatsList.Add(new Seat(j, (char)((i - 1) + 65), false));
+                    systemInformation.BookedSeatsList.Add(new Seat(j, cols, false));
                 }
 
             }
+        }
+
+        public int ColumnCheck(char cols)
+        {
+            if (cols == 'S')
+            {
+                return 3;
+            }
+
+            if (cols == 'M')
+            {
+                return 4;
+            }
+
+            if (cols == 'W')
+            {
+                return 10;
+            }
+
+            return 0;
         }
     }
 }

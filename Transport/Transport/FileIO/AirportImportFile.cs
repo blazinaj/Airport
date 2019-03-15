@@ -86,7 +86,8 @@ namespace Transport
                                 int flightYear = 0, flightMonth = 0, flightDay = 0, flightHour = 0, flightMinutes = 0;
                                 string origAirport="", distAirport="";
                                 SeatClass sectionClass;
-                                int sectionPrice = 0, sectionColumns = 0, sectionRows = 0;
+                                int sectionPrice = 0, sectionRows = 0;
+                                char sectionColumns;
 
                                 //getting FlightID
 
@@ -198,7 +199,7 @@ namespace Transport
 
                                         sectionClass = (SeatClass)Enum.Parse(typeof(SeatClass),sectionItems[0]);
                                         sectionPrice = int.Parse(sectionItems[1]);
-                                        sectionColumns = int.Parse(sectionItems[2]);
+                                        sectionColumns = Convert.ToChar(sectionItems[2]);
                                         sectionRows = int.Parse(sectionItems[3]);
 
                                         //here will be call to create flight, with date, section, class, price, columns and rows
