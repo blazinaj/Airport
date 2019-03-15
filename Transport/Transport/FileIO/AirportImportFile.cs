@@ -41,7 +41,7 @@ namespace Transport
                             stringOfAirports.Append(charArrayWholeLine[i]);
                         }
 
-                        string[] airports = stringOfAirports.ToString().Split(',');
+                        string[] airports = Array.ConvertAll(stringOfAirports.ToString().Split(','), p => p.Trim());
 
                         foreach (string airport in airports)
                         {
@@ -105,8 +105,6 @@ namespace Transport
                                 }
 
                                   flightID = Flight.ToString();
-
-                                
 
                                 //getting flight date
                                 if (charArrayWholeLine[index] == '|')

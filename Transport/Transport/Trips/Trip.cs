@@ -12,6 +12,7 @@ namespace Transport
         public string TripID { get; set; }
         public Line TripLine { get; set; }
         public Port OriginPort { get; set; }
+        public Port DestinationPort { get; set; }
         public List<Port> DestinationPorts { get; set; } = new List<Port>();
         public int Month { get; set; }
         public int Day { get; set; }

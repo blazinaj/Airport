@@ -39,6 +39,7 @@ namespace Transport.Trips
             {
                 TripLine = SystemManager.airportInformation.LineList.Find(x=> x.Name == airLine);
                 OriginPort = SystemManager.airportInformation.PortList.Find(x => x.Name == originAirPort);
+                DestinationPort = SystemManager.airportInformation.PortList.Find(x => x.Name == destinationAirPort);
                 DestinationPorts.Add(SystemManager.airportInformation.PortList.Find(x => x.Name == destinationAirPort));
                 Year = year;
                 Month = month;
