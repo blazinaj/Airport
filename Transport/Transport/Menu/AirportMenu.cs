@@ -53,9 +53,9 @@ namespace Transport.Menu
                     Console.WriteLine("Please enter the Airline name: ");
                     string airlineName = Console.ReadLine();
 
-                    (Line line, string result) = systemManager.airFactory.CreateLine(airlineName);
+ //                   (Line line, string result) = SystemManager.airFactory.CreateLine(airlineName);
 
-                    Console.WriteLine(result);
+//                    Console.WriteLine(result);
                     Console.WriteLine("\nPress Enter to Return to MENU");
                     Console.ReadLine();
                 }
@@ -66,7 +66,7 @@ namespace Transport.Menu
                     Console.WriteLine("Please enter the FlightID: ");
                     string flightId = Console.ReadLine();
 
-                    Trip line = systemManager.airFactory.CreateTrip(flightId);
+//                    Trip line = SystemManager.airFactory.CreateTrip(flightId);
 
                     Console.WriteLine("\nPress Enter to Return to MENU");
                     Console.ReadLine();

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Transport
@@ -55,5 +57,42 @@ namespace Transport
             return TripList.FindAll(x => x.TripID == trip).Count > 0;
         }
 
+        public string SaveToFile()
+        {
+            using (StreamWriter writetext = new StreamWriter(@"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\FileIO\airportFile.out"))
+            {
+                StringBuilder state = new StringBuilder();
+
+                state.Append("[");
+
+                foreach (var port in PortList)
+                    state.Append(port + ", ");
+
+                state.Append("]{");
+
+                foreach (var line in LineList)
+                {
+                    
+                    state.Append(line+"[");
+
+                    foreach (var trip in TripList.Where(x => x.TripLine == line))
+                    {
+                        state.Append(trip.TripID + "|" + trip.Year + ", " + trip.Month + ", " + trip.Day + ", " +
+                                     trip.Hour + ", " + trip.Minutes + "|" + trip.OriginPort + "|" +
+                                     trip.DestinationPorts+"[");
+
+                        foreach (var VARIABLE in COLLECTION)
+                        {
+                            
+                        }
+                    }
+                    
+                }
+
+                state.Append("}");
+            }
+
+            return "Success";
+        }
     }
 }

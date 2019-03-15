@@ -7,7 +7,7 @@ namespace Transport.Trips
 {
     class Flight : Trip
     {
-        public Flight(string airLine, string originAirPort, string destinationAirPort, int year, int month, int day, string tripID)
+        public Flight(string airLine, string originAirPort, string destinationAirPort, int year, int month, int day, int hour, int minutes, string tripID)
         {
             (bool isDateValid, string dateResult) = GlobalFunctions.IsDateValid(year, month, day);
 
@@ -44,6 +44,8 @@ namespace Transport.Trips
                 Month = month;
                 Day = day;
                 TripID = tripID;
+                Hour = hour;
+                Minutes = minutes;
             }
         }
     }

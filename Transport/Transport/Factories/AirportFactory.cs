@@ -41,11 +41,11 @@ namespace Transport.Factories
             }
         }
 
-        public override string CreateTrip(string airLine, string originAirPort, string destinationAirPort, int year, int month, int day, string tripID)
+        public override string CreateTrip(string airLine, string originAirPort, string destinationAirPort, int year, int month, int day, int hour, int minutes, string tripID)
         {
             try
             {
-                Trip newFlight = new Flight(airLine, originAirPort, destinationAirPort, year, month, day, tripID);
+                Trip newFlight = new Flight(airLine, originAirPort, destinationAirPort, year, month, day, hour, minutes, tripID);
                 string success = "Success: Flight " + newFlight.TripID + " Successfully Created!";
                 SystemManager.airportInformation.AddTrip(newFlight);
                 return success;
@@ -54,6 +54,11 @@ namespace Transport.Factories
             {
                 return e.Message;
             }
+        }
+
+        public override string CreateSection(string line, string tripID, int rows, int cols, SeatClass seatClass, int price)
+        {
+            throw new NotImplementedException();
         }
     }
 }

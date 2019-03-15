@@ -53,5 +53,10 @@ namespace Transport.Factories
                 return e.Message;
             }
         }
+
+        public override string CreateSection(string line, string tripID, int rows, int cols, SeatClass seatClass, int price)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
