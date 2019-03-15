@@ -13,19 +13,19 @@ namespace Transport.Trips
 
             if (!SystemManager.airportInformation.DoesLineExist(trainLine))
             {
-                throw new InvalidJourneyException("Error: AirLine " + trainLine + " does not exist!");
+                throw new InvalidJourneyException("Error: TrainLine " + trainLine + " does not exist!");
             }
             else if (!SystemManager.airportInformation.DoesPortExist(originTrainPort))
             {
-                throw new InvalidJourneyException("Error: AirPort " + originTrainPort + " does not exist!");
+                throw new InvalidJourneyException("Error: TrainPort " + originTrainPort + " does not exist!");
             }
             else if (!SystemManager.airportInformation.DoesPortExist(destinationTrainPort))
             {
-                throw new InvalidJourneyException("Error: AirPort " + destinationTrainPort + " does not exist!");
+                throw new InvalidJourneyException("Error: TrainPort " + destinationTrainPort + " does not exist!");
             }
             else if (originTrainPort == destinationTrainPort)
             {
-                throw new InvalidJourneyException("Error: Origin Airport (" + originTrainPort + ") cannot be same as Destination Airport (" + destinationTrainPort + ")!");
+                throw new InvalidJourneyException("Error: Origin TrainPort (" + originTrainPort + ") cannot be same as Destination TrainPort (" + destinationTrainPort + ")!");
             }
             else if (SystemManager.airportInformation.DoesTripExist(tripID))
             {
