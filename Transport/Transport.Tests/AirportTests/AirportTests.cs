@@ -12,9 +12,7 @@ namespace Transport.Tests.AirportTests
         [TestMethod]
         public void Create_Airport_Success()
         {
-            SystemFactory factory = new AirportFactory();
-
-            (Port port, string result) = factory.CreatePort("DEN");
+            string result = SystemManager.airFactory.CreatePort("DEN");
 
             Assert.AreEqual("Success: AirPort DEN Successfully Created!", result);
         }

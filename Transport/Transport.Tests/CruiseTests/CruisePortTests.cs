@@ -14,7 +14,7 @@ namespace Transport.Tests.CruiseTests
         {
             SystemFactory factory = new CruiseFactory();
 
-            (Port port, string result) = factory.CreatePort("Puget Sound Cruise Dock");
+            string result = factory.CreatePort("Puget Sound Cruise Dock");
 
             Assert.AreEqual("Success: CruisePort Puget Sound Cruise Dock Successfully Created!", result);
         }
