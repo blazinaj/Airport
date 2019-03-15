@@ -9,9 +9,7 @@ namespace Transport.Trips
     {
         public Flight(string airLine, string originAirPort, string destinationAirPort, int year, int month, int day, string tripID)
         {
-            bool isDateValid;
-            string dateResult;
-            (isDateValid, dateResult) = GlobalFunctions.IsDateValid(year, month, day);
+            (bool isDateValid, string dateResult) = GlobalFunctions.IsDateValid(year, month, day);
 
             if (!SystemManager.airportInformation.DoesLineExist(airLine))
             {
