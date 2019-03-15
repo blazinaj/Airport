@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Transport.Trips
 {
-    class AirTrip : Trip
+    class TrainJourney : Trip
     {
-        public AirTrip(string tripID)
+        public TrainJourney(string tripID)
         {
             TripID = tripID;
         }
