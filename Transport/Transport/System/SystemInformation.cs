@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Transport.Trips;
 
 namespace Transport
 {
@@ -11,6 +12,8 @@ namespace Transport
         public List<Port> PortList { get; set; } = new List<Port>();
         public List<Line> LineList { get; set; } = new List<Line>();
         public List<Trip> TripList { get; set; } = new List<Trip>();
+        internal List<TripSection> TripSectionList { get; set; } = new List<TripSection>();
+        public List<Seat> BookedSeatsList { get; set; } = new List<Seat>();
 
         // Ports
         public void AddPort(Port port)
@@ -57,6 +60,21 @@ namespace Transport
             return TripList.FindAll(x => x.TripID == trip).Count > 0;
         }
 
+        public void AddTripSection(TripSection tripSection)
+        {
+            TripSectionList.Add(tripSection);
+        }
+
+        public string BookSeat(string line, string tripId, SeatClass s, int row, char col)
+        {
+            string result;
+            BookedSeatsList.Where(x => (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == false)).ToList().ForEach(x => x.IsBooked = true);
+            result = "Success: Seat (" + col + row + ") with Seat Class " + s + " on Flight " + tripId + " with " + line + " airline " + " Booked!";
+            Console.WriteLine(result);
+            return result;
+        }
+
+
         public string SaveToFile()
         {
             using (StreamWriter writetext = new StreamWriter(@"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\FileIO\airportFile.out"))
@@ -81,7 +99,7 @@ namespace Transport
                                      trip.Hour + ", " + trip.Minutes + "|" + trip.OriginPort + "|" +
                                      trip.DestinationPorts+"[");
 
-                        foreach (var VARIABLE in COLLECTION)
+                        foreach (var VARIABLE in )
                         {
                             
                         }

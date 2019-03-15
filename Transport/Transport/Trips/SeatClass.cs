@@ -2,6 +2,6 @@
 {
     public enum SeatClass
     {
-        economy, first, business
+        E, F, B
     }
 }

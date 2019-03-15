@@ -54,9 +54,20 @@ namespace Transport.Factories
             }
         }
 
-        public override string CreateSection(string line, string tripID, int rows, int cols, SeatClass seatClass, int price)
+        public override string CreateSection(string cruiseLine, string cID, int rows, int cols, SeatClass seatClass, int price)
         {
-            throw new NotImplementedException();
+            try
+            {
+                TripSection newSection = new TripSection(cruiseLine, cID, rows, cols, seatClass, price);
+                string success = "Success: Cruise Section (" + rows + " rows, " + cols + " cols) with Seat Class " + seatClass + " and price " + price + " on Cruise journey " + cID + " with " + cruiseLine + " cruise line " + " Created!";
+                SystemManager.cruiseInformation.AddTripSection(newSection);
+                return success;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }
