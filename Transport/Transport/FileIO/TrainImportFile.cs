@@ -86,7 +86,8 @@ namespace Transport
                                 int TrainJourneyYear = 0, TrainJourneyMonth = 0, TrainJourneyDay = 0, TrainJourneyHour = 0, TrainJourneyMinutes = 0;
                                 string origTrainport, distTrainport;
                                 SeatClass sectionClass; 
-                                int sectionPrice = 0, sectionColumns = 0, sectionRows = 0;
+                                int sectionPrice = 0, sectionRows = 0;
+                                char sectionColumns;
 
                                 //getting TrainJourneyID
 
@@ -194,7 +195,7 @@ namespace Transport
 
                                         sectionClass = (SeatClass)Enum.Parse(typeof(SeatClass),sectionItems[0]);
                                         sectionPrice = int.Parse(sectionItems[1]);
-                                        sectionColumns = int.Parse(sectionItems[2]);
+                                        sectionColumns = Convert.ToChar(sectionItems[2]);
                                         sectionRows = int.Parse(sectionItems[3]);
 
                                         //here will be call to create flight, with date, section, class, price, columns and rows
