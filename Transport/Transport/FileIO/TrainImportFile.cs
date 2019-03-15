@@ -85,7 +85,8 @@ namespace Transport
                                 string[] dateTime = new string[5];
                                 int TrainJourneyYear = 0, TrainJourneyMonth = 0, TrainJourneyDay = 0, TrainJourneyHour = 0, TrainJourneyMinutes = 0;
                                 string origTrainport, distTrainport;
-                                string sectionClass, sectionPrice, sectionColumns, sectionRows;
+                                SeatClass sectionClass; 
+                                int sectionPrice = 0, sectionColumns = 0, sectionRows = 0;
 
                                 //getting TrainJourneyID
 
@@ -191,12 +192,14 @@ namespace Transport
                                     {
                                         string[] sectionItems = section.Split(':');
 
-                                        sectionClass = sectionItems[0];
-                                        sectionPrice = sectionItems[1];
-                                        sectionColumns = sectionItems[2];
-                                        sectionRows = sectionItems[3];
+                                        sectionClass = (SeatClass)Enum.Parse(typeof(SeatClass),sectionItems[0]);
+                                        sectionPrice = int.Parse(sectionItems[1]);
+                                        sectionColumns = int.Parse(sectionItems[2]);
+                                        sectionRows = int.Parse(sectionItems[3]);
 
                                         //here will be call to create flight, with date, section, class, price, columns and rows
+                                        SystemManager.trainFactory.CreateSection(trainline, TrainJourneyID, sectionRows,
+                                            sectionColumns, sectionClass, sectionPrice);
                                     }
                                 }
 
