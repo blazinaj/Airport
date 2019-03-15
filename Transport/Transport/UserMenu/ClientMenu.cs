@@ -22,19 +22,19 @@ namespace Transport.UserMenu
             {
                 if (res == 1)
                 {
-                    SystemMenu airportMenu = new AirportMenu();
+                    UserMenu airportMenu = new AirportUserMenu();
                     airportMenu.DisplayMenu();
                 }
 
                 if (res == 2)
                 {
-                    SystemMenu trainMenu = new TrainMenu();
+                    UserMenu trainMenu = new TrainUserMenu();
                     trainMenu.DisplayMenu();
                 }
 
                 if (res == 3)
                 {
-                    SystemMenu cruiseMenu = new CruiseMenu();
+                    UserMenu cruiseMenu = new CruiseUserMenu();
                     cruiseMenu.DisplayMenu();
                 }
 
