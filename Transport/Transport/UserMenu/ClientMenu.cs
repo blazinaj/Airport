@@ -9,6 +9,7 @@ namespace Transport.UserMenu
     {
         public override string DisplayMenu()
         {
+            Console.Clear();
             Console.WriteLine("Welcome to the Transportation System Manager!");
             Console.WriteLine("Please choose one of following options: ");
             Console.WriteLine();

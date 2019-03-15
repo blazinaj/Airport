@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Transport.Menu;
 
@@ -35,21 +36,42 @@ namespace Transport.UserMenu
                 if (res == 1)
                 {
                     //Change the price associated with seats in a flight section
+                    Console.WriteLine("Please enter the FlightID:");
+                    string flightID = Console.ReadLine();
+                    SystemInformation system = new SystemInformation();
+
+                    var flight = system.TripList.Where(x => x.TripID == flightID);
+
                 }
 
                 if (res == 2)
                 {
                     //Query the system for flights with available seats in a given class
+                    Console.WriteLine("Please enter the class name. Economy  Class, First Class, Business Class");
+                    string seatClass = Console.ReadLine();
+                    SystemInformation system = new SystemInformation();
+ //                   var flight = system.TripList.Where(x => x.SeatClass == seatClass);
                 }
 
                 if (res == 3)
                 {
                     //Change the seat class
+                    Console.WriteLine("Please enter the FlightID:");
+                    string flightID = Console.ReadLine();
+                    SystemInformation system = new SystemInformation();
+
+                    var flight = system.TripList.Where(x => x.TripID == flightID);
+
                 }
 
                 if (res == 4)
                 {
                     //Book a seat given a specific seat on a flight
+                    Console.WriteLine("Please enter the FlightID:");
+                    string flightID = Console.ReadLine();
+                    SystemInformation system = new SystemInformation();
+
+                    var flight = system.TripList.Where(x => x.TripID == flightID);
                 }
 
                 if (res == 5)
@@ -60,6 +82,7 @@ namespace Transport.UserMenu
                 if (res == 6)
                 {
                     //Display Airport Transportation System
+                    
                 }
 
                 if (res == 7)
