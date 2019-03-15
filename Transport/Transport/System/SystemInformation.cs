@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks.Sources;
 using Transport.Trips;
 
 namespace Transport
@@ -65,16 +68,6 @@ namespace Transport
             TripSectionList.Add(tripSection);
         }
 
-        public string BookSeat(string line, string tripId, SeatClass s, int row, char col)
-        {
-            string result;
-            BookedSeatsList.Where(x => (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == false)).ToList().ForEach(x => x.IsBooked = true);
-            result = "Success: Seat (" + col + row + ") with Seat Class " + s + " on Flight " + tripId + " with " + line + " airline " + " Booked!";
-            Console.WriteLine(result);
-            return result;
-        }
-
-
         public string SaveToFile()
         {
             using (StreamWriter writetext = new StreamWriter(@"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\FileIO\airportFile.out"))
@@ -84,37 +77,49 @@ namespace Transport
                 state.Append("[");
 
                 foreach (var port in PortList)
-                    state.Append(port + ", ");
+                {
+                    state.Append(port.Name + ", ");
+                }
+
+                state.Length = state.Length-2;
 
                 state.Append("]{");
 
                 foreach (var line in LineList)
                 {
-                    
-                    state.Append(line+"[");
 
-                    foreach (var trip in TripList.Where(x => x.TripLine == line))
+                    state.Append(line.Name + "[");
+
+                    foreach (var trip in TripList.FindAll(x => x.TripLine.Name == line.Name))
                     {
                         state.Append(trip.TripID + "|" + trip.Year + ", " + trip.Month + ", " + trip.Day + ", " +
-                                     trip.Hour + ", " + trip.Minutes + "|" + trip.OriginPort + "|" +
-                                     trip.DestinationPorts+"[");
+                                     trip.Hour + ", " + trip.Minutes + "|" + trip.OriginPort.Name + "|" +
+                                     trip.DestinationPort.Name + "[");
 
-                        foreach (var section in TripSectionList.Where(x => x.tripId == trip.TripID))
+                        foreach (var section in TripSectionList.FindAll(x => x.tripId == trip.TripID))
                         {
-                            state.Append(section.seatClass + ":" + section.price + ":"+section.cols+":"+section.rows+", ");
+                            state.Append(section.seatClass + ":" + section.price + ":" + section.cols + ":" + section.rows+",");
                         }
 
-                        state.Append("]");
+                        state.Length--;
+
+                        state.Append("], ");
                     }
 
+                    state.Length = state.Length - 2;
                     state.Append("]");
 
                 }
 
                 state.Append("}");
+
+                //write to the file
+                writetext.WriteLine(state);
             }
 
             return "Success";
         }
+
+
     }
 }

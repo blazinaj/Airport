@@ -73,7 +73,9 @@ namespace Transport
                 if (res == 4)
                 {
                     Console.WriteLine("Saving the Cruise System to the File.out file ...");
-                    // Code here
+
+                    //Save Airport Transportation System to a file
+                    SystemManager.cruiseInformation.SaveToFile();
 
                     Console.WriteLine("\nPress Enter to Return to MENU");
                     Console.ReadLine();

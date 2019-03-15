@@ -8,6 +8,7 @@ namespace Transport.UserMenu
 {
     class AirportUserMenu : UserMenu
     {
+
         public override string DisplayMenu()
         {
             Console.Clear();
@@ -88,6 +89,7 @@ namespace Transport.UserMenu
                 if (res == 7)
                 {
                     //Save Airport Transportation System to a file
+                    SystemManager.airportInformation.SaveToFile();
                 }
 
                 if (res == 8)

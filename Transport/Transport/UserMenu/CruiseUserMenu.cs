@@ -65,6 +65,7 @@ namespace Transport.UserMenu
                 if (res == 7)
                 {
                     //Save Airport Transportation System to a file
+                    SystemManager.cruiseInformation.SaveToFile();
                 }
 
                 if (res == 8)
