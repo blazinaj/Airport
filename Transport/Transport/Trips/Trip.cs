@@ -10,8 +10,13 @@ namespace Transport
     public abstract class Trip : IDisplaySystemDetails
     {
         public string TripID { get; set; }
+        public Line TripLine { get; set; }
         public Port OriginPort { get; set; }
-        public List<Port> DestinationPorts { get; set; }
+        public List<Port> DestinationPorts { get; set; } = new List<Port>();
+        public int Month { get; set; }
+        public int Day { get; set; }
+        public int Year { get; set; }
+
         public string DisplaySystemDetails()
         {
             string details = GetType() + ": " + TripID + " | Origin: " + OriginPort.Name + " | Destination(s)" + DestinationPorts.ToString();

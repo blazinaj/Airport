@@ -6,7 +6,6 @@ namespace Transport.Menu
 {
     abstract class SystemMenu
     {
-        public SystemManager systemManager = new SystemManager();
         public abstract string DisplayMenu();
     }
 }

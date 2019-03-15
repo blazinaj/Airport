@@ -39,7 +39,7 @@ namespace Transport.Menu
                     Console.WriteLine("Please enter the Airport name: ");
                     string airportName = Console.ReadLine();
 
-                    (Port port, string result) = systemManager.airFactory.CreatePort(airportName);
+                    string result = SystemManager.airFactory.CreatePort(airportName);
 
                     Console.WriteLine(result);
                     Console.WriteLine("\nPress Enter to Return to MENU");

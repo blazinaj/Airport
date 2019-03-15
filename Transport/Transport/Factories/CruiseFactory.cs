@@ -12,36 +12,46 @@ namespace Transport.Factories
     /// </summary>
     public class CruiseFactory : SystemFactory
     {
-        public override (Port, string) CreatePort(string name)
+        public override string CreatePort(string name)
         {
             try
             {
                 Port newCruisePort = new CruisePort(name);
                 string success = "Success: CruisePort " + newCruisePort.Name + " Successfully Created!";
-                return (newCruisePort, success);
+                return success;
             }
             catch (InvalidCruisePortException e)
             {
-                return (null, e.Message);
+                return e.Message;
             }
         }
-        public override (Line, string) CreateLine(string name)
+        public override string CreateLine(string name)
         {
             try
             {
                 Line newCruiseLine = new CruiseLine(name);
                 string success = "Success: CruiseLine " + newCruiseLine.Name + " Successfully Created!";
-                return (newCruiseLine, success);
+                return success;
             }
             catch (InvalidCruiseLineException e)
             {
-                return (null, e.Message);
+                return e.Message;
             }
         }
 
-        public override Trip CreateTrip(string name)
+        public override string CreateTrip(string cruiseLine, string originCruisePort, string destinationCruisePort, int year, int month, int day, string tripID)
         {
-            return new CruiseTrip(name);
+            try
+            {
+                Trip newCruise = new CruiseTrip(cruiseLine, originCruisePort, destinationCruisePort, year, month, day, tripID);
+                string success = "Success: CruiseTrip " + newCruise.TripID + " Successfully Created!";
+                SystemManager.airportInformation.AddTrip(newCruise);
+                return success;
+            }
+            catch (InvalidCruiseException e)
+            {
+                return e.Message;
+            }
         }
     }
 }

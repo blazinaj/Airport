@@ -14,7 +14,7 @@ namespace Transport.Tests.AirportTests
         {
             SystemFactory factory = new TrainFactory();
 
-            (Port port, string result) = factory.CreatePort("London Train Station");
+            string result = factory.CreatePort("London Train Station");
 
             Assert.AreEqual("Success: TrainPort London Train Station Successfully Created!", result);
         }
