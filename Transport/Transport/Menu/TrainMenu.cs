@@ -1,5 +1,6 @@
 ﻿using System;
 using Transport.Menu;
+using Transport.UserMenu;
 
 namespace Transport
 {
@@ -88,7 +89,8 @@ namespace Transport
 
                 if (res == 6)
                 {
-                    //            Client.Main();
+                    UserMenu.UserMenu  userMenu = new TrainUserMenu();
+                    userMenu.DisplayMenu();
                 }
             }
 

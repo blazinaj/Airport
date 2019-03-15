@@ -15,6 +15,8 @@ namespace Transport
         public List<Port> DestinationPorts { get; set; } = new List<Port>();
         public int Month { get; set; }
         public int Day { get; set; }
+        public int Hour { get; set; }
+        public int Minutes { get; set; }
         public int Year { get; set; }
 
         public string DisplaySystemDetails()

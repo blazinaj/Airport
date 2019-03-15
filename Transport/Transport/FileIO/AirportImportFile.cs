@@ -46,6 +46,7 @@ namespace Transport
                         foreach (string airport in airports)
                         {
                             //call for System Manager to create an Airport
+                            SystemManager.airFactory.CreatePort(airport);
                         }
                     }
 
@@ -57,7 +58,7 @@ namespace Transport
                                 //--------------------------------------------------------------------------------------------------------
                                 //Create Airline
 
-                                string airline;
+                                string airline ="";
                                 StringBuilder stringOfAirline = new StringBuilder();
 
                                 for (int i = index + 1; i < charArrayWholeLine.Length; i++)
@@ -72,17 +73,18 @@ namespace Transport
                                     airline = stringOfAirline.ToString();
                                 }
 
-                            // call to create an airline with parameter: airline <-- one airline inside this string
+                                // call to create an airline with parameter: airline <-- one airline inside this string
+                                SystemManager.airFactory.CreateLine(airline);
 
 
                             do
                             {
                                 //--------------------------------------------------------------------------------------------------------
                                 //create a flight for the airline above
-                                string flightID;
+                                string flightID ="";
                                 string[] dateTime = new string[5];
-                                string flightYear, flightMonth, flightDay, flightHour, flightMinutes;
-                                string origAirport, distAirport;
+                                int flightYear = 0, flightMonth = 0, flightDay = 0, flightHour = 0, flightMinutes = 0;
+                                string origAirport="", distAirport="";
                                 string sectionClass, sectionPrice, sectionColumns, sectionRows;
 
                                 //getting FlightID
@@ -123,11 +125,11 @@ namespace Transport
 
                                     dateTime = FlightDate.ToString().Split(',');
 
-                                    flightYear = dateTime[0].Trim();
-                                    flightMonth = dateTime[1].Trim();
-                                    flightDay = dateTime[2].Trim();
-                                    flightHour = dateTime[3].Trim();
-                                    flightMinutes = dateTime[4].Trim();
+                                    flightYear = int.Parse(dateTime[0].Trim());
+                                    flightMonth = int.Parse(dateTime[1].Trim());
+                                    flightDay = int.Parse(dateTime[2].Trim());
+                                    flightHour = int.Parse(dateTime[3].Trim());
+                                    flightMinutes = int.Parse(dateTime[4].Trim());
                                 }
 
                                 //getting origAirport
@@ -167,6 +169,10 @@ namespace Transport
 
                                     distAirport = destinationAirport.ToString();
                                 }
+
+                                //call to create an airline
+                                SystemManager.airFactory.CreateTrip(airline, origAirport, distAirport, flightYear,
+                                    flightMonth, flightDay, flightHour, flightMinutes, flightID);
 
                                 //getting flightSection
                                 if (charArrayWholeLine[index] == '[')

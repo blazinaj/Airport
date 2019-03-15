@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Transport.Lines;
+using Transport.UserMenu;
 
 namespace Transport.Menu
 {
@@ -90,7 +91,8 @@ namespace Transport.Menu
 
                 if (res == 6)
                 {
-                    //            Client.Main();
+                    UserMenu.UserMenu userMenu = new AirportUserMenu();
+                    userMenu.DisplayMenu();
                 }
             }
 

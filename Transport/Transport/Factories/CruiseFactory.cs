@@ -39,11 +39,11 @@ namespace Transport.Factories
             }
         }
 
-        public override string CreateTrip(string cruiseLine, string originCruisePort, string destinationCruisePort, int year, int month, int day, string tripID)
+        public override string CreateTrip(string cruiseLine, string originCruisePort, string destinationCruisePort, int year, int month, int day, int hour, int minutes, string tripID)
         {
             try
             {
-                Trip newCruise = new CruiseTrip(cruiseLine, originCruisePort, destinationCruisePort, year, month, day, tripID);
+                Trip newCruise = new CruiseTrip(cruiseLine, originCruisePort, destinationCruisePort, year, month, day, hour, minutes, tripID);
                 string success = "Success: CruiseTrip " + newCruise.TripID + " Successfully Created!";
                 SystemManager.airportInformation.AddTrip(newCruise);
                 return success;

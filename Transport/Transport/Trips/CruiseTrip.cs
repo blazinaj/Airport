@@ -7,7 +7,7 @@ namespace Transport.Trips
 {
     class CruiseTrip : Trip
     {
-        public CruiseTrip(string cruiseLine, string originCruisePort, string destinationCruisePort, int year, int month, int day, string tripID)
+        public CruiseTrip(string cruiseLine, string originCruisePort, string destinationCruisePort, int year, int month, int day, int hour, int minutes, string tripID)
         {
             (bool isDateValid, string dateResult) = GlobalFunctions.IsDateValid(year, month, day);
 
@@ -44,6 +44,8 @@ namespace Transport.Trips
                 Month = month;
                 Day = day;
                 TripID = tripID;
+                Hour = hour;
+                Minutes = minutes;
             }
         }
     }

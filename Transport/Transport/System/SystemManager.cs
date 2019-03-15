@@ -8,8 +8,8 @@ namespace Transport
     public static class SystemManager
     {
         public static SystemFactory airFactory = new AirportFactory();
-        public static SystemFactory cruiseFactory = new AirportFactory();
-        public static SystemFactory trainFactory = new AirportFactory();
+        public static SystemFactory cruiseFactory = new CruiseFactory();
+        public static SystemFactory trainFactory = new TrainFactory();
 
         public static SystemInformation airportInformation = new SystemInformation();
         public static SystemInformation cruiseInformation = new SystemInformation();
