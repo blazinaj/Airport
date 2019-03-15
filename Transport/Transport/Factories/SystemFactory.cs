@@ -11,6 +11,6 @@ namespace Transport
     {
         public abstract string CreatePort(string name);
         public abstract string CreateLine(string name);
-        public abstract string CreateTrip(string airLine, string originAirPort, string destinationAirPort, int year, int month, int day, string tripID);
+        public abstract string CreateTrip(string airLine, string originAirPort, string destinationAirPort, int year, int month, int day, int hour, int minutes, string tripID);
     }
 }

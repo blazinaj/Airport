@@ -28,7 +28,7 @@ namespace Transport
 
                     if (charArrayWholeLine[0] == '[')
                     {
-                        StringBuilder stringOfAirports = new StringBuilder();
+                        StringBuilder stringOfTrainports = new StringBuilder();
                         for (int i = 1; i < charArrayWholeLine.Length; i++)
                         {
                             index = i;
@@ -38,14 +38,15 @@ namespace Transport
                                 break;
                             }
 
-                            stringOfAirports.Append(charArrayWholeLine[i]);
+                            stringOfTrainports.Append(charArrayWholeLine[i]);
                         }
 
-                        string[] airports = stringOfAirports.ToString().Split(',');
+                        string[] trainports = stringOfTrainports.ToString().Split(',');
 
-                        foreach (string airport in airports)
+                        foreach (string trainport in trainports)
                         {
                             //call for System Manager to create an Airport
+                            SystemManager.trainFactory.CreatePort(trainport);
                         }
                     }
 
@@ -55,10 +56,10 @@ namespace Transport
                         {
 
                                 //--------------------------------------------------------------------------------------------------------
-                                //Create Airline
+                                //Create Trainline
 
-                                string airline;
-                                StringBuilder stringOfAirline = new StringBuilder();
+                                string trainline ="";
+                                StringBuilder stringOTrainline = new StringBuilder();
 
                                 for (int i = index + 1; i < charArrayWholeLine.Length; i++)
                                 {
@@ -68,26 +69,27 @@ namespace Transport
                                         break;
                                     }
 
-                                    stringOfAirline.Append(charArrayWholeLine[i]);
-                                    airline = stringOfAirline.ToString();
+                                    stringOTrainline.Append(charArrayWholeLine[i]);
+                                    trainline = stringOTrainline.ToString();
                                 }
 
-                            // call to create an airline with parameter: airline <-- one airline inside this string
+                                // call to create an trainline with parameter: trainline <-- one trainline inside this string
+                                SystemManager.trainFactory.CreateLine(trainline);
 
 
                             do
                             {
                                 //--------------------------------------------------------------------------------------------------------
-                                //create a flight for the airline above
-                                string flightID;
+                                //create a TrainJourney for the trainline above
+                                string TrainJourneyID = "";
                                 string[] dateTime = new string[5];
-                                string flightYear, flightMonth, flightDay, flightHour, flightMinutes;
-                                string origAirport, distAirport;
+                                int TrainJourneyYear = 0, TrainJourneyMonth = 0, TrainJourneyDay = 0, TrainJourneyHour = 0, TrainJourneyMinutes = 0;
+                                string origTrainport, distTrainport;
                                 string sectionClass, sectionPrice, sectionColumns, sectionRows;
 
-                                //getting FlightID
+                                //getting TrainJourneyID
 
-                                StringBuilder Flight = new StringBuilder();
+                                StringBuilder TrainJourney = new StringBuilder();
 
                                 for (int i = index + 1; i < charArrayWholeLine.Length; i++)
                                 {
@@ -97,17 +99,17 @@ namespace Transport
                                           break;
                                       }
 
-                                        Flight.Append(charArrayWholeLine[i]);
+                                    TrainJourney.Append(charArrayWholeLine[i]);
                                 }
 
-                                  flightID = Flight.ToString();
+                                    TrainJourneyID = TrainJourney.ToString();
 
                                 
 
-                                //getting flight date
+                                //getting TrainJourney date
                                 if (charArrayWholeLine[index] == '|')
                                 {
-                                    StringBuilder FlightDate = new StringBuilder();
+                                    StringBuilder TrainJourneyDate = new StringBuilder();
 
                                     for (int j = index + 1; j < charArrayWholeLine.Length; j++)
                                     {
@@ -117,23 +119,23 @@ namespace Transport
                                             break;
                                         }
 
-                                        FlightDate.Append(charArrayWholeLine[j]);
+                                        TrainJourneyDate.Append(charArrayWholeLine[j]);
 
                                     }
 
-                                    dateTime = FlightDate.ToString().Split(',');
+                                    dateTime = TrainJourneyDate.ToString().Split(',');
 
-                                    flightYear = dateTime[0].Trim();
-                                    flightMonth = dateTime[1].Trim();
-                                    flightDay = dateTime[2].Trim();
-                                    flightHour = dateTime[3].Trim();
-                                    flightMinutes = dateTime[4].Trim();
+                                    TrainJourneyYear = int.Parse(dateTime[0].Trim());
+                                    TrainJourneyMonth = int.Parse(dateTime[1].Trim());
+                                    TrainJourneyDay = int.Parse(dateTime[2].Trim());
+                                    TrainJourneyHour = int.Parse(dateTime[3].Trim());
+                                    TrainJourneyMinutes = int.Parse(dateTime[4].Trim());
                                 }
 
-                                //getting origAirport
+                                //getting origTrainport
                                 if (charArrayWholeLine[index] == '|')
                                 {
-                                    StringBuilder originationAirport = new StringBuilder();
+                                    StringBuilder originationTrainport = new StringBuilder();
 
 
                                     for (int k = index + 1; k < charArrayWholeLine.Length; k++)
@@ -144,16 +146,16 @@ namespace Transport
                                             break;
                                         }
 
-                                        originationAirport.Append(charArrayWholeLine[k]);
-                                        origAirport = originationAirport.ToString();
+                                        originationTrainport.Append(charArrayWholeLine[k]);
+                                        origTrainport = originationTrainport.ToString();
                                     }
                                 }
 
                                 if (charArrayWholeLine[index] == '|')
                                 {
-                                    StringBuilder destinationAirport = new StringBuilder();
+                                    StringBuilder destinationTrainport = new StringBuilder();
 
-                                    //getting distAirport
+                                    //getting distTrainport
                                     for (int l = index + 1; l < charArrayWholeLine.Length; l++)
                                     {
                                         index = l;
@@ -162,16 +164,16 @@ namespace Transport
                                             break;
                                         }
 
-                                        destinationAirport.Append(charArrayWholeLine[l]);
+                                        destinationTrainport.Append(charArrayWholeLine[l]);
                                     }
 
-                                    distAirport = destinationAirport.ToString();
+                                    distTrainport = destinationTrainport.ToString();
                                 }
 
-                                //getting flightSection
+                                //getting TrainJourneySection
                                 if (charArrayWholeLine[index] == '[')
                                 {
-                                    StringBuilder flightsection = new StringBuilder();
+                                    StringBuilder TrainJourneysection = new StringBuilder();
                                     for (int i = index + 1; i < charArrayWholeLine.Length; i++)
                                     {
                                         index++;
@@ -180,10 +182,10 @@ namespace Transport
                                             break;
                                         }
 
-                                        flightsection.Append(charArrayWholeLine[i]);
+                                        TrainJourneysection.Append(charArrayWholeLine[i]);
                                     }
 
-                                    string[] sectionsArray = flightsection.ToString().Split(',');
+                                    string[] sectionsArray = TrainJourneysection.ToString().Split(',');
 
                                     foreach (var section in sectionsArray)
                                     {

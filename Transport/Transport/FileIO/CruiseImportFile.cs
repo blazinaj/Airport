@@ -28,7 +28,7 @@ namespace Transport
 
                     if (charArrayWholeLine[0] == '[')
                     {
-                        StringBuilder stringOfAirports = new StringBuilder();
+                        StringBuilder stringOfCruises = new StringBuilder();
                         for (int i = 1; i < charArrayWholeLine.Length; i++)
                         {
                             index = i;
@@ -38,14 +38,15 @@ namespace Transport
                                 break;
                             }
 
-                            stringOfAirports.Append(charArrayWholeLine[i]);
+                            stringOfCruises.Append(charArrayWholeLine[i]);
                         }
 
-                        string[] airports = stringOfAirports.ToString().Split(',');
+                        string[] cruises = stringOfCruises.ToString().Split(',');
 
-                        foreach (string airport in airports)
+                        foreach (string airport in cruises)
                         {
-                            //call for System Manager to create an Airport
+                            //call for System Manager to create an CruisePort
+                            SystemManager.cruiseFactory.CreatePort(airport);
                         }
                     }
 
@@ -55,10 +56,10 @@ namespace Transport
                         {
 
                                 //--------------------------------------------------------------------------------------------------------
-                                //Create Airline
+                                //Create CruiseLine
 
-                                string airline;
-                                StringBuilder stringOfAirline = new StringBuilder();
+                                string cruiseline ="";
+                                StringBuilder stringOfCruiseline = new StringBuilder();
 
                                 for (int i = index + 1; i < charArrayWholeLine.Length; i++)
                                 {
@@ -68,26 +69,27 @@ namespace Transport
                                         break;
                                     }
 
-                                    stringOfAirline.Append(charArrayWholeLine[i]);
-                                    airline = stringOfAirline.ToString();
+                                    stringOfCruiseline.Append(charArrayWholeLine[i]);
+                                    cruiseline = stringOfCruiseline.ToString();
                                 }
 
-                            // call to create an airline with parameter: airline <-- one airline inside this string
+                                // call to create an airline with parameter: cruiseline <-- one cruise inside this string
+                                SystemManager.cruiseFactory.CreateLine(cruiseline);
 
 
                             do
                             {
                                 //--------------------------------------------------------------------------------------------------------
-                                //create a flight for the airline above
-                                string flightID;
+                                //create a cruiseTrip for the airline above
+                                string cruiseTripID ="";
                                 string[] dateTime = new string[5];
-                                string flightYear, flightMonth, flightDay, flightHour, flightMinutes;
-                                string origAirport, distAirport;
+                                int cruiseTripYear = 0, cruiseTripMonth= 0, cruiseTripDay= 0, cruiseTripHour= 0, cruiseTripMinutes = 0;
+                                string origCruiseport = "", distCruiseport ="";
                                 string sectionClass, sectionPrice, sectionColumns, sectionRows;
 
                                 //getting FlightID
 
-                                StringBuilder Flight = new StringBuilder();
+                                StringBuilder CruiseTrip = new StringBuilder();
 
                                 for (int i = index + 1; i < charArrayWholeLine.Length; i++)
                                 {
@@ -97,17 +99,17 @@ namespace Transport
                                           break;
                                       }
 
-                                        Flight.Append(charArrayWholeLine[i]);
+                                    CruiseTrip.Append(charArrayWholeLine[i]);
                                 }
 
-                                  flightID = Flight.ToString();
+                                     cruiseTripID = CruiseTrip.ToString();
 
                                 
 
                                 //getting flight date
                                 if (charArrayWholeLine[index] == '|')
                                 {
-                                    StringBuilder FlightDate = new StringBuilder();
+                                    StringBuilder CruiseTriptDate = new StringBuilder();
 
                                     for (int j = index + 1; j < charArrayWholeLine.Length; j++)
                                     {
@@ -117,23 +119,23 @@ namespace Transport
                                             break;
                                         }
 
-                                        FlightDate.Append(charArrayWholeLine[j]);
+                                        CruiseTriptDate.Append(charArrayWholeLine[j]);
 
                                     }
 
-                                    dateTime = FlightDate.ToString().Split(',');
+                                    dateTime = CruiseTriptDate.ToString().Split(',');
 
-                                    flightYear = dateTime[0].Trim();
-                                    flightMonth = dateTime[1].Trim();
-                                    flightDay = dateTime[2].Trim();
-                                    flightHour = dateTime[3].Trim();
-                                    flightMinutes = dateTime[4].Trim();
+                                    cruiseTripYear = int.Parse(dateTime[0].Trim());
+                                    cruiseTripMonth = int.Parse(dateTime[1].Trim());
+                                    cruiseTripDay = int.Parse(dateTime[2].Trim());
+                                    cruiseTripHour = int.Parse(dateTime[3].Trim());
+                                    cruiseTripMinutes = int.Parse(dateTime[4].Trim());
                                 }
 
                                 //getting origAirport
                                 if (charArrayWholeLine[index] == '|')
                                 {
-                                    StringBuilder originationAirport = new StringBuilder();
+                                    StringBuilder originationCruseport = new StringBuilder();
 
 
                                     for (int k = index + 1; k < charArrayWholeLine.Length; k++)
@@ -144,14 +146,14 @@ namespace Transport
                                             break;
                                         }
 
-                                        originationAirport.Append(charArrayWholeLine[k]);
-                                        origAirport = originationAirport.ToString();
+                                        originationCruseport.Append(charArrayWholeLine[k]);
+                                        origCruiseport = originationCruseport.ToString();
                                     }
                                 }
 
                                 if (charArrayWholeLine[index] == '|')
                                 {
-                                    StringBuilder destinationAirport = new StringBuilder();
+                                    StringBuilder destinationCruiseport = new StringBuilder();
 
                                     //getting distAirport
                                     for (int l = index + 1; l < charArrayWholeLine.Length; l++)
@@ -162,16 +164,21 @@ namespace Transport
                                             break;
                                         }
 
-                                        destinationAirport.Append(charArrayWholeLine[l]);
+                                        destinationCruiseport.Append(charArrayWholeLine[l]);
                                     }
 
-                                    distAirport = destinationAirport.ToString();
+                                    distCruiseport = destinationCruiseport.ToString();
                                 }
+
+                                //call to create CruiseTrip
+                                SystemManager.cruiseFactory.CreateTrip(cruiseline, origCruiseport,
+                                    distCruiseport, cruiseTripYear, cruiseTripMonth, cruiseTripDay, cruiseTripHour, cruiseTripMinutes,
+                                    cruiseTripID);
 
                                 //getting flightSection
                                 if (charArrayWholeLine[index] == '[')
                                 {
-                                    StringBuilder flightsection = new StringBuilder();
+                                    StringBuilder tripsection = new StringBuilder();
                                     for (int i = index + 1; i < charArrayWholeLine.Length; i++)
                                     {
                                         index++;
@@ -180,10 +187,10 @@ namespace Transport
                                             break;
                                         }
 
-                                        flightsection.Append(charArrayWholeLine[i]);
+                                        tripsection.Append(charArrayWholeLine[i]);
                                     }
 
-                                    string[] sectionsArray = flightsection.ToString().Split(',');
+                                    string[] sectionsArray = tripsection.ToString().Split(',');
 
                                     foreach (var section in sectionsArray)
                                     {
@@ -195,6 +202,7 @@ namespace Transport
                                         sectionRows = sectionItems[3];
 
                                         //here will be call to create flight, with date, section, class, price, columns and rows
+                                        
                                     }
                                 }
 
