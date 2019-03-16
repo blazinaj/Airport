@@ -48,5 +48,10 @@ namespace Transport.UserMenu
             return DisplayMenu();
 
         }
+
+        public override void DisplaySystemDetails()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
