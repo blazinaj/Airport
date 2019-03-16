@@ -94,43 +94,8 @@ namespace Transport.UserMenu
                 if (res == 6)
                 {
                     //Display Train Transportation System
-
-                    Console.Clear();
-                    Console.WriteLine("List of Train Stations: ");
-                    foreach (var trainPort in SystemManager.trainInformation.PortList)
-                    {
-                        Console.WriteLine(trainPort.Name);
-                    }
-
-                    Console.WriteLine("List of Train lines: ");
-                    foreach (var trainLine in SystemManager.trainInformation.LineList)
-                    {
-                        Console.WriteLine(trainLine.Name);
-                    }
-
-                    Console.WriteLine("List of Train Trips: ");
-                    foreach (var trainTrips in SystemManager.trainInformation.TripList)
-                    {
-                        Console.WriteLine("Trip Number: " + trainTrips.TripID + " Train line Name: " + trainTrips.TripLine.Name +
-                                          " Origin Station: " + trainTrips.OriginPort.Name + " Destination Station: " +
-                                          trainTrips.DestinationPort.Name + " Date: " + trainTrips.Month + "/" + trainTrips.Day +
-                                          "/" + trainTrips.Year);
-                    }
-
-                    Console.WriteLine("List of Trip Sections: ");
-                    foreach (var section in SystemManager.trainInformation.TripSectionList)
-                    {
-                        Console.WriteLine("Train Section " + section.seatClass.ToString() + " class for trip number " + section.tripId + " on " + section.line + " train line with " + section.rows + " rows and " + section.rows + " columns.");
-                    }
-
-                    Console.WriteLine("List of Seats: ");
-                    foreach (var seat in SystemManager.trainInformation.BookedSeatsList)
-                    {
-                        Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and trip number " + seat.TripId + " Is Booked: " + seat.IsBooked);
-                    }
-
-                    Console.WriteLine("\nPress Enter to Return to MENU");
-                    Console.ReadLine();
+                    DisplaySystemDetails();
+                    
                 }
 
                 if (res == 7)
@@ -156,6 +121,46 @@ namespace Transport.UserMenu
             }
 
             return DisplayMenu();
+        }
+
+        public override void DisplaySystemDetails()
+        {
+            Console.Clear();
+            Console.WriteLine("List of Train Stations: ");
+            foreach (var trainPort in SystemManager.trainInformation.PortList)
+            {
+                Console.WriteLine(trainPort.Name);
+            }
+
+            Console.WriteLine("List of Train lines: ");
+            foreach (var trainLine in SystemManager.trainInformation.LineList)
+            {
+                Console.WriteLine(trainLine.Name);
+            }
+
+            Console.WriteLine("List of Train Trips: ");
+            foreach (var trainTrips in SystemManager.trainInformation.TripList)
+            {
+                Console.WriteLine("Trip Number: " + trainTrips.TripID + " Train line Name: " + trainTrips.TripLine.Name +
+                                  " Origin Station: " + trainTrips.OriginPort.Name + " Destination Station: " +
+                                  trainTrips.DestinationPort.Name + " Date: " + trainTrips.Month + "/" + trainTrips.Day +
+                                  "/" + trainTrips.Year);
+            }
+
+            Console.WriteLine("List of Trip Sections: ");
+            foreach (var section in SystemManager.trainInformation.TripSectionList)
+            {
+                Console.WriteLine("Train Section " + section.seatClass.ToString() + " class for trip number " + section.tripId + " on " + section.line + " train line with " + section.rows + " rows and " + section.rows + " columns.");
+            }
+
+            Console.WriteLine("List of Seats: ");
+            foreach (var seat in SystemManager.trainInformation.BookedSeatsList)
+            {
+                Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and trip number " + seat.TripId + " Is Booked: " + seat.IsBooked);
+            }
+
+            Console.WriteLine("\nPress Enter to Return to MENU");
+            Console.ReadLine();
         }
     }
 }
