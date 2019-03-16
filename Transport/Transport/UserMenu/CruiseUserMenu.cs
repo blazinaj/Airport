@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Transport.Menu;
 
@@ -25,16 +26,49 @@ namespace Transport.UserMenu
             Console.WriteLine("9. Go to the Main Menu");
             var isNumeric = int.TryParse(Console.ReadLine(), out int res);
 
-            if (res > -1 && res < 9)
+            if (res > -1 && res < 10)
             {
                 if (res == 0)
                 {
+                    Console.Clear();
                     CruiseImportFile.ReadFromFile();
+
+                    Console.WriteLine("System was build from file successfully");
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 if (res == 1)
                 {
                     //Change the price associated with seats in a flight section
+                    Console.Clear();
+
+
+                    Console.WriteLine("Please enter the Cruise TripID:");
+                    string tripID = Console.ReadLine();
+
+                    var tripExist = SystemManager.cruiseInformation.DoesTripExist(tripID);
+
+                    if (tripExist)
+                    {
+                        Console.WriteLine("Please enter the class and seat number. Ex: E5");
+                        string seat = Console.ReadLine();
+
+                        Console.WriteLine("Please enter new price");
+                        int price = int.Parse(Console.ReadLine());
+
+                        foreach (var tripSection in SystemManager.cruiseInformation.TripSectionList.Where(x =>
+                            (x.seatClass.ToString() == seat.Substring(0, 1).ToUpper().ToString()) && (x.tripId == tripID)))
+                        {
+                            tripSection.price = price;
+                        }
+
+                    }
+
+                    Console.WriteLine("Price was changed successfully");
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
+
                 }
 
                 if (res == 2)
@@ -60,7 +94,7 @@ namespace Transport.UserMenu
 
                 if (res == 6)
                 {
-                    //Display Airport Transportation System
+                    //Display Cruise Transportation System
                     Console.Clear();
                     Console.WriteLine("List of Cruises: ");
                     foreach (var cruise in SystemManager.cruiseInformation.PortList)

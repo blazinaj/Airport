@@ -7,5 +7,7 @@ namespace Transport.UserMenu
     abstract class UserMenu
     {
         public abstract string DisplayMenu();
+
+        public abstract void DisplaySystemDetails();
     }
 }
