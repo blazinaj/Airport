@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Transport.Menu;
 
@@ -25,16 +26,48 @@ namespace Transport.UserMenu
             Console.WriteLine("9. Go to the Main Menu");
             var isNumeric = int.TryParse(Console.ReadLine(), out int res);
 
-            if (res > -1 && res < 9)
+            if (res > -1 && res < 10)
             {
                 if (res == 0)
                 {
+                    Console.Clear();
                     TrainImportFile.ReadFromFile();
+
+                    Console.WriteLine("System was build from file successfully");
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 if (res == 1)
                 {
                     //Change the price associated with seats in a flight section
+                    Console.Clear();
+
+                    Console.WriteLine("Please enter the Train Journey ID:");
+                    string trainID = Console.ReadLine();
+
+                    var tripExist = SystemManager.trainInformation.DoesTripExist(trainID);
+
+                    if (tripExist)
+                    {
+                        Console.WriteLine("Please enter the class and seat number. Ex: E5");
+                        string seat = Console.ReadLine();
+
+                        Console.WriteLine("Please enter new price");
+                        int price = int.Parse(Console.ReadLine());
+
+                        foreach (var tripSection in SystemManager.trainInformation.TripSectionList.Where(x =>
+                            (x.seatClass.ToString() == seat.Substring(0, 1).ToUpper().ToString()) && (x.tripId == trainID)))
+                        {
+                            tripSection.price = price;
+                        }
+
+                    }
+
+                    Console.WriteLine("Price was changed successfully");
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
+
                 }
 
                 if (res == 2)

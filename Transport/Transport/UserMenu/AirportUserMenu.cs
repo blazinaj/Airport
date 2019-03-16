@@ -8,7 +8,6 @@ namespace Transport.UserMenu
 {
     class AirportUserMenu : UserMenu
     {
-
         public override string DisplayMenu()
         {
             Console.Clear();
@@ -27,14 +26,14 @@ namespace Transport.UserMenu
             Console.WriteLine("9. Go to the Main Menu");
             var isNumeric = int.TryParse(Console.ReadLine(), out int res);
 
-            if (res > -1 && res < 9)
+            if (res > -1 && res < 10)
             {
                 if (res == 0)
                 {   
                     Console.Clear();
                     AirportImportFile.ReadFromFile();
 
-                    Console.WriteLine("System was build successfully");
+                    Console.WriteLine("System was build from file successfully");
                     Console.WriteLine("\nPress Enter to Return to MENU");
                     Console.ReadLine();
                 }
@@ -65,7 +64,6 @@ namespace Transport.UserMenu
                             }
 
                         }
-                    
 
                     Console.WriteLine("Price was changed successfully");
                     Console.WriteLine("\nPress Enter to Return to MENU");
@@ -135,42 +133,7 @@ namespace Transport.UserMenu
                 if (res == 6)
                 {
                     //Display Airport Transportation System
-                    Console.Clear();
-                    Console.WriteLine("List of Airports: ");
-                    foreach (var airport in SystemManager.airportInformation.PortList)
-                    {
-                        Console.WriteLine(airport.Name);
-                    }
-
-                    Console.WriteLine("List of Airlines: ");
-                    foreach (var airline in SystemManager.airportInformation.LineList)
-                    {
-                        Console.WriteLine(airline.Name);
-                    }
-
-                    Console.WriteLine("List of Flights: ");
-                    foreach (var airline in SystemManager.airportInformation.TripList)
-                    {
-                        Console.WriteLine("Flight Number: " + airline.TripID + " Airline Name: " + airline.TripLine.Name +
-                                          " Origin Airport: " + airline.OriginPort.Name + " Destination Airport: " +
-                                          airline.DestinationPort.Name + " Date: " + airline.Month + "/" + airline.Day +
-                                          "/" + airline.Year);
-                    }
-
-                    Console.WriteLine("List of Flight Sections: ");
-                    foreach (var section in SystemManager.airportInformation.TripSectionList)
-                    {
-                        Console.WriteLine("Flight Section " + section.seatClass.ToString() + " class for flight number " + section.tripId + " on " + section.line + " airline with " + section.rows + " rows and " + section.rows + " columns.");
-                    }
-
-                    Console.WriteLine("List of Seats: ");
-                    foreach (var seat in SystemManager.airportInformation.BookedSeatsList)
-                    {
-                        Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on "+seat.Line+" line and flight "+seat.TripId+" Is Booked: " + seat.IsBooked);
-                    }
-
-                    Console.WriteLine("\nPress Enter to Return to MENU");
-                    Console.ReadLine();
+                    DisplaySystemDetails();
                 }
 
                 if (res == 7)
@@ -196,6 +159,46 @@ namespace Transport.UserMenu
             }
 
             return DisplayMenu();
+        }
+
+        public override void DisplaySystemDetails()
+        {
+            Console.Clear();
+            Console.WriteLine("List of Airports: ");
+            foreach (var airport in SystemManager.airportInformation.PortList)
+            {
+                Console.WriteLine(airport.Name);
+            }
+
+            Console.WriteLine("List of Airlines: ");
+            foreach (var airline in SystemManager.airportInformation.LineList)
+            {
+                Console.WriteLine(airline.Name);
+            }
+
+            Console.WriteLine("List of Flights: ");
+            foreach (var airline in SystemManager.airportInformation.TripList)
+            {
+                Console.WriteLine("Flight Number: " + airline.TripID + " Airline Name: " + airline.TripLine.Name +
+                                  " Origin Airport: " + airline.OriginPort.Name + " Destination Airport: " +
+                                  airline.DestinationPort.Name + " Date: " + airline.Month + "/" + airline.Day +
+                                  "/" + airline.Year);
+            }
+
+            Console.WriteLine("List of Flight Sections: ");
+            foreach (var section in SystemManager.airportInformation.TripSectionList)
+            {
+                Console.WriteLine("Flight Section " + section.seatClass.ToString() + " class for flight number " + section.tripId + " on " + section.line + " airline with " + section.rows + " rows and " + section.rows + " columns.");
+            }
+
+            Console.WriteLine("List of Seats: ");
+            foreach (var seat in SystemManager.airportInformation.BookedSeatsList)
+            {
+                Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and flight " + seat.TripId + " Is Booked: " + seat.IsBooked);
+            }
+
+            Console.WriteLine("\nPress Enter to Return to MENU");
+            Console.ReadLine();
         }
     }
 }
