@@ -72,7 +72,37 @@ namespace Transport.UserMenu
 
                 if (res == 2)
                 {
+                    Console.Clear();
                     //Query the system for flights with available seats in a given class
+                    Console.WriteLine("Please enter Origination Station. Ex: GEG");
+                    string origStation = Console.ReadLine();
+
+                    Console.WriteLine("Please enter Destination Station. Ex: LAX");
+                    string distStation = Console.ReadLine();
+
+                    Console.Clear();
+                    Console.WriteLine("Available Seats for Train Journey " + origStation + " to " + distStation);
+
+                    var avalibleTrainJourney = SystemManager.trainInformation.TripList.Where(x =>
+                        (x.OriginPort.Name == origStation) && (x.DestinationPort.Name == distStation));
+
+                    foreach (var journey in avalibleTrainJourney)
+                    {
+                        foreach (var section in SystemManager.airportInformation.TripSectionList.Where(x => (x.line == journey.TripLine.Name) && (x.tripId == journey.TripID)))
+                        {
+                            Console.WriteLine(section.seatClass + " class seats available");
+                            var notBooked = SystemManager.trainInformation.BookedSeatsList.Where(x => x.IsBooked == false);
+
+                            foreach (var seat in notBooked)
+                            {
+                                Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and journey " + seat.TripId + " Is Booked: " + seat.IsBooked);
+                            }
+                        }
+                    }
+
+                    Console.WriteLine("Price was changed successfully");
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 if (res == 3)

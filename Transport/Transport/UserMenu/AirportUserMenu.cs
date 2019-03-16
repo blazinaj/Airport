@@ -73,35 +73,37 @@ namespace Transport.UserMenu
 
                 if (res == 2)
                 {
-                    //Console.Clear();
-                    ////Query the system for flights with available seats in a given class
-                    //Console.WriteLine("Please enter Origination Airport. Ex: GEG");
-                    //string origAirport = Console.ReadLine();
+                    Console.Clear();
+                    //Query the system for flights with available seats in a given class
+                    Console.WriteLine("Please enter Origination Airport. Ex: GEG");
+                    string origAirport = Console.ReadLine();
 
-                    //Console.WriteLine("Please enter Distanation Airport. Ex: LAX");
-                    //string distAirport = Console.ReadLine();
+                    Console.WriteLine("Please enter Destination Airport. Ex: LAX");
+                    string distAirport = Console.ReadLine();
 
-                    //Console.Clear();
-                    //Console.WriteLine("Available Seats for Flight " + origAirport + " to " + distAirport);
+                    Console.Clear();
+                    Console.WriteLine("Available Seats for Flight " + origAirport + " to " + distAirport);
 
-                    //var avalibleFlight = SystemManager.airportInformation.TripList.Where(x =>
-                    //    (x.OriginPort.Name == origAirport) && (x.DestinationPort.Name == distAirport));
+                    var avalibleFlight = SystemManager.airportInformation.TripList.Where(x =>
+                        (x.OriginPort.Name == origAirport) && (x.DestinationPort.Name == distAirport));
 
-                    //foreach (var section in avalibleFlight)
-                    //{
-                    //    Console.WriteLine(section + " class seats available");
+                    foreach (var flight in avalibleFlight)
+                    {
+                        foreach (var section in SystemManager.airportInformation.TripSectionList.Where(x=> (x.line == flight.TripLine.Name) && (x.tripId == flight.TripID)))
+                        {
+                            Console.WriteLine(section.seatClass + " class seats available");
+                            var notBooked = SystemManager.airportInformation.BookedSeatsList.Where(x => x.IsBooked == false);
 
-                    //    var notBooked = section.BookedSeatsList.Where(x => x.IsBooked == false);
+                            foreach (var seat in notBooked)
+                            {
+                                Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and flight " + seat.TripId + " Is Booked: " + seat.IsBooked);
+                            }
+                        }  
+                    }
 
-                    //    foreach (var seat in notBooked)
-                    //    {
-                    //        Console.WriteLine(seat.ToString());
-                    //    }
-                    //}
-
-                    //Console.WriteLine("Price was changed successfully");
-                    //Console.WriteLine("\nPress Enter to Return to MENU");
-                    //Console.ReadLine();
+                    Console.WriteLine("Price was changed successfully");
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 if (res == 3)

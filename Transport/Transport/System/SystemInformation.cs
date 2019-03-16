@@ -112,10 +112,11 @@ namespace Transport
                     }
 
                     state.Length = state.Length - 2;
-                    state.Append("]");
+                    state.Append("], ");
 
                 }
 
+                state.Length = state.Length - 2;
                 state.Append("}");
 
                 //write to the file
@@ -125,6 +126,14 @@ namespace Transport
             return "Success";
         }
 
+        public string BookSeat(string line, string tripId, SeatClass s, int row, char col)
+        {
+            string result;
 
+            BookedSeatsList.Where(x => (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == false)).ToList().ForEach(x => x.IsBooked = true);
+            result = "Success: Seat (" + col + row + ") with Seat Class " + s + " on Flight " + tripId + " with " + line + " airline " + " Booked!";
+            Console.WriteLine(result);
+            return result;
+        }
     }
 }
