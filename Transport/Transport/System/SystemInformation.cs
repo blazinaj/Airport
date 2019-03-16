@@ -63,6 +63,11 @@ namespace Transport
             return TripList.FindAll(x => x.TripID == trip).Count > 0;
         }
 
+        public bool DoesSeatExist(char col, int row)
+        {
+            return BookedSeatsList.FindAll(x => (x.ColumnCharacter == col) && (x.RowNumber == row)).Count > 0;
+        }
+
         public void AddTripSection(TripSection tripSection)
         {
             TripSectionList.Add(tripSection);

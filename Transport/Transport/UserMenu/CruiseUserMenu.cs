@@ -57,9 +57,46 @@ namespace Transport.UserMenu
                     //Book a seat on a flight given only a seating preference
                 }
 
+
                 if (res == 6)
                 {
                     //Display Airport Transportation System
+                    Console.Clear();
+                    Console.WriteLine("List of Cruises: ");
+                    foreach (var cruise in SystemManager.cruiseInformation.PortList)
+                    {
+                        Console.WriteLine(cruise.Name);
+                    }
+
+                    Console.WriteLine("List of Cruise lines: ");
+                    foreach (var cruiseline in SystemManager.cruiseInformation.LineList)
+                    {
+                        Console.WriteLine(cruiseline.Name);
+                    }
+
+                    Console.WriteLine("List of Cruise trips: ");
+                    foreach (var trip in SystemManager.cruiseInformation.TripList)
+                    {
+                        Console.WriteLine("Cruise Number: " + trip.TripID + " Cruise line Name: " + trip.TripLine.Name +
+                                          " Origin Port: " + trip.OriginPort.Name + " Destination Port: " +
+                                          trip.DestinationPort.Name + " Date: " + trip.Month + "/" + trip.Day +
+                                          "/" + trip.Year);
+                    }
+
+                    Console.WriteLine("List of Cruise Sections: ");
+                    foreach (var section in SystemManager.cruiseInformation.TripSectionList)
+                    {
+                        Console.WriteLine("Cruise Section " + section.seatClass.ToString() + " class for cruise trip number " + section.tripId + " on " + section.line + " cruise line with " + section.rows + " rows and " + section.rows + " columns.");
+                    }
+
+                    Console.WriteLine("List of Seats: ");
+                    foreach (var seat in SystemManager.cruiseInformation.BookedSeatsList)
+                    {
+                        Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and trip number " + seat.TripId + " Is Booked: " + seat.IsBooked);
+                    }
+
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 if (res == 7)

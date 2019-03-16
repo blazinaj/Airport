@@ -41,7 +41,7 @@ namespace Transport
                             stringOfCruises.Append(charArrayWholeLine[i]);
                         }
 
-                        string[] cruises = stringOfCruises.ToString().Split(',');
+                        string[] cruises = Array.ConvertAll(stringOfCruises.ToString().Split(','), p => p.Trim());
 
                         foreach (string airport in cruises)
                         {

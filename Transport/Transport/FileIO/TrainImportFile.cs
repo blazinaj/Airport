@@ -41,7 +41,7 @@ namespace Transport
                             stringOfTrainports.Append(charArrayWholeLine[i]);
                         }
 
-                        string[] trainports = stringOfTrainports.ToString().Split(',');
+                        string[] trainports = Array.ConvertAll(stringOfTrainports.ToString().Split(','), p => p.Trim());
 
                         foreach (string trainport in trainports)
                         {
