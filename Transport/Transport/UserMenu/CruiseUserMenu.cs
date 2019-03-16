@@ -73,7 +73,37 @@ namespace Transport.UserMenu
 
                 if (res == 2)
                 {
+                    Console.Clear();
                     //Query the system for flights with available seats in a given class
+                    Console.WriteLine("Please enter Origination Port. Ex: LAX");
+                    string origPort = Console.ReadLine();
+
+                    Console.WriteLine("Please enter Destination Port. Ex: LAX");
+                    string distPort = Console.ReadLine();
+
+                    Console.Clear();
+                    Console.WriteLine("Available Seats for Cruise " + origPort + " to " + distPort);
+
+                    var avalibleTrip = SystemManager.cruiseInformation.TripList.Where(x =>
+                        (x.OriginPort.Name == origPort) && (x.DestinationPort.Name == distPort));
+
+                    foreach (var trip in avalibleTrip)
+                    {
+                        foreach (var section in SystemManager.airportInformation.TripSectionList.Where(x => (x.line == trip.TripLine.Name) && (x.tripId == trip.TripID)))
+                        {
+                            Console.WriteLine(section.seatClass + " class seats available");
+                            var notBooked = SystemManager.cruiseInformation.BookedSeatsList.Where(x => x.IsBooked == false);
+
+                            foreach (var seat in notBooked)
+                            {
+                                Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and trip " + seat.TripId + " Is Booked: " + seat.IsBooked);
+                            }
+                        }
+                    }
+
+                    Console.WriteLine("Price was changed successfully");
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 if (res == 3)
