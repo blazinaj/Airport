@@ -207,9 +207,6 @@ namespace Transport
                                 }
 
                                 index = index + 2;
-                                Console.WriteLine(charArrayWholeLine[index]);
-                                Console.WriteLine(charArrayWholeLine[index - 1]);
-                                Console.WriteLine(charArrayWholeLine[index - 2]);
 
                             } while (charArrayWholeLine[index] != ']' && charArrayWholeLine[index - 1] != ']');
 

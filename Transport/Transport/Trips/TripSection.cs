@@ -28,9 +28,8 @@ namespace Transport.Trips
             for (int i = 1; i <= columnCheck; i++)
             {
                 for (int j = 1; j <= rows; j++)
-                {
-                    SystemInformation systemInformation = new SystemInformation();
-                    systemInformation.BookedSeatsList.Add(new Seat(j, cols, false));
+                {    
+                    SystemManager.airportInformation.BookedSeatsList.Add(new Seat(line, tripId, j, cols, false));
                 }
 
             }
