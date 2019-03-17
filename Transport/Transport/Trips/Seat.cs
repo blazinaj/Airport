@@ -10,6 +10,7 @@
 
         public Seat(string line, string tripId, int row, char col, bool isBooked)
         {
+            Line = line;
             TripId = tripId;
             RowNumber = row;
             ColumnCharacter = col;
