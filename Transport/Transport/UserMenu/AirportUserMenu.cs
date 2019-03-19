@@ -103,19 +103,18 @@ namespace Transport.UserMenu
 
                     foreach (var flight in avalibleFlight)
                     {
-                        foreach (var section in SystemManager.airportInformation.TripSectionList.Where(x=> (x.line == flight.TripLine.Name) && (x.tripId == flight.TripID)))
+                        foreach (var section in SystemManager.airportInformation.TripSectionList.Where(x=> (x.line == flight.TripLine.Name) && (x.tripId == flight.TripID) && (x.seatClass.ToString() == seatClass)))
                         {
                             Console.WriteLine(section.seatClass + " class seats available");
-                            var notBooked = SystemManager.airportInformation.BookedSeatsList.Where(x => x.IsBooked == false);
+                            var notBooked =section.seatList.Where(x => x.IsBooked == false);
 
                             foreach (var seat in notBooked)
                             {
-                                Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and flight " + seat.TripId + " Is Booked: " + seat.IsBooked);
+                                Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and flight " + seat.TripId + " Is Booked: " + seat.IsBooked + " Price: $" + section.price);
                             }
                         }  
                     }
-
-                    Console.WriteLine("Price was changed successfully");
+                    
                     Console.WriteLine("\nPress Enter to Return to MENU");
                     Console.ReadLine();
                 }
