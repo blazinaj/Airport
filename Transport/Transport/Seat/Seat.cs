@@ -1,4 +1,4 @@
-﻿namespace Transport
+namespace Transport
 {
     public class Seat
     {
@@ -22,6 +22,7 @@
             RowNumber = row;
             ColumnCharacter = col;
             IsBooked = isBooked;
+            Type = type;
         }
 
 
