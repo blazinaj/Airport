@@ -27,6 +27,7 @@ namespace Transport.Menu
 
             if (res > 0 && res < 7)
             {
+                // Create Airport
                 if (res == 1)
                 {
                     Console.Clear();
@@ -41,6 +42,7 @@ namespace Transport.Menu
                     Console.ReadLine();
                 }
 
+                //Create Airline
                 if (res == 2)
                 {
                     Console.Clear();
@@ -55,6 +57,7 @@ namespace Transport.Menu
                     Console.ReadLine();
                 }
 
+                // Create Flight
                 if (res == 3)
                 {
                     Console.Clear();
@@ -82,16 +85,16 @@ namespace Transport.Menu
                     int hour = int.Parse(dateTImeArray[3]);
                     int minutes = int.Parse(dateTImeArray[4]);
 
-                    string result = SystemManager.airFactory.CreateTrip(airlineName, origAirport, distAirport , year, month, day, hour, minutes, flightID);
-                    Console.WriteLine("Flight was successfully created");
-
+                    string result = SystemManager.airFactory.CreateTrip(airlineName, origAirport, distAirport, year, month, day, hour, minutes, flightID);
+                    
+                    Console.WriteLine(result);
                     Console.WriteLine("\nPress Enter to Return to MENU");
                     Console.ReadLine();
                 }
 
+                // Create Section
                 if (res == 4)
                 {
-                    //Create Section
                     Console.Clear();
                     Console.WriteLine("Creating a Flight Section...");
                     Console.WriteLine("Please enter Airline Name: ");
@@ -113,15 +116,15 @@ namespace Transport.Menu
                     char numberColn = Convert.ToChar(Console.ReadLine());
 
                     string result = SystemManager.airFactory.CreateSection(airlineName, flightID, numberRows, numberColn, flightClass, price);
-                    Console.WriteLine("Section was successfully created");
 
+                    Console.WriteLine(result);
                     Console.WriteLine("\nPress Enter to Return to MENU");
                     Console.ReadLine();
                 }
 
+                // Display
                 if (res == 5)
                 {
-                    // Display Airport system call
                     UserMenu.UserMenu menu = new AirportUserMenu();
                     menu.DisplaySystemDetails();
                 }

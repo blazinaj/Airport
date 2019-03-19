@@ -38,9 +38,10 @@ namespace Transport.UserMenu
                     Console.ReadLine();
                 }
 
+
+                //Change the price associated with seats in a flight section
                 if (res == 1)
                 {
-                    //Change the price associated with seats in a flight section
                     Console.Clear();
 
 
@@ -71,10 +72,11 @@ namespace Transport.UserMenu
 
                 }
 
+                //Query the system for flights with available seats in a given class
                 if (res == 2)
                 {
                     Console.Clear();
-                    //Query the system for flights with available seats in a given class
+                    
                     Console.WriteLine("Please enter Origination Airport. Ex: GEG");
                     string origAirport = Console.ReadLine();
 
@@ -106,9 +108,10 @@ namespace Transport.UserMenu
                     Console.ReadLine();
                 }
 
+                //Change the seat class
                 if (res == 3)
                 {
-                    //Change the seat class
+                    
                     Console.WriteLine("Please enter the FlightID:");
                     string flightID = Console.ReadLine();
                     SystemInformation system = new SystemInformation();
@@ -117,9 +120,10 @@ namespace Transport.UserMenu
 
                 }
 
+                //Book a seat given a specific seat on a flight
                 if (res == 4)
                 {
-                    //Book a seat given a specific seat on a flight
+                    
                     Console.WriteLine("Please enter the FlightID:");
                     string flightID = Console.ReadLine();
                     SystemInformation system = new SystemInformation();
@@ -127,33 +131,38 @@ namespace Transport.UserMenu
                     var flight = system.TripList.Where(x => x.TripID == flightID);
                 }
 
+                //Book a seat on a flight given only a seating preference
                 if (res == 5)
                 {
-                    //Book a seat on a flight given only a seating preference
+                    
                 }
 
+                //Display Airport Transportation System
                 if (res == 6)
                 {
-                    //Display Airport Transportation System
+                    
                     DisplaySystemDetails();
                 }
 
+                //Save Airport Transportation System to a file
                 if (res == 7)
                 {
-                    //Save Airport Transportation System to a file
+                    
                     SystemManager.airportInformation.SaveToFile();
                 }
 
+                // Go to administrator menu
                 if (res == 8)
                 {
-                    // Go to administrator menu
+                    
                     SystemMenu adminMenu = new AirportMenu();
                     adminMenu.DisplayMenu();
                 }
 
+                //Go to the Main Menu
                 if (res == 9)
                 {
-                    //Go to the Main Menu
+                    
                     UserMenu userMenu = new ClientMenu();
                     userMenu.DisplayMenu();
                 }
