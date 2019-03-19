@@ -173,5 +173,25 @@ namespace Transport.Trips
 
             return layout;
         }
+
+        public string DisplaySeatDetails()
+        {
+            string ret = "";
+            foreach (var seat in seatList)
+            {
+                ret += seat.Type + " Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and flight " + seat.TripId + " Is Booked: " + seat.IsBooked + "\n";
+            }
+            return ret;
+        }
+
+
+        public string BookSeat(string line, string tripId, SeatClass s, int row, char col)
+        {
+            string result;
+
+            seatList.Where(x => (x.ColumnCharacter == col) && (x.RowNumber == row) && (x.IsBooked == false)).ToList().ForEach(x => x.IsBooked = true);
+            result = "Success: Seat (" + col + row + ") with Seat Class " + s + " on Flight " + tripId + " with " + line + " airline " + " Booked!";
+            return result;
+        }
     }
 }

@@ -22,6 +22,7 @@
             RowNumber = row;
             ColumnCharacter = col;
             IsBooked = isBooked;
+            Type = type;
         }
 
 
