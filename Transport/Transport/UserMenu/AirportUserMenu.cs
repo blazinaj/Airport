@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Transport.Menu;
+using Transport.Trips;
 
 namespace Transport.UserMenu
 {
@@ -248,14 +249,17 @@ namespace Transport.UserMenu
             Console.WriteLine("List of Flight Sections: ");
             foreach (var section in SystemManager.airportInformation.TripSectionList)
             {
-                Console.WriteLine("Flight Section " + section.seatClass.ToString() + " class for flight number " + section.tripId + " on " + section.line + " airline with " + section.rows + " rows and " + section.rows + " columns.");
+                Console.WriteLine("Flight Section " + section.seatClass.ToString() + " class for flight number " + section.tripId + " on " + section.line + " airline with " + section.rows + " rows and " + section.layout + " columns layout.");
+                Console.WriteLine();
+
+                //List seats in FlightSection
+                Console.WriteLine("Seats in Section: " + section.seatClass.ToString());
+                Console.WriteLine();
+
+                Console.WriteLine(section.DisplaySeatDetails());
+                Console.WriteLine();
             }
 
-            Console.WriteLine("List of Seats: ");
-            foreach (var seat in SystemManager.airportInformation.BookedSeatsList)
-            {
-                Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and flight " + seat.TripId + " Is Booked: " + seat.IsBooked);
-            }
 
             Console.WriteLine("\nPress Enter to Return to MENU");
             Console.ReadLine();
