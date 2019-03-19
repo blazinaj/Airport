@@ -10,7 +10,7 @@ namespace Transport
         public static string ReadFromFile()
         {
             // change to your path to make it work
-                var fileStream = new FileStream(@"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\FileIO\airportFile.in",
+                var fileStream = new FileStream(@"F:\Airport\Transport\Transport\FileIO\airportFile.in",
                     FileMode.Open, FileAccess.Read);
             
 

@@ -56,21 +56,19 @@ namespace Transport.Factories
             }
         }
 
-        public override string CreateSection(string airLine, string fID, int rows, char cols, SeatClass seatClass, int price)
+        public override string CreateSection(string airLine, string fID, int rows, char layout, SeatClass seatClass, int price)
         {
             try
             {
-                TripSection newSection = new TripSection(airLine, fID, rows, cols, seatClass, price);
-                string success = "Success: Flight Section (" + rows + " rows, " + cols + " cols) with Seat Class " + seatClass +" and price " + price + " on Flight " + fID + " with " + airLine + " airline " + " Created!";
+                TripSection newSection = new TripSection(airLine, fID, rows, layout, seatClass, price);
+                string success = "Success: Flight Section (" + newSection.rows + " rows, " + newSection.layout + " layout) with Seat Class " + newSection.seatClass +" and price " + newSection.price + " on Flight " + newSection.tripId + " with " + newSection.line + " airline " + " Created!";
                 SystemManager.airportInformation.AddTripSection(newSection);
                 return success;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                return e.Message;
             }
-            
         }
     }
 }
