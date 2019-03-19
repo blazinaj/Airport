@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,29 +44,38 @@ namespace Transport.UserMenu
                 {
                     Console.Clear();
 
+                    Console.WriteLine("Please enter the FlightID:");
+                    string FlightID = Console.ReadLine();
 
-                        Console.WriteLine("Please enter the FlightID:");
-                        string FlightID = Console.ReadLine();
+                    var tripExist = SystemManager.airportInformation.DoesTripExist(FlightID);
 
-                        var tripExist = SystemManager.airportInformation.DoesTripExist(FlightID);
+                    if (tripExist)
+                    {
+                        var flight = SystemManager.airportInformation.TripList.Find(x => x.TripID == FlightID);
 
-                        if (tripExist)
+                        Console.WriteLine("Sections on Flight: " + flight.TripID);
+
+                        var sections = SystemManager.airportInformation.TripSectionList.FindAll(x => x.tripId == FlightID);
+
+                        foreach(var sec in sections)
                         {
-                            Console.WriteLine("Please enter the class and seat number. Ex: E5");
-                            string seat = Console.ReadLine();
-
-                            Console.WriteLine("Please enter new price");
-                            int price = int.Parse(Console.ReadLine());
-
-                            foreach (var tripSection in SystemManager.airportInformation.TripSectionList.Where(x =>
-                                (x.seatClass.ToString() == seat.Substring(0,1).ToUpper().ToString()) && (x.tripId == FlightID)))
-                            {
-                                tripSection.price = price;
-                            }
-
+                            Console.WriteLine("Seat Class : " + sec.seatClass + " Price: $" + sec.price);
                         }
 
-                    Console.WriteLine("Price was changed successfully");
+                        Console.WriteLine("Please enter the section to change the price of:");
+                        string section = Console.ReadLine();
+
+                        Console.WriteLine("Please enter new price");
+                        int price = int.Parse(Console.ReadLine());
+
+                        foreach (var tripSection in SystemManager.airportInformation.TripSectionList.Where(x =>
+                            (x.seatClass.ToString() == section.Substring(0,1).ToUpper().ToString()) && (x.tripId == FlightID)))
+                        {
+                            tripSection.price = price;
+                        }
+                        Console.WriteLine("Success: The price for Section " + section + " was successfully change to $" + price + "!");
+                    }
+
                     Console.WriteLine("\nPress Enter to Return to MENU");
                     Console.ReadLine();
 
