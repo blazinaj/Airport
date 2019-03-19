@@ -137,21 +137,59 @@ namespace Transport.UserMenu
                     
                     Console.WriteLine("Please enter the FlightID:");
                     string flightID = Console.ReadLine();
-                    SystemInformation system = new SystemInformation();
 
-                    var flight = system.TripList.Where(x => x.TripID == flightID);
+                    Console.WriteLine("Please enter a seat class (F/B/E)");
+                    string seatClassString = Console.ReadLine();
+                    SeatClass seatClassReal = SeatClass.E;
+                    switch (seatClassString)
+                    {
+                        case "F":
+                            seatClassReal = SeatClass.F;
+                            break;
+                        case "B":
+                            seatClassReal = SeatClass.B;
+                            break;
+                        case "E":
+                            seatClassReal = SeatClass.E;
+                            break;
+                        default:
+                            Console.WriteLine("Invalid Seat Class");
+                            break;
+                    }
+
+                    List<TripSection> sectionList = SystemManager.airportInformation.TripSectionList.FindAll(x => x.tripId == flightID);
+
+                    TripSection section = sectionList.Find(x => x.seatClass.ToString() == seatClassString);
+                    Console.WriteLine("Displaying all seats for that section");
+                    Console.WriteLine(section.DisplaySeatDetails());
+
+                    Console.WriteLine("Please enter a seat number: ");
+                    string seatNumber = Console.ReadLine();
+                    string column = seatNumber.ToCharArray().GetValue(0).ToString();
+                    int row;
+                    Int32.TryParse(seatNumber.ToCharArray().GetValue(1).ToString(), out row);
+                    
+                    try
+                    {
+                        string result = section.BookSeat(section.line, section.tripId, seatClassReal, row, char.Parse(column));
+                        Console.WriteLine(result);
+                    } catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 //Book a seat on a flight given only a seating preference
                 if (res == 5)
                 {
-                    
                 }
 
                 //Display Airport Transportation System
                 if (res == 6)
                 {
-                    
                     DisplaySystemDetails();
                 }
 
