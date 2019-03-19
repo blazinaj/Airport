@@ -7,8 +7,15 @@
         internal int RowNumber { get; set; }
         internal char ColumnCharacter { get; set; }
         internal bool IsBooked { get; set; }
+        internal SeatType Type { get; set; }
 
-        public Seat(string line, string tripId, int row, char col, bool isBooked)
+        public enum SeatType
+        {
+            window,
+            aisle
+        }
+
+        public Seat(string line, string tripId, int row, char col, bool isBooked, SeatType type)
         {
             Line = line;
             TripId = tripId;
