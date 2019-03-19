@@ -186,6 +186,97 @@ namespace Transport.UserMenu
                 //Book a seat on a flight given only a seating preference
                 if (res == 5)
                 {
+                    Console.WriteLine("Please enter the FlightID:");
+                    string flightID = Console.ReadLine();
+
+                    Console.WriteLine("Please enter the desired seat Class (F/B/E):");
+                    string seatClassString = Console.ReadLine();
+                    SeatClass seatClassReal = SeatClass.E;
+
+                    switch (seatClassString)
+                    {
+                        case "F":
+                            seatClassReal = SeatClass.F;
+                            break;
+                        case "B":
+                            seatClassReal = SeatClass.B;
+                            break;
+                        case "E":
+                            seatClassReal = SeatClass.E;
+                            break;
+                        default:
+                            Console.WriteLine("Invalid Seat Class");
+                            break;
+                    }
+
+                    Console.WriteLine("Please enter the desired Seating Preference ( W = window, A = aisle):");
+                    string seatTypeInput = Console.ReadLine();
+                    string seatTypeReal = "aisle";
+
+                    switch (seatTypeInput)
+                    {
+                        case "W":
+                            seatTypeReal = "window";
+                            break;
+                        case "A":
+                            seatTypeReal = "aisle";
+                            break;
+                        default:
+                            Console.WriteLine("Not a valid seat type.. defaulting to aisle seat..");
+                            break;
+                    }
+
+                    var section = SystemManager.airportInformation.TripSectionList.Find(x => ((x.tripId == flightID) && (x.seatClass == seatClassReal)));
+
+                    // Checks if trip exists
+                    if (!SystemManager.airportInformation.DoesTripExist(flightID))
+                    {
+                        Console.WriteLine("Error: There is no trip " + flightID + " available!");
+                    }
+
+                    // Checks if section exists
+                    else if (section == null)
+                    {
+                        Console.WriteLine("Error: There is no section " + seatClassString + " on flight " + flightID);
+                    }
+
+                    // If trip and section exist
+                    else
+                    {
+                        // Find a seat with type preference and is not booked
+                        Seat seat = section.seatList.Find(x => x.Type.ToString() == seatTypeReal && x.IsBooked == false);
+
+                        // Checks if a seat with type preference exists
+                        if (seat == null)
+                        {
+                            // If no seat with that type exists, looks for another one
+                            Console.WriteLine("No available " + seatTypeReal + " seat found, checking for another seat..");
+                            Seat anotherSeat = section.seatList.Find(x => x.IsBooked == false);
+
+                            // No other seats exist
+                            if (anotherSeat == null)
+                            {
+                                Console.WriteLine("No available seats at all, sorry. Have a nice day!");
+                               
+                            }
+                            // Found another available seat
+                            else
+                            {
+                                section.BookSeat(anotherSeat.Line, anotherSeat.TripId, section.seatClass, anotherSeat.RowNumber, anotherSeat.ColumnCharacter);
+                                Console.WriteLine("Success: " + section.seatClass + " class " + seat.Type + " seat, number: " + seat.ColumnCharacter + seat.RowNumber + " was booked on trip " + flightID + " for $" + section.price + "!");
+
+                            }
+                        }
+                        // If seat with original preference exists, book it.
+                        else
+                        {
+                            section.BookSeat(seat.Line, seat.TripId, section.seatClass, seat.RowNumber, seat.ColumnCharacter);
+                            Console.WriteLine("Success: " + section.seatClass + " class " + seat.Type + " seat, number: " + seat.ColumnCharacter + seat.RowNumber + " was booked on trip " + flightID + " for $" + section.price + "!");
+                        }
+                    }
+
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 //Display Airport Transportation System
