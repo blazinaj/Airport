@@ -92,6 +92,9 @@ namespace Transport.UserMenu
                     Console.WriteLine("Please enter Destination Airport. Ex: LAX");
                     string distAirport = Console.ReadLine();
 
+                    Console.WriteLine("Please enter your Seat Class (F/B/E):");
+                    string seatClass = Console.ReadLine();
+
                     Console.Clear();
                     Console.WriteLine("Available Seats for Flight " + origAirport + " to " + distAirport);
 
