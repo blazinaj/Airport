@@ -113,7 +113,7 @@ namespace Transport.Trips
             for (char cols = 'A'; cols <= total_cols; cols++)
             {
                 //Loops through each row
-                for (int row = 1; row <= rows; rows++)
+                for (int row = 1; row <= rows; row++)
                 {
                     Seat.SeatType type = Seat.SeatType.window;
                     switch (cols)
@@ -151,7 +151,7 @@ namespace Transport.Trips
             for (char cols = 'A'; cols <= total_cols; cols++)
             {
                 //Loops through each row
-                for (int row = 1; row <= rows; rows++)
+                for (int row = 1; row <= rows; row++)
                 {
                     Seat.SeatType type = Seat.SeatType.window;
                     switch (cols)
