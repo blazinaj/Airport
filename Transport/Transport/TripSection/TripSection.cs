@@ -18,15 +18,6 @@ namespace Transport.Trips
 
         public TripSection(string line, string tripId, int rows, char layout, SeatClass seatClass, int price)
         {
-            if (!SystemManager.airportInformation.DoesLineExist(line))
-            {
-                throw new InvalidJourneyException("Error: " + line + " does not exist!");
-            }
-
-            if (!SystemManager.airportInformation.DoesTripExist(tripId))
-            {
-                throw new InvalidJourneyException("Error: " + tripId + " does not exist!");
-            }
 
             this.line = line;
             this.tripId = tripId;

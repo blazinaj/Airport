@@ -201,7 +201,7 @@ namespace Transport
                                         sectionRows = int.Parse(sectionItems[3]);
 
                                         //here will be call to create flight, with date, section, class, price, columns and rows
-                                        SystemManager.airFactory.CreateSection(airline, flightID, sectionRows,
+                                        string res = SystemManager.airFactory.CreateSection(airline, flightID, sectionRows,
                                             sectionColumns, sectionClass, sectionPrice);
                                     }
                                 }

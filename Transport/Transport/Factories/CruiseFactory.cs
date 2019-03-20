@@ -58,6 +58,15 @@ namespace Transport.Factories
         {
             try
             {
+                if (!SystemManager.airportInformation.DoesLineExist(cruiseLine))
+                {
+                    return "Error: " + cruiseLine + " does not exist!";
+                }
+
+                if (!SystemManager.airportInformation.DoesTripExist(cID))
+                {
+                    return "Error: " + cID + " does not exist!";
+                }
                 TripSection newSection = new TripSection(cruiseLine, cID, rows, cols, seatClass, price);
                 string success = "Success: Cruise Section (" + rows + " rows, " + cols + " cols) with Seat Class " + seatClass + " and price " + price + " on Cruise journey " + cID + " with " + cruiseLine + " cruise line " + " Created!";
                 SystemManager.cruiseInformation.AddTripSection(newSection);
