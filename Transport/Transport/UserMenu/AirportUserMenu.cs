@@ -122,14 +122,44 @@ namespace Transport.UserMenu
 
                 //Change the seat class
                 if (res == 3)
-                {
-                    
-                    Console.WriteLine("Please enter the FlightID:");
-                    string flightID = Console.ReadLine();
-                    SystemInformation system = new SystemInformation();
+                {          
+                    Console.WriteLine("Please enter the Airline Name. Ex: AMER");
+                    string airline = Console.ReadLine();
 
-                    var flight = system.TripList.Where(x => x.TripID == flightID);
+                    var isAirlineExist = SystemManager.airportInformation.DoesLineExist(airline);
 
+                    Console.WriteLine("Please enter the Origination Airport. Ex: GEG");
+                    string origAirport = Console.ReadLine();
+
+                    var isOrigPortExist = SystemManager.airportInformation.DoesPortExist(origAirport);
+
+                    Console.WriteLine("Please enter the Destination Airport. Ex: LAX");
+                    string destAirport = Console.ReadLine();
+
+                    var isDestPortExist = SystemManager.airportInformation.DoesPortExist(destAirport);
+
+                    Console.WriteLine("Please enter the class. Ex: Economy");
+                    string seatClass = Console.ReadLine();
+
+                    if (isAirlineExist && isOrigPortExist && isDestPortExist)
+                    {
+                        Console.WriteLine("Please enter new class price.");
+                        int classPrice = int.Parse(Console.ReadLine());
+
+                        var flight = SystemManager.airportInformation.TripList.Find(x => (x.TripLine.Name == airline) && (x.OriginPort.Name == origAirport) && (x.DestinationPort.Name == destAirport));
+
+                        foreach (var section in SystemManager.airportInformation.TripSectionList.Where(x => seatClass != null && ((x.line == airline) && (x.tripId == flight.TripID) && (x.seatClass.ToString() == seatClass.Substring(0, 1).ToUpper()))))
+                        {
+                            section.price = classPrice;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wrong data entered!");
+                    }
+
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 //Book a seat given a specific seat on a flight
@@ -340,7 +370,7 @@ namespace Transport.UserMenu
             Console.WriteLine("List of Flight Sections: ");
             foreach (var section in SystemManager.airportInformation.TripSectionList)
             {
-                Console.WriteLine("Flight Section " + section.seatClass.ToString() + " class for flight number " + section.tripId + " on " + section.line + " airline with " + section.rows + " rows and " + section.layout + " columns layout.");
+                Console.WriteLine("Flight Section " + section.seatClass.ToString() + " class with section price $"+section.price+" for flight number " + section.tripId + " on " + section.line + " airline with " + section.rows + " rows and " + section.layout + " columns layout.");
                 Console.WriteLine();
 
                 //List seats in FlightSection
