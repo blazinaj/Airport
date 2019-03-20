@@ -60,6 +60,15 @@ namespace Transport.Factories
         {
             try
             {
+                if (!SystemManager.airportInformation.DoesLineExist(airLine))
+                {
+                    return "Error: " + airLine + " does not exist!";
+                }
+
+                if (!SystemManager.airportInformation.DoesTripExist(fID))
+                {
+                    return "Error: " + fID + " does not exist!";
+                }
                 TripSection newSection = new TripSection(airLine, fID, rows, layout, seatClass, price);
                 string success = "Success: Flight Section (" + newSection.rows + " rows, " + newSection.layout + " layout) with Seat Class " + newSection.seatClass +" and price " + newSection.price + " on Flight " + newSection.tripId + " with " + newSection.line + " airline " + " Created!";
                 SystemManager.airportInformation.AddTripSection(newSection);
