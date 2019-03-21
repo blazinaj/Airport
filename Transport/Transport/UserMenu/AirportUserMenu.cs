@@ -18,7 +18,7 @@ namespace Transport.UserMenu
             Console.WriteLine("0. Create an airport System from a file");
             Console.WriteLine("1. Change the price associated with seats in a flight section");
             Console.WriteLine("2. Query the system for flights with available seats in a given class");
-            Console.WriteLine("3. Change the seat class");
+            Console.WriteLine("3. Change the price of a seat class on a given flight");
             Console.WriteLine("4. Book a seat given a specific seat on a flight");
             Console.WriteLine("5. Book a seat on a flight given only a seating preference");
             Console.WriteLine("6. Display Airport Transportation System");
