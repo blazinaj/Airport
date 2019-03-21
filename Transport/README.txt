@@ -8,6 +8,7 @@ Github Repository : https://github.com/blazinaj/Airport/tree/part2
 
 NOTE: 	To import a file, you must change the import path in Transport/FileIO/AirportImportFile.cs to match your directory, 
 		see https://github.com/blazinaj/Airport/blob/part2/Transport/Transport/FileIO/AirportImportFile.cs
+		also in order to save the System to a file you need to change path in \Transport\Transport\System\SystemInformation.cs file and SaveToFile(string type) Method
 
 Tidbits:
 
