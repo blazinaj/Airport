@@ -320,7 +320,9 @@ namespace Transport.UserMenu
                 if (res == 7)
                 {
                     //Save Airport Transportation System to a file
-                    SystemManager.trainInformation.SaveToFile();
+                    SystemManager.trainInformation.SaveToFile("train");
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 if (res == 8)

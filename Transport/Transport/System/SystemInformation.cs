@@ -73,9 +73,25 @@ namespace Transport
             TripSectionList.Add(tripSection);
         }
 
-        public string SaveToFile()
+        public string SaveToFile(string type)
         {
-            using (StreamWriter writetext = new StreamWriter(@"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\FileIO\airportFile.out"))
+            string path = "";
+
+            if (type == "airport")
+            {
+                path = @"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\FileIO\airportFile.out";
+            }
+            if(type == "train")
+            {
+                path = @"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\FileIO\trainFile.out";
+            }
+
+            if (type == "cruise")
+            {
+                path = @"C:\Users\Anatoli\Source\Repos\Airport\Transport\Transport\FileIO\cruiseFile.out";
+            }
+
+            using (StreamWriter writetext = new StreamWriter(path))
             {
                 StringBuilder state = new StringBuilder();
 

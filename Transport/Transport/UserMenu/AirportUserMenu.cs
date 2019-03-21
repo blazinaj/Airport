@@ -319,7 +319,9 @@ namespace Transport.UserMenu
                 if (res == 7)
                 {
                     
-                    SystemManager.airportInformation.SaveToFile();
+                    SystemManager.airportInformation.SaveToFile("airport");
+                    Console.WriteLine("\nPress Enter to Return to MENU");
+                    Console.ReadLine();
                 }
 
                 // Go to administrator menu
