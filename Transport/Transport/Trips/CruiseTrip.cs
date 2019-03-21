@@ -15,11 +15,11 @@ namespace Transport.Trips
             {
                 throw new InvalidCruiseException("Error: CruiseLine " + cruiseLine + " does not exist!");
             }
-            else if (!SystemManager.airportInformation.DoesPortExist(originCruisePort))
+            else if (!SystemManager.cruiseInformation.DoesPortExist(originCruisePort))
             {
                 throw new InvalidCruiseException("Error: CruisePort " + originCruisePort + " does not exist!");
             }
-            else if (!SystemManager.airportInformation.DoesPortExist(destinationCruisePort))
+            else if (!SystemManager.cruiseInformation.DoesPortExist(destinationCruisePort))
             {
                 throw new InvalidCruiseException("Error: CruisePort " + destinationCruisePort + " does not exist!");
             }
@@ -27,7 +27,7 @@ namespace Transport.Trips
             {
                 throw new InvalidCruiseException("Error: Origin CruisePort (" + originCruisePort + ") cannot be same as Destination CruisePort (" + destinationCruisePort + ")!");
             }
-            else if (SystemManager.airportInformation.DoesTripExist(tripID))
+            else if (SystemManager.cruiseInformation.DoesTripExist(tripID))
             {
                 throw new InvalidCruiseException("Error: Trip (" + tripID + ") already exists!");
             }
@@ -39,6 +39,7 @@ namespace Transport.Trips
             {
                 TripLine = SystemManager.cruiseInformation.LineList.Find(x => x.Name == cruiseLine);
                 OriginPort = SystemManager.cruiseInformation.PortList.Find(x => x.Name == originCruisePort);
+                DestinationPort = SystemManager.cruiseInformation.PortList.Find(x => x.Name == destinationCruisePort);
                 DestinationPorts.Add(SystemManager.cruiseInformation.PortList.Find(x => x.Name == destinationCruisePort));
                 Year = year;
                 Month = month;

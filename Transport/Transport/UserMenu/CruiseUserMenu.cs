@@ -344,38 +344,41 @@ namespace Transport.UserMenu
         public override void DisplaySystemDetails()
         {
             Console.Clear();
-            Console.WriteLine("List of Cruises: ");
-            foreach (var cruise in SystemManager.cruiseInformation.PortList)
+            Console.WriteLine("List of Ports: ");
+            foreach (var station in SystemManager.cruiseInformation.PortList)
             {
-                Console.WriteLine(cruise.Name);
+                Console.WriteLine(station.Name);
             }
 
             Console.WriteLine("List of Cruise lines: ");
-            foreach (var cruiseline in SystemManager.cruiseInformation.LineList)
+            foreach (var line in SystemManager.cruiseInformation.LineList)
             {
-                Console.WriteLine(cruiseline.Name);
+                Console.WriteLine(line.Name);
             }
 
-            Console.WriteLine("List of Cruise trips: ");
-            foreach (var trip in SystemManager.cruiseInformation.TripList)
+            Console.WriteLine("List of Cruise Journeys: ");
+            foreach (var trainLine in SystemManager.cruiseInformation.TripList)
             {
-                Console.WriteLine("Cruise Number: " + trip.TripID + " Cruise line Name: " + trip.TripLine.Name +
-                                  " Origin Port: " + trip.OriginPort.Name + " Destination Port: " +
-                                  trip.DestinationPort.Name + " Date: " + trip.Month + "/" + trip.Day +
-                                  "/" + trip.Year);
+                Console.WriteLine("Journey Number: " + trainLine.TripID + " Cruise line Name: " + trainLine.TripLine.Name +
+                                  " Origin Port: " + trainLine.OriginPort.Name + " Destination Port: " +
+                                  trainLine.DestinationPort.Name + " Date: " + trainLine.Month + "/" + trainLine.Day +
+                                  "/" + trainLine.Year);
             }
 
-            Console.WriteLine("List of Cruise Sections: ");
+            Console.WriteLine("List of the Cruise Sections: ");
             foreach (var section in SystemManager.cruiseInformation.TripSectionList)
             {
-                Console.WriteLine("Cruise Section " + section.seatClass.ToString() + " class for cruise trip number " + section.tripId + " on " + section.line + " cruise line with " + section.rows + " rows and " + section.rows + " columns.");
+                Console.WriteLine("Journey Section " + section.seatClass.ToString() + " class with section price $" + section.price + " for Journey number " + section.tripId + " on " + section.line + "  Cruise line with " + section.rows + " rows and " + section.layout + " columns layout.");
+                Console.WriteLine();
+
+                //List seats in FlightSection
+                Console.WriteLine("Seats in Section: " + section.seatClass.ToString());
+                Console.WriteLine();
+
+                Console.WriteLine(section.DisplaySeatDetails());
+                Console.WriteLine();
             }
 
-            Console.WriteLine("List of Seats: ");
-            foreach (var seat in SystemManager.cruiseInformation.BookedSeatsList)
-            {
-                Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and trip number " + seat.TripId + " Is Booked: " + seat.IsBooked);
-            }
 
             Console.WriteLine("\nPress Enter to Return to MENU");
             Console.ReadLine();

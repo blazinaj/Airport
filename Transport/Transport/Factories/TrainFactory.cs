@@ -18,6 +18,7 @@ namespace Transport.Factories
             {
                 Port newTrainPort = new TrainPort(name);
                 string success = "Success: TrainPort " + newTrainPort.Name + " Successfully Created!";
+                SystemManager.trainInformation.AddPort(newTrainPort);
                 return success;
             }
             catch (InvalidTrainPortException e)
@@ -31,6 +32,7 @@ namespace Transport.Factories
             {
                 Line newTrainLine = new TrainLine(name);
                 string success = "Success: TrainLine " + newTrainLine.Name + " Successfully Created!";
+                SystemManager.trainInformation.AddLine(newTrainLine);
                 return success;
             }
             catch (InvalidTrainLineException e)
@@ -43,9 +45,9 @@ namespace Transport.Factories
         {
             try
             {
-                Trip newTrainTrip = new CruiseTrip(trainLine, originTrainPort, destinationTrainPort, year, month, day, hour, minutes, tripID);
+                Trip newTrainTrip = new TrainJourney(trainLine, originTrainPort, destinationTrainPort, year, month, day, hour, minutes, tripID);
                 string success = "Success: CruiseTrip " + newTrainTrip.TripID + " Successfully Created!";
-                SystemManager.airportInformation.AddTrip(newTrainTrip);
+                SystemManager.trainInformation.AddTrip(newTrainTrip);
                 return success;
             }
             catch (InvalidJourneyException e)
@@ -58,12 +60,12 @@ namespace Transport.Factories
         {
             try
             {
-                if (!SystemManager.airportInformation.DoesLineExist(trainLine))
+                if (!SystemManager.trainInformation.DoesLineExist(trainLine))
                 {
                     return "Error: " + trainLine + " does not exist!";
                 }
 
-                if (!SystemManager.airportInformation.DoesTripExist(tID))
+                if (!SystemManager.trainInformation.DoesTripExist(tID))
                 {
                     return "Error: " + tID + " does not exist!";
                 }
