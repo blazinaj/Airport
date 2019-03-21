@@ -20,3 +20,6 @@ Tidbits:
 7. Used Pull Requests for code reviewing with Github.
 8. Used Factories to abstract creation logic.
 9. Used Interfaces to abstract display logic.
+10. Included Trains using Abstract Factory
+11. Can find available seat on a flight and book the seat
+12. Find available seat on a cruise and book it.
