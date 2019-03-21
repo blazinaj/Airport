@@ -345,38 +345,41 @@ namespace Transport.UserMenu
         public override void DisplaySystemDetails()
         {
             Console.Clear();
-            Console.WriteLine("List of Train Stations: ");
-            foreach (var trainPort in SystemManager.trainInformation.PortList)
+            Console.WriteLine("List of Stations: ");
+            foreach (var station in SystemManager.trainInformation.PortList)
             {
-                Console.WriteLine(trainPort.Name);
+                Console.WriteLine(station.Name);
             }
 
             Console.WriteLine("List of Train lines: ");
-            foreach (var trainLine in SystemManager.trainInformation.LineList)
+            foreach (var line in SystemManager.trainInformation.LineList)
             {
-                Console.WriteLine(trainLine.Name);
+                Console.WriteLine(line.Name);
             }
 
-            Console.WriteLine("List of Train Trips: ");
-            foreach (var trainTrips in SystemManager.trainInformation.TripList)
+            Console.WriteLine("List of Train Journeys: ");
+            foreach (var trainLine in SystemManager.trainInformation.TripList)
             {
-                Console.WriteLine("Trip Number: " + trainTrips.TripID + " Train line Name: " + trainTrips.TripLine.Name +
-                                  " Origin Station: " + trainTrips.OriginPort.Name + " Destination Station: " +
-                                  trainTrips.DestinationPort.Name + " Date: " + trainTrips.Month + "/" + trainTrips.Day +
-                                  "/" + trainTrips.Year);
+                Console.WriteLine("Journey Number: " + trainLine.TripID + " Train line Name: " + trainLine.TripLine.Name +
+                                  " Origin Station: " + trainLine.OriginPort.Name + " Destination Station: " +
+                                  trainLine.DestinationPort.Name + " Date: " + trainLine.Month + "/" + trainLine.Day +
+                                  "/" + trainLine.Year);
             }
 
-            Console.WriteLine("List of Trip Sections: ");
+            Console.WriteLine("List of the Journey Sections: ");
             foreach (var section in SystemManager.trainInformation.TripSectionList)
             {
-                Console.WriteLine("Train Section " + section.seatClass.ToString() + " class for trip number " + section.tripId + " on " + section.line + " train line with " + section.rows + " rows and " + section.rows + " columns.");
+                Console.WriteLine("Journey Section " + section.seatClass.ToString() + " class with section price $" + section.price + " for Journey number " + section.tripId + " on " + section.line + "  Train line with " + section.rows + " rows and " + section.layout + " columns layout.");
+                Console.WriteLine();
+
+                //List seats in FlightSection
+                Console.WriteLine("Seats in Section: " + section.seatClass.ToString());
+                Console.WriteLine();
+
+                Console.WriteLine(section.DisplaySeatDetails());
+                Console.WriteLine();
             }
 
-            Console.WriteLine("List of Seats: ");
-            foreach (var seat in SystemManager.trainInformation.BookedSeatsList)
-            {
-                Console.WriteLine("Seat " + seat.ColumnCharacter + seat.RowNumber + ", on " + seat.Line + " line and trip number " + seat.TripId + " Is Booked: " + seat.IsBooked);
-            }
 
             Console.WriteLine("\nPress Enter to Return to MENU");
             Console.ReadLine();

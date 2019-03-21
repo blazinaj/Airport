@@ -84,7 +84,7 @@ namespace Transport
                                 string TrainJourneyID = "";
                                 string[] dateTime = new string[5];
                                 int TrainJourneyYear = 0, TrainJourneyMonth = 0, TrainJourneyDay = 0, TrainJourneyHour = 0, TrainJourneyMinutes = 0;
-                                string origTrainport, distTrainport;
+                                string origTrainport = "", distTrainport ="";
                                 SeatClass sectionClass; 
                                 int sectionPrice = 0, sectionRows = 0;
                                 char sectionColumns;
@@ -172,6 +172,11 @@ namespace Transport
                                     distTrainport = destinationTrainport.ToString();
                                 }
 
+                                //call to create an airline
+                                SystemManager.trainFactory.CreateTrip(trainline, origTrainport, distTrainport, TrainJourneyYear,
+                                    TrainJourneyMonth, TrainJourneyDay, TrainJourneyHour, TrainJourneyMinutes, TrainJourneyID);
+
+
                                 //getting TrainJourneySection
                                 if (charArrayWholeLine[index] == '[')
                                 {
@@ -205,10 +210,7 @@ namespace Transport
                                 }
 
                                 index = index + 2;
-                                Console.WriteLine(charArrayWholeLine[index]);
-                                Console.WriteLine(charArrayWholeLine[index - 1]);
-                                Console.WriteLine(charArrayWholeLine[index - 2]);
-
+                                
                             } while (charArrayWholeLine[index] != ']' && charArrayWholeLine[index - 1] != ']');
 
                             index = index + 1;

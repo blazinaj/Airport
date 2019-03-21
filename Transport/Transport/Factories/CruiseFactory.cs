@@ -18,6 +18,7 @@ namespace Transport.Factories
             {
                 Port newCruisePort = new CruisePort(name);
                 string success = "Success: CruisePort " + newCruisePort.Name + " Successfully Created!";
+                SystemManager.cruiseInformation.AddPort(newCruisePort);
                 return success;
             }
             catch (InvalidCruisePortException e)
@@ -31,6 +32,7 @@ namespace Transport.Factories
             {
                 Line newCruiseLine = new CruiseLine(name);
                 string success = "Success: CruiseLine " + newCruiseLine.Name + " Successfully Created!";
+                SystemManager.cruiseInformation.AddLine(newCruiseLine);
                 return success;
             }
             catch (InvalidCruiseLineException e)
@@ -45,7 +47,7 @@ namespace Transport.Factories
             {
                 Trip newCruise = new CruiseTrip(cruiseLine, originCruisePort, destinationCruisePort, year, month, day, hour, minutes, tripID);
                 string success = "Success: CruiseTrip " + newCruise.TripID + " Successfully Created!";
-                SystemManager.airportInformation.AddTrip(newCruise);
+                SystemManager.cruiseInformation.AddTrip(newCruise);
                 return success;
             }
             catch (InvalidCruiseException e)
@@ -58,12 +60,12 @@ namespace Transport.Factories
         {
             try
             {
-                if (!SystemManager.airportInformation.DoesLineExist(cruiseLine))
+                if (!SystemManager.cruiseInformation.DoesLineExist(cruiseLine))
                 {
                     return "Error: " + cruiseLine + " does not exist!";
                 }
 
-                if (!SystemManager.airportInformation.DoesTripExist(cID))
+                if (!SystemManager.cruiseInformation.DoesTripExist(cID))
                 {
                     return "Error: " + cID + " does not exist!";
                 }
